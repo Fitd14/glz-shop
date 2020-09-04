@@ -26,6 +26,7 @@
         <module>glz-shop-user-api</module>
         <module>glz-shop-redis</module>
         <module>glz-shop-redis-api</module>
+        <module>glz-shop-gateway</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -47,6 +48,8 @@
         <sentinel-version>2.2.1.RELEASE</sentinel-version>
         <seata-version>2.2.1.RELEASE</seata-version>
         <dubbo-version>2.2.0.RELEASE</dubbo-version>
+        <gateway-version>2.2.1.RELEASE</gateway-version>
+        <dubbo-registry-nacos-version>2.7.3</dubbo-registry-nacos-version>
     </properties>
 
     <dependencyManagement>
@@ -166,6 +169,12 @@
                 <version>${nacos-version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+            </dependency>
+
+
             <!--sentinel-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
@@ -184,6 +193,19 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dubbo</artifactId>
                 <version>${dubbo-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-registry-nacos</artifactId>
+                <version>2.7.3</version>
+            </dependency>
+
+            <!--gateway-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
+                <version>${gateway-version}</version>
             </dependency>
 
         </dependencies>

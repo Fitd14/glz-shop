@@ -1,0 +1,7 @@
+server:
+  port: 6011
+
+spring:
+  application:
+    name: glz-shop-sso-service
+

@@ -21,6 +21,11 @@
         <module>glz-shop-cart</module>
         <module>glz-shop-commodity-type-api</module>
         <module>glz-shop-commodity-type</module>
+        <module>glz-shop-inventory-api</module>
+        <module>glz-shop-inventory</module>
+        <module>glz-shop-user-api</module>
+        <module>glz-shop-redis</module>
+        <module>glz-shop-redis-api</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -41,6 +46,7 @@
         <nacos-version>2.2.0.RELEASE</nacos-version>
         <sentinel-version>2.2.1.RELEASE</sentinel-version>
         <seata-version>2.2.1.RELEASE</seata-version>
+        <dubbo-version>2.2.0.RELEASE</dubbo-version>
     </properties>
 
     <dependencyManagement>
@@ -171,6 +177,13 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
                 <version>${seata-version}</version>
+            </dependency>
+
+            <!--dubbo-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dubbo</artifactId>
+                <version>${dubbo-version}</version>
             </dependency>
 
         </dependencies>

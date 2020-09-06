@@ -11,11 +11,13 @@ spring:
     url: jdbc:mysql://39.106.162.221:3306/glz-shop
     username: admin
     password: shop1234
-
+    type: com.alibaba.druid.pool.DruidDataSource
 dubbo:
   scan:
     base-packages: com.cloud.smy.service.impl
   protocol:
     name: dubbo
     port: -1
+  cloud:
+    subscribed-services: ''
 

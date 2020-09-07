@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: glz-shop-commodity
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://39.106.162.221:3306/glz-shop?useUnicode=true&characterEncoding=UTF8
+    username: admin
+    password: shop1234
+  cloud:
+    nacos:
+      server-addr: 39.106.162.221:8848
+  jpa:
+    show-sql: true
+
+server:
+  port: 9500
+
+dubbo:
+  protocol:
+    name: dubbo
+    port: -1
+  scan:
+    base-packages: com.smy.shop.service.impl
+
+
+logging:
+  level:
+    com.smy.shop.mapper: debug
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+
+

@@ -6,10 +6,12 @@ import com.glz.model.ResponseResult;
 import com.glz.pojo.User;
 import com.smy.shop.mapper.UserMapper;
 import com.smy.shop.service.UserService;
-import com.sun.istack.internal.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.validation.constraints.NotNull;
+
 
 @Service
 @Slf4j

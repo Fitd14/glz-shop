@@ -1,3 +1,4 @@
-D:\java-workspace\workspace-idea\glz-shop\glz-shop-common\src\main\java\com\glz\constant\HttpStatus.java
-D:\java-workspace\workspace-idea\glz-shop\glz-shop-common\src\main\java\com\glz\model\ResponseResult.java
-D:\java-workspace\workspace-idea\glz-shop\glz-shop-common\src\main\java\com\glz\enums\UserStatusEnum.java
+D:\springcloud-shopping\glz-shop\glz-shop-common\src\main\java\com\glz\enums\CommodityStatusEnum.java
+D:\springcloud-shopping\glz-shop\glz-shop-common\src\main\java\com\glz\enums\UserStatusEnum.java
+D:\springcloud-shopping\glz-shop\glz-shop-common\src\main\java\com\glz\model\ResponseResult.java
+D:\springcloud-shopping\glz-shop\glz-shop-common\src\main\java\com\glz\constant\HttpStatus.java

@@ -19,8 +19,6 @@
         <module>glz-shop-commodity-api</module>
         <module>glz-shop-commodity</module>
         <module>glz-shop-cart</module>
-        <module>glz-shop-commodity-type-api</module>
-        <module>glz-shop-commodity-type</module>
         <module>glz-shop-inventory-api</module>
         <module>glz-shop-inventory</module>
         <module>glz-shop-user-api</module>
@@ -30,12 +28,14 @@
     <packaging>pom</packaging>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot-version>2.2.2.RELEASE</spring-boot-version>
         <spring-boot-web-version>2.2.2.RELEASE</spring-boot-web-version>
         <lombok-version>1.18.12</lombok-version>
         <spring-cloud-alibaba-version>2.2.1.RELEASE</spring-cloud-alibaba-version>
         <hutool-all-version>5.3.9</hutool-all-version>
-        <mysql-connector-version>8.0.17</mysql-connector-version>
+        <mysql.version>8.0.20</mysql.version>
+        <druid.spring.boot.verison>1.1.16</druid.spring.boot.verison>
         <mybatis-plus-version>3.3.2</mybatis-plus-version>
         <mybatis-version>2.1.1</mybatis-version>
         <log4j-version>1.2.17</log4j-version>
@@ -47,10 +47,19 @@
         <sentinel-version>2.2.1.RELEASE</sentinel-version>
         <seata-version>2.2.1.RELEASE</seata-version>
         <dubbo-version>2.2.0.RELEASE</dubbo-version>
+        <spring.cloud.version>Hoxton.SR1</spring.cloud.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- spring cloud  -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!--spring-boot-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -60,6 +69,12 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.spring.boot.verison}</version>
+            </dependency>
             <!--lombok-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -73,6 +88,8 @@
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring-boot-web-version}</version>
             </dependency>
+
+
 
             <!--spring cloud alibaba-->
             <dependency>
@@ -90,11 +107,11 @@
                 <version>${hutool-all-version}</version>
             </dependency>
 
-            <!--mysql驱动-->
+            <!-- mysql driver -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector-version}</version>
+                <version>${mysql.version}</version>
             </dependency>
 
             <!--mybatis-plus-->
@@ -115,7 +132,7 @@
             <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
-                <version>${log4j.version}</version>
+                <version>${log4j-version}</version>
             </dependency>
 
             <!--mail邮件-->

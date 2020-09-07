@@ -1,3 +1,4 @@
-com\glz\constant\HttpStatus.class
+com\glz\enums\CommodityStatusEnum.class
 com\glz\model\ResponseResult.class
 com\glz\enums\UserStatusEnum.class
+com\glz\constant\HttpStatus.class

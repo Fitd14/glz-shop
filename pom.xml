@@ -14,11 +14,9 @@
         <module>glz-shop-web-sso</module>
         <module>glz-shop-order-api</module>
         <module>glz-shop-order</module>
-        <module>glz-shop-cart-api</module>
         <module>glz-shop-user</module>
         <module>glz-shop-commodity-api</module>
         <module>glz-shop-commodity</module>
-        <module>glz-shop-cart</module>
         <module>glz-shop-commodity-type-api</module>
         <module>glz-shop-commodity-type</module>
         <module>glz-shop-inventory-api</module>
@@ -26,6 +24,8 @@
         <module>glz-shop-user-api</module>
         <module>glz-shop-redis</module>
         <module>glz-shop-redis-api</module>
+        <module>glz-shop-cart</module>
+        <module>glz-shop-cart-api</module>
     </modules>
     <packaging>pom</packaging>
 

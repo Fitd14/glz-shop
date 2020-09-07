@@ -32,7 +32,7 @@ public class Commodity {
     /**
      * 商品类别
      */
-    private int  commodityType;
+    private int  category;
 
     /**
      * 品牌方
@@ -63,7 +63,7 @@ public class Commodity {
     /**
      * 图片
      */
-    private int  photo;
+    private String  photo;
 
     /**
      * 商品价格

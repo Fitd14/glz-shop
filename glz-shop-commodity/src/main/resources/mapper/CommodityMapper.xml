@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smy.shop.mapper.CommodityMapper">
+
+
+    <select id="getByOther" resultMap="commodityMap">
+         SELECT
+            t1.*
+         FROM t_commodity t1
+        <where>
+            <if test="commodityName != null">
+                and t1.commodity_name like CONCAT('%',#{commodityName},'%')
+            </if>
+            <if test="commoditySubHead != null ">
+                and t1.commodity_sub_head like CONCAT('%',#{commoditySubHead},'%')
+            </if>
+            <if test="brand !=null ">
+                and t1.brand like CONCAT('%',#{brand},'%')
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="commodityMap" type="com.glz.pojo.Commodity" >
+        <id column="id" property="id"  />
+        <result column="commodity_name" property="commodityName" />
+        <result column="commodity_sub_head" property="commoditySubHead"  />
+        <result column="brand" property="brand" />
+        <result column="category" property="category"></result>
+        <result column="inventory" property="inventory"  />
+        <result column="sort" property="sort"  />
+        <result column="status" property="status" />
+        <result column="putaway_status" property="putawayStatus"  />
+        <result column="photo" property="photo"  />
+        <result column="price" property="price" />
+        <result column="create_time" property="createTime"  />
+        <result column="update_time" property="updateTime"  />
+
+    </resultMap>
+
+
+
+    <select id="selectAll" resultMap="commodityMap">
+        select * from t_commodity
+    </select>
+</mapper>

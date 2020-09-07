@@ -1,0 +1,83 @@
+package com.cloud.shop.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cloud.shop.mapper.OrderItemMapper;
+import com.cloud.smy.service.OrderItemService;
+import com.glz.model.ResponseResult;
+import com.glz.pojo.Order;
+import com.glz.pojo.OrderItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Component
+public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem> implements OrderItemService {
+
+    @Autowired
+    OrderItemMapper orderItemMapper;
+
+    /**
+     * 添加订单明细
+     */
+    @Override
+    public int addOrderItem(OrderItem orderItem) {
+        int insert = orderItemMapper.insert(orderItem);
+        return insert;
+    }
+
+    /**
+     * 分页查询
+     */
+    @Override
+    public ResponseResult selItemPage(String orderNo, int pageNo, int pageSize) {
+        Page<OrderItem> page = new Page<>(pageNo, pageSize);
+        Page<OrderItem> items = orderItemMapper.selectPage(page, new QueryWrapper<OrderItem>()
+                .eq("order_no", orderNo));
+        return new ResponseResult("200", "success", items.getRecords());
+    }
+
+    /**
+     * 根据ID删除订单明细
+     */
+    @Override
+    public int delOrderItem(String orderNo) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("order_no", orderNo);
+        int i = orderItemMapper.deleteByMap(map);
+        return i;
+    }
+
+    /**
+     * 根据更新订单明细
+     */
+
+    @Override
+    public int updateOrderItem(OrderItem orderItem) {
+        int i = orderItemMapper.updateById(orderItem);
+        return i;
+    }
+
+
+
+    @Override
+    public int updateItemStatus(Order order) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("orderNo", order.getOrderNo());
+        List<OrderItem> items = orderItemMapper.selectByMap(map);
+        int i = 0;
+        for (OrderItem item : items) {
+            i = orderItemMapper.update(item, new UpdateWrapper<OrderItem>()
+                    .set("status", order.getStatus())
+                    .eq("order_no", order.getOrderNo()));
+        }
+
+        return i;
+    }
+
+}

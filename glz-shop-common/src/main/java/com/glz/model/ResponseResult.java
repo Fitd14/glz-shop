@@ -29,7 +29,4 @@ public class ResponseResult<M> {
         return new ResponseResult("500","失败");
     }
 
-
-
-
 }

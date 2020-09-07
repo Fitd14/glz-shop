@@ -1,0 +1,15 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: glz-shop-gateway
+  cloud:
+    nacos:
+      server-addr: 39.106.162.221:8848
+    gateway:
+      routes:
+        - id: glz-shop-inventory
+          uri: lb://glz-shop-inventory
+          predicates:
+            - Path=/inventory/**

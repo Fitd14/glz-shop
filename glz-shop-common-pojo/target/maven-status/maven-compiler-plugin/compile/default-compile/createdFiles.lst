@@ -1,2 +1,8 @@
+com\glz\pojo\Cart.class
+com\glz\pojo\CommodityType.class
+com\glz\pojo\handler\MyDateTimeHandler.class
 com\glz\pojo\User.class
+com\glz\pojo\Commodity.class
+com\glz\pojo\Inventory.class
 com\glz\pojo\UserAddress.class
+com\glz\pojo\UploadFile.class

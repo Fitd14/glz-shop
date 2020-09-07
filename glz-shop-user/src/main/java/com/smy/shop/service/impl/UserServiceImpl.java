@@ -1,18 +1,20 @@
 package com.smy.shop.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.glz.constant.HttpStatus;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.User;
 import com.smy.shop.mapper.UserMapper;
 import com.smy.shop.service.UserService;
-import com.sun.istack.internal.NotNull;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+
+import javax.validation.constraints.NotNull;
 
 @Service
 @Slf4j
+@Component
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -39,7 +41,6 @@ public class UserServiceImpl implements UserService {
         if(row > 0){
             return ResponseResult.success();
         }
-        log.error("删除用户失败");
         return ResponseResult.error();
     }
 
@@ -54,5 +55,11 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectOne(new QueryWrapper<User>().eq("username",username)
                 .eq("password",password));
         return new ResponseResult("200","查询成功",user);
+    }
+
+    @Override
+    public User selectByUsername(String username) {
+        return userMapper.selectOne(new QueryWrapper<User>()
+                .eq("username",username));
     }
 }

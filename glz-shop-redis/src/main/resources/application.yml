@@ -1,7 +1,17 @@
 spring:
   application:
     name: glz-shop-redis
-
   redis:
     host: 39.106.162.221
     port: 6379
+    password:
+  cloud:
+    nacos:
+      server-addr: 39.106.162.221:8848
+
+dubbo:
+  protocol:
+    name: dubbo
+    port: -1
+  scan:
+    base-packages: com.smy.shop.service.impl

@@ -50,5 +50,9 @@
             <artifactId>spring-cloud-alibaba-dubbo</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo-registry-nacos</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -31,19 +31,15 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public ResponseResult updateCount(Long commodityId, int count) {
+    public int updateCount(Long commodityId, int count) {
         Inventory oldInventory = inventoryMapper.selectOne(new QueryWrapper<Inventory>()
                 .eq("commodity_id", commodityId));
         oldInventory.setExistingCount(oldInventory.getExistingCount()-count);
         oldInventory.setConsumeCount(oldInventory.getConsumeCount()+count);
-        int result = inventoryMapper.update(oldInventory, new UpdateWrapper<Inventory>()
+        return inventoryMapper.update(oldInventory, new UpdateWrapper<Inventory>()
                 .set("existing_count", oldInventory.getExistingCount())
                 .set("consume_count", oldInventory.getConsumeCount())
                 .eq("commodity_id", commodityId));
-        if(result > 0){
-            return ResponseResult.success();
-        }
-        return ResponseResult.error();
     }
 
     @Override

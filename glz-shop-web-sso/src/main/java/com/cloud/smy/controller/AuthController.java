@@ -3,6 +3,7 @@ package com.cloud.smy.controller;
 import com.smy.shop.service.UserService;
 import jdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,4 +23,5 @@ public class AuthController {
     public String getUser(){
         return "User";
     }
+
 }

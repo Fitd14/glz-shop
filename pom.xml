@@ -25,6 +25,8 @@
         <module>glz-shop-redis</module>
         <module>glz-shop-redis-api</module>
         <module>glz-shop-gateway</module>
+        <module>glz-shop-collect-api</module>
+        <module>glz-shop-collect</module>
     </modules>
     <packaging>pom</packaging>
 

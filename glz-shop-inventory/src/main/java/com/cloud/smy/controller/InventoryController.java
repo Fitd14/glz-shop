@@ -18,10 +18,19 @@ public class InventoryController {
         return inventoryService.insert(inventory);
     }
 
-    @GetMapping("/update/count")
+    @PutMapping("/update/count")
     public ResponseResult updateCount(Long commodityId,int count) {
         return inventoryService.updateCount(commodityId,count);
     }
 
+    @PutMapping("/update/totalcount")
+    public ResponseResult updateTotalCount(Long commodityId,int totalCount){
+        return inventoryService.updateTotalCount(commodityId,totalCount);
+    }
+
+    @DeleteMapping("/del/{commodityId}")
+    public ResponseResult delByCommodity(@PathVariable Long commodityId){
+        return inventoryService.delete(commodityId);
+    }
 
 }

@@ -12,6 +12,13 @@
     <artifactId>glz-shop-redis</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.smy.shop</groupId>
+            <artifactId>glz-shop-redis-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
@@ -35,12 +42,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.smy.shop</groupId>
-            <artifactId>glz-shop-redis-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -49,11 +50,6 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-alibaba-dubbo</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-registry-nacos</artifactId>
         </dependency>
 
         <dependency>

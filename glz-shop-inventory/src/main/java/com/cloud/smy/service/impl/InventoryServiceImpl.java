@@ -21,6 +21,7 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public ResponseResult insert(Inventory inventory) {
+
         inventory.setExistingCount(inventory.getTotalCount());
         int row = inventoryMapper.insert(inventory);
         if(row > 0){

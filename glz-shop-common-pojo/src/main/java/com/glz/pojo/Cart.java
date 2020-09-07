@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -29,12 +28,7 @@ public class Cart {
     /**
      * 商品ID
      */
-    //  private Long commodityId;
-    /**
-     * 商品数组
-     */
-    private List<Commodity> commodities;
-
+    private Long commodityId;
 
     /**
      * 购买价格

@@ -1,0 +1,40 @@
+server:
+  port: 7000
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: admin
+    password: shop1234
+    url: jdbc:mysql://39.106.162.221:3306/glz-shop
+
+  application:
+    name: glz-shop-cart-service
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 39.106.162.221:8848
+
+dubbo:
+  scan:
+    base-packages: com.dsj.shop.service
+  protocol:
+    name: dubbo
+    port: -1
+  cloud:
+    subscribed-services: ''
+
+logging:
+  level:
+    com.dsj.shop.mapper: debug
+
+#seata:
+#  application-id: ${spring.application.name}
+#  tx-service-group: seata-shop-cart
+#  service:
+#    vgroup-mapping:
+#      seata-shop-cart: shop-cart-tx
+#    grouplist:
+#      shop-cart-tx: 127.0.0.1:8091

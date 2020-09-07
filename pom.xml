@@ -19,17 +19,17 @@
         <module>glz-shop-commodity-api</module>
         <module>glz-shop-commodity</module>
         <module>glz-shop-cart</module>
-        <module>glz-shop-commodity-type-api</module>
-        <module>glz-shop-commodity-type</module>
         <module>glz-shop-inventory-api</module>
         <module>glz-shop-inventory</module>
         <module>glz-shop-user-api</module>
         <module>glz-shop-redis</module>
         <module>glz-shop-redis-api</module>
+        <module>glz-shop-gateway</module>
     </modules>
     <packaging>pom</packaging>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot-version>2.2.2.RELEASE</spring-boot-version>
         <spring-boot-web-version>2.2.2.RELEASE</spring-boot-web-version>
         <lombok-version>1.18.12</lombok-version>
@@ -47,10 +47,26 @@
         <sentinel-version>2.2.1.RELEASE</sentinel-version>
         <seata-version>2.2.1.RELEASE</seata-version>
         <dubbo-version>2.2.0.RELEASE</dubbo-version>
+        <spring.cloud.version>Hoxton.SR1</spring.cloud.version>
+        <gateway-version>2.2.1.RELEASE</gateway-version>
+        <druid-version>1.1.16</druid-version>
+        <redis-version>1.4.7.RELEASE</redis-version>
+        <jjwt-version>0.9.0</jjwt-version>
+        <mysql.version>8.0.20</mysql.version>
+        <druid.spring.boot.verison>1.1.16</druid.spring.boot.verison>
+        <spring-security-jwt-version>1.0.9.RELEASE</spring-security-jwt-version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- spring cloud  -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!--spring-boot-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -60,6 +76,12 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.spring.boot.verison}</version>
+            </dependency>
             <!--lombok-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -96,7 +118,12 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connector-version}</version>
             </dependency>
-
+            <!-- mysql driver -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
             <!--mybatis-plus-->
             <dependency>
                 <groupId>com.baomidou</groupId>
@@ -117,7 +144,12 @@
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
-
+            <!--log4j日志-->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j-version}</version>
+            </dependency>
             <!--mail邮件-->
             <dependency>
                 <groupId>javax.mail</groupId>
@@ -166,6 +198,12 @@
                 <version>${nacos-version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+            </dependency>
+
+
             <!--sentinel-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
@@ -185,6 +223,41 @@
                 <artifactId>spring-cloud-alibaba-dubbo</artifactId>
                 <version>${dubbo-version}</version>
             </dependency>
+
+            <!--gateway-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
+                <version>${gateway-version}</version>
+            </dependency>
+
+            <!--druid-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-version}</version>
+            </dependency>
+
+            <!--redis-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-redis</artifactId>
+                <version>${redis-version}</version>
+            </dependency>
+
+            <!--jwt-->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${spring-security-jwt-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt-version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

@@ -1,0 +1,54 @@
+#server:
+#  port: 9091
+#
+spring:
+  application:
+    name: glz-shop-order
+  cloud:
+    nacos:
+      server-addr: 39.106.162.221:8848
+  datasource:
+    url: jdbc:mysql://39.106.162.221:3306/glz-shop
+    username: admin
+    password: shop1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+#  type-aliases-package: com.glz.pojo  #所有entity别名所在包
+
+dubbo:
+  scan:
+    base-packages: com.cloud.shop
+  protocol:
+    name: dubbo
+    port: -1
+  cloud:
+    subscribed-services: glz-shop-cart-service,glz-shop-commodity
+  registry:
+    address: nacos://39.106.162.221:8848
+
+
+server:
+  port: 8070
+    #spring:
+    #  application:
+  #    name: server-provider
+  #  cloud:
+  #    nacos:
+  #      discovery:
+  #        server-addr: 39.106.162.221:8848
+  #  server-addr: localhost:8848
+
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+logging:
+  level:
+    com.cloud.shop: debug

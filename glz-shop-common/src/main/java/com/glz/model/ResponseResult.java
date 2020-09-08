@@ -28,5 +28,4 @@ public class ResponseResult<M> {
     public static ResponseResult error(){
         return new ResponseResult("500","失败");
     }
-
 }

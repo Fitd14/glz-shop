@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: glz-shop-commodity-type
+
+  datasource:
+    url: jdbc:mysql://39.106.162.221:3306
+    username: admin
+    password: shop1234

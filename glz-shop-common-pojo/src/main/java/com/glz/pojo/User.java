@@ -6,10 +6,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @TableName("t_user")
-public class User {
+public class User implements Serializable {
 
     /**
      * 主键

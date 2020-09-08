@@ -19,8 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
+
 
 @Configuration
 public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
@@ -38,7 +37,6 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
         String refreshToken = JWTTokenUtil.createRefreshTokenByUsername(username);
 
         User user = userService.selectByUsername(username);
-
 
         UserDTO userDTO = new UserDTO();
         userDTO.setUsername(username);

@@ -28,8 +28,8 @@ import java.nio.charset.StandardCharsets;
 @Component
 public class MyJWTLogoutHandler implements LogoutSuccessHandler {
 
-//    @Autowired
-//    RedisTemplate<String, Serializable> redisTemplate;
+    @Autowired
+    RedisTemplate<String, Serializable> redisTemplate;
 
     /**
      * 用户登出返回结果
@@ -40,28 +40,28 @@ public class MyJWTLogoutHandler implements LogoutSuccessHandler {
      */
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-//        String username = null;
-//        String tokenHeader = request.getHeader(JWTTokenUtil.TOKEN_HEADER);
-//        if (tokenHeader != null && tokenHeader.startsWith(JWTTokenUtil.TOKEN_PREFIX)) {
-//            String token = tokenHeader.replace(JWTTokenUtil.TOKEN_PREFIX, "");
-//            username = JWTTokenUtil.getUsernameFromToken(token);
-//        }
-//
-//        // 清除用户信息缓存
-//        redisTemplate.delete("spring:security:userDetails::" + username);
-//        log.info("[" + username + "] => api注销成功");
-//
-//        SecurityContextHolder.clearContext();
-//        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-//        response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
-//        PrintWriter writer = null;
-//        try {
-//            writer = response.getWriter();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        writer.write(JSON.toJSONString(ResponseResult.success()));
-//        writer.flush();
-//        writer.close();
+        String username = null;
+        String tokenHeader = request.getHeader(JWTTokenUtil.TOKEN_HEADER);
+        if (tokenHeader != null && tokenHeader.startsWith(JWTTokenUtil.TOKEN_PREFIX)) {
+            String token = tokenHeader.replace(JWTTokenUtil.TOKEN_PREFIX, "");
+            username = JWTTokenUtil.getUsernameFromToken(token);
+        }
+
+        // 清除用户信息缓存
+        redisTemplate.delete("spring:security:userDetails::" + username);
+        log.info("[" + username + "] => api注销成功");
+
+        SecurityContextHolder.clearContext();
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
+        PrintWriter writer = null;
+        try {
+            writer = response.getWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        writer.write(JSON.toJSONString(ResponseResult.success()));
+        writer.flush();
+        writer.close();
     }
 }

@@ -1,16 +1,25 @@
 server:
   port: 6011
 
+
 spring:
-  application:
-    name: glz-shop-sso
+  cache:
+    type: redis
+  profiles:
+    active: dev
   redis:
     host: 39.106.162.221
     port: 6379
     password:
-  cloud:
-    nacos:
-      server-addr: 39.106.162.221:8848
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 4
+        max-wait: 10000
+        min-idle: 0
+      shutdown-timeout: 4000
+    timeout: 10000
+
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://39.106.162.221:3306/glz-shop
@@ -36,3 +45,6 @@ jwt:
 dubbo:
   cloud:
     subscribed-services: glz-shop-user
+
+
+

@@ -10,7 +10,8 @@ import java.util.List;
 @Mapper
 public interface CommodityMapper extends BaseMapper<Commodity> {
 
-    List<Commodity> getByOther(@Param("commodityName") String commodityName, @Param("commoditySubHead") String commoditySubHead, @Param("brand") String brand);
+    List<Commodity> getByOther(@Param("commodityName") String commodityName, @Param("commoditySubHead") String commoditySubHead,
+                               @Param("brand") String brand,@Param("max") String max, @Param("min") String min);
 
     List<Commodity> selectAll();
 }

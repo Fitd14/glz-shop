@@ -17,6 +17,17 @@
             <if test="brand !=null ">
                 and t1.brand like CONCAT('%',#{brand},'%')
             </if>
+            <choose>
+                <when test="max!=null and min!=null">
+                    and t1.price between #{min} and #{max}
+                </when>
+                <when test="max==null and min!=null">
+                    and t1.price >= #{min}
+                </when>
+                <when test="max!=null and min==null">
+                    and t1.price <![CDATA[<=]]> #{max}
+                </when>
+            </choose>
         </where>
     </select>
 
@@ -34,6 +45,10 @@
         <result column="price" property="price" />
         <result column="create_time" property="createTime"  />
         <result column="update_time" property="updateTime"  />
+        <result column="width" property="width"  />
+        <result column="length" property="length" />
+        <result column="height" property="height"  />
+        <result column="weight" property="weight"  />
 
     </resultMap>
 

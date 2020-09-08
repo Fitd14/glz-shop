@@ -23,7 +23,7 @@ dubbo:
     name: dubbo
     port: -1
   cloud:
-    subscribed-services: ""
+    subscribed-services: glz-shop-cart-service,glz-shop-commodity
   registry:
     address: nacos://39.106.162.221:8848
 

@@ -22,9 +22,9 @@ public class OrderController {
      * 通过一个购物车记录添加一条订单信息
      */
     @PostMapping("/add")
-    public ResponseResult add(Cart cart, @RequestParam("aid") Long aid) {
+    public ResponseResult add(Long userId, List<Long> cids, @RequestParam("aid") Long aid) {
 
-        return orderService.addOrder(cart, aid);
+        return orderService.addOrder(userId, cids, aid);
 
     }
 
@@ -36,7 +36,6 @@ public class OrderController {
     @GetMapping("/del/{orderNo}")
     public ResponseResult delOrder(@PathVariable String orderNo) {
         return orderService.delOrder(orderNo);
-
     }
 
 

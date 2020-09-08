@@ -10,15 +10,20 @@ import com.cloud.shop.mapper.OrderMapper;
 import com.cloud.smy.service.OrderItemService;
 import com.cloud.smy.service.OrderService;
 import com.cloud.smy.service.UserShipAreaService;
+import com.dsj.shop.service.CartService;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.*;
+import org.apache.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Component
+@Service
 @Transactional
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
     @Autowired
@@ -27,6 +32,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     OrderItemService orderItemService;
     @Autowired
     UserShipAreaService userShipAreaService;
+    @Reference
+    CartService cartService;
 
     /**
      * 通过用戶ID查询该用户的所有订单
@@ -55,7 +62,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
      * 添加订单
      */
     @Override
-    public ResponseResult addOrder(Cart cart, Long id) {
+    public ResponseResult addOrder(Long userId, List<Long> cids, Long id) {
+        List<Cart> carts = cartService.listCart(userId);
+        Cart cart = carts.get(0);
         Order order = new Order();
         UserShipArea userShipArea = null;
         int i = 0;
@@ -63,7 +72,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             ResponseResult shipAreaById = userShipAreaService.getShipAreaById(id);
             userShipArea = (UserShipArea) shipAreaById.getData();
         }
-        if (userShipArea != null) {
+        if (userShipArea != null && carts != null) {
             String uuid = UUID.randomUUID().toString().replaceAll("-", "");
             order.setOrderNo(uuid);
             order.setUserId(cart.getUserId());
@@ -75,15 +84,21 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             order.setProvince(userShipArea.getProvince());
             order.setCity(userShipArea.getCity());
             order.setRegion(userShipArea.getRegion());
+            BigDecimal total = new BigDecimal("0");
+            for (Cart cart2 : carts) {
+                OrderItem item = new OrderItem();
+                item.setOrderNo(uuid);
+                item.setUserId(cart2.getUserId());
+                item.setCommodityId(cart2.getCommodityId());
+                item.setNumber(cart2.getCommodityCount());
+                item.setPrice(cart2.getTotalPrice());
+                total = total.add(cart2.getTotalPrice());
+                i = orderItemService.addOrderItem(item);
+            }
+            order.setPayment(total);
             orderMapper.insert(order);
-
-            //   for (Commodity com : cart.getCommodities()) {
-            OrderItem item = new OrderItem();
-            item.setOrderNo(uuid);
-            item.setUserId(cart.getUserId());
-            i = orderItemService.addOrderItem(item);
+            cartService.deleteCartAll(userId);
         }
-        //  }
         if (i > 0) {
             return ResponseResult.success();
         } else {

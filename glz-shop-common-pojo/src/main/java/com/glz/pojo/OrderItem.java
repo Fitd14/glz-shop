@@ -3,6 +3,8 @@ package com.glz.pojo;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @TableName("t_order_item")
 public class OrderItem {
@@ -24,24 +26,18 @@ public class OrderItem {
     Long userId;
 
     /**
-     * 收货地址
-     */
-    String shipAddress;
+     * 商品ID
+     * */
+    Long commodityId;
+    /**
+     * 数量
+     * */
+    int number;
 
     /**
-     * 收货人姓名
-     */
-    String shipName;
-
-    /**
-     * 收货人电话
-     */
-    String shipMobile;
-
-    /**
-     * 收货状态
-     */
-    int status;
+     * 价钱
+     * */
+    BigDecimal price;
 
     /**
      * 备注

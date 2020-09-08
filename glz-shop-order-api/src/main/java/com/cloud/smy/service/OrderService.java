@@ -11,7 +11,7 @@ public interface OrderService extends IService<Order> {
     /**
      * 添加订单
      */
-    ResponseResult addOrder(Cart cart, Long id);
+    ResponseResult addOrder(Long userId, List<Long> cids, Long id);
 
     /**
      * 根据订单号删除订单

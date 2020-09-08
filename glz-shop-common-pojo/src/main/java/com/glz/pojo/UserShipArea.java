@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("t_user_ship_area")
+@TableName("t_member_ship_area")
 public class UserShipArea {
     /**
      * ID

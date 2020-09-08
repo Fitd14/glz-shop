@@ -7,7 +7,7 @@ import com.glz.pojo.Order;
 
 import java.util.List;
 
-public interface OrderService extends IService<Order> {
+public interface OrderService {
     /**
      * 添加订单
      */

@@ -11,12 +11,14 @@ import com.glz.pojo.Order;
 import com.glz.pojo.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Component
+@Transactional
 public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem> implements OrderItemService {
 
     @Autowired
@@ -62,7 +64,6 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem
         int i = orderItemMapper.updateById(orderItem);
         return i;
     }
-
 
 
     @Override

@@ -69,6 +69,22 @@ public class Commodity {
      * 商品价格
      */
     private double price;
+    /**
+     * 商品重量
+     */
+    private double weight;
+    /**
+     * 商品高度
+     */
+    private double height;
+    /**
+     * 商品长度
+     */
+    private double length;
+    /**
+     * 商品宽度
+     */
+    private double width;
 
     private String createTime;
 

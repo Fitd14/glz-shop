@@ -1,5 +1,6 @@
 package com.smy.shop.service;
 
+import com.glz.model.ResponseResult;
 import com.glz.pojo.Role;
 import com.glz.pojo.RoleUser;
 
@@ -7,11 +8,13 @@ import java.util.List;
 
 public interface RoleUserService {
 
-    int save(Role role);
+    ResponseResult save(RoleUser roleUser);
 
-    int deleteById(long id);
+    ResponseResult deleteById(long id);
 
     List<RoleUser> selectAll();
 
-    int update(Role role);
+    ResponseResult update(RoleUser roleUser);
+
+    RoleUser selectByUserId(long uid);
 }

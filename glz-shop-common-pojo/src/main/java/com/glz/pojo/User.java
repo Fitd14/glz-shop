@@ -43,6 +43,21 @@ public class User implements Serializable {
     private String email;
 
     /**
+     * 昵称
+     */
+    private String nickname;
+
+    /**
+     * 头像
+     */
+    private String icon;
+
+    /**
+     * 状态 0为正常 1为禁用 2为删除
+     */
+    private int status;
+
+    /**
      * 创建时间
      */
     private String created;

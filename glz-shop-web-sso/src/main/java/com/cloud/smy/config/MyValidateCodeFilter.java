@@ -33,6 +33,9 @@ public class MyValidateCodeFilter extends OncePerRequestFilter {
                 String captchaId = ServletRequestUtils.getStringParameter(request, "captchaId");
                 String captchaCode = ServletRequestUtils.getStringParameter(request, "captchaCode");
                 // 进行验证码的校验
+
+                System.out.println(captchaCode);
+                System.out.println(captchaId);
                 if (!securityUtils.isVerValidateCode(captchaId, captchaCode)) {
                     // 如果校验不通过，调用自定义校验失败处理器
                     myJWTFailureHandler.onAuthenticationFailure(request, response,

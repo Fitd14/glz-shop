@@ -27,7 +27,7 @@ public class Member {
     //手机号
     private String phone;
 
-    //状态
+    //状态 0为正常 1为禁用
     private int status;
 
     //头像

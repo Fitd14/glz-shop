@@ -108,6 +108,7 @@ public class SecurityUtils {
         if (!"127.0.0.1".equals(ip) && !"00000001".equals(ip)) {
             String ipRedisKey = generateKey(LOGIN_ERROR_COUNT_IP_KEY, ip);
             Integer ipCount = (Integer)serializableRedisTemplate.opsForValue().get(ipRedisKey);
+            System.out.println(ipCount);
             ipFlag = ipCount != null && ipCount >= LOGIN_ERROR_MAX_COUNT_IP;
         }
         return usernameFlag || ipFlag;

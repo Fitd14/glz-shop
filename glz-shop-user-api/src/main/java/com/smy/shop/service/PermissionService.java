@@ -1,5 +1,6 @@
 package com.smy.shop.service;
 
+import com.glz.model.ResponseResult;
 import com.glz.pojo.Permission;
 
 import java.util.List;
@@ -8,11 +9,12 @@ public interface PermissionService {
 
     List<Permission> selectAll();
 
-    int addPermission(Permission permission);
+    ResponseResult addPermission(Permission permission);
 
-    int deleteById(long permissionId);
+    ResponseResult deleteById(long permissionId);
 
-    int update(Permission permission);
+    ResponseResult update(Permission permission);
 
+    List<Permission> selectByRoleId(long roleId);
 
 }

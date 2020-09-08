@@ -50,6 +50,7 @@
         <sentinel-version>2.2.1.RELEASE</sentinel-version>
         <seata-version>2.2.1.RELEASE</seata-version>
         <dubbo-version>2.2.0.RELEASE</dubbo-version>
+        <dubbo-registry-version>2.7.6</dubbo-registry-version>
         <spring.cloud.version>Hoxton.SR1</spring.cloud.version>
         <gateway-version>2.2.1.RELEASE</gateway-version>
         <druid-version>1.1.16</druid-version>
@@ -147,12 +148,7 @@
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
-            <!--log4j日志-->
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4j-version}</version>
-            </dependency>
+
             <!--mail邮件-->
             <dependency>
                 <groupId>javax.mail</groupId>
@@ -225,6 +221,12 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dubbo</artifactId>
                 <version>${dubbo-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo-registry-nacos</artifactId>
+                <version>${dubbo-registry-version}</version>
             </dependency>
 
             <!--gateway-->

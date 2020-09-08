@@ -3,11 +3,12 @@ package com.glz.pojo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.sun.istack.internal.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 @TableName("t_commodity")
 public class Commodity {
@@ -31,7 +32,7 @@ public class Commodity {
     /**
      * 商品类别
      */
-    private CommodityType commodityType;
+    private int  category;
 
     /**
      * 品牌方
@@ -41,7 +42,7 @@ public class Commodity {
     /**
      * 商品库存
      */
-    private Inventory inventory;
+    private int inventory;
 
     /**
      * 排序
@@ -49,26 +50,27 @@ public class Commodity {
     private Integer sort;
 
     /**
-     * 状态
+     * 审核状态 1是审核中   0审核过
      */
+
     private Integer status;
 
     /**
-     * 上下架状态
+     * 上下架状态 0上架   1下架
      */
     private Integer putawayStatus;
 
     /**
      * 图片
      */
-    private UploadFile photo;
+    private String  photo;
 
     /**
      * 商品价格
      */
-    private int price;
+    private double price;
 
-    private String created;
+    private String createTime;
 
-    private String updated;
+    private String updateTime;
 }

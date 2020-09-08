@@ -11,5 +11,33 @@
 
     <artifactId>glz-shop-cart-api</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.smy.shop</groupId>
+            <artifactId>glz-shop-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.smy.shop</groupId>
+            <artifactId>glz-shop-common-pojo</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

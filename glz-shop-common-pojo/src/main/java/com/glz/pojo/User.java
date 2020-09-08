@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * 后台用户表
+ */
 @Data
 @NoArgsConstructor
 @TableName("t_user")
@@ -48,7 +51,5 @@ public class User implements Serializable {
      * 更新时间
      */
     private String updated;
-
-
 
 }

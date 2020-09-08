@@ -41,5 +41,10 @@ public interface UserService {
      */
     ResponseResult selectByUsernameAndPassword(String username,String password);
 
+    /**
+     * 通过username查询用户
+     * @param username
+     * @return
+     */
     User selectByUsername(String username);
 }

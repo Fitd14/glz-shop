@@ -10,6 +10,7 @@ import com.glz.model.ResponseResult;
 import com.glz.pojo.User;
 import com.smy.shop.mapper.UserMapper;
 import com.smy.shop.service.UserService;
+import com.smy.shop.util.BCryptUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Override
     public ResponseResult insert(User user) {
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setId(IdUtil.getSnowflake(1,1).nextId());
         user.setCreated(DateUtil.now());
-        String encodePassword = encodePassword(user.getPassword());
+        String encodePassword = BCryptUtils.encodePassword(user.getPassword());
         user.setPassword(encodePassword);
         int row = userMapper.insert(user);
         if(row > 0){
@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseResult updatePasswordByUsername(String username,String password) {
         User oldUser = selectByUsername(username);
-        oldUser.setPassword(encodePassword(password));
+        oldUser.setPassword(BCryptUtils.encodePassword(password));
         int row = userMapper.update(oldUser,new UpdateWrapper<User>().set("password",oldUser.getPassword())
                 .eq("username",oldUser.getUsername()));
         if(row > 0){
@@ -97,7 +97,5 @@ public class UserServiceImpl implements UserService {
         return new ResponseResult(ResultEnum.OK.getCode(),ResultEnum.OK.getValue(),users);
     }
 
-    private String encodePassword(String password){
-        return bCryptPasswordEncoder.encode(password);
-    }
+
 }

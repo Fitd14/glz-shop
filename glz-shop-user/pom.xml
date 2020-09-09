@@ -54,5 +54,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo-registry-nacos</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.smy.shop</groupId>
+            <artifactId>glz-shop-web-sso</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

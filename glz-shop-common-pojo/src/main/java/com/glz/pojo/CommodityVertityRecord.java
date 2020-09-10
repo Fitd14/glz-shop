@@ -11,9 +11,9 @@ public class CommodityVertityRecord {
 
     @TableId(type = IdType.AUTO)
     private Long id;
-    private Long productId;
+    private String productId;
     private String createTime;
-    private String vertityMan;
+    private Long vertityMan;
     private int status;
     private String detail;
 }

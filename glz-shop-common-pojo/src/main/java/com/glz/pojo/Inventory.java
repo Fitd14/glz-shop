@@ -4,11 +4,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import javax.annotation.security.DenyAll;
+import java.io.Serializable;
+
 
 @Data
 @TableName("t_inventory")
-public class Inventory {
+public class Inventory implements Serializable {
 
     @TableId
     private String id;
@@ -16,7 +17,7 @@ public class Inventory {
     /**
      * 商品id
      */
-    private Long commodityId;
+    private String commodityId;
 
     /**
      * 总数

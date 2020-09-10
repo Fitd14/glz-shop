@@ -23,4 +23,13 @@ public class CommodityVertityRecordSericeImpl implements CommodityVertityRecordS
         }
         return ResponseResult.error();
     }
+
+    @Override
+    public ResponseResult del(String id) {
+        int delete = mapper.deleteById(id);
+        if (delete > 0){
+            return ResponseResult.success();
+        }
+        return ResponseResult.error();
+    }
 }

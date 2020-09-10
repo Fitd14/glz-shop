@@ -23,4 +23,14 @@ public class CommodityAttributeController {
     public ResponseResult update(String inputList, Long id){
         return comodityAttributeService.update(inputList, id);
     }
+
+    @RequestMapping("/del")
+    public  ResponseResult del(Long id){
+        return comodityAttributeService.del(id);
+    }
+
+    @RequestMapping("/sel")
+    public  ResponseResult sel(Long id){
+        return comodityAttributeService.sel(id);
+    }
 }

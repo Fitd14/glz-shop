@@ -14,18 +14,17 @@ import com.dsj.shop.service.CartService;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.*;
 import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.*;
 
 @Component
-@Service
-@Transactional
-public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
+// @Transactional
+public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderMapper orderMapper;
     @Autowired

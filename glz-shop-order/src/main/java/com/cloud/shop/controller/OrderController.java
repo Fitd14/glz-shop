@@ -17,6 +17,13 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+    /**
+     * 跨域测试
+     */
+    @GetMapping("/aaa")
+    public ResponseResult aaa() {
+        return ResponseResult.success();
+    }
 
     /**
      * 通过一个购物车记录添加一条订单信息

@@ -133,7 +133,8 @@ public class MyCartServiceImpl implements MyCartService {
                 .eq("commodity_id", commodityId));
 
         int update = cartMapper.update(one, new UpdateWrapper<Cart>().set("commodity_count", commodityCount)
-                .set("total_price", new BigDecimal(commodityCount).multiply(one.getPrice())));
+                .set("total_price", new BigDecimal(commodityCount).multiply(one.getPrice())).eq("user_id", userId)
+                .eq("commodity_id", commodityId));
 
         if(update >= 1){
             return ResponseResult.success();

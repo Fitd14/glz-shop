@@ -37,4 +37,4 @@ logging:
 #    vgroup-mapping:
 #      seata-shop-cart: shop-cart-tx
 #    grouplist:
-#      shop-cart-tx: 127.0.0.1:8091
+#      shop-cart-tx: localhost:8091

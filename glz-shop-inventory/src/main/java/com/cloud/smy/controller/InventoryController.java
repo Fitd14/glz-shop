@@ -18,10 +18,10 @@ public class InventoryController {
         return inventoryService.insert(inventory);
     }
 
-    @PutMapping("/update/count")
-    public ResponseResult updateCount(Long commodityId,int count) {
-        return inventoryService.updateCount(commodityId,count);
-    }
+//    @PutMapping("/update/count")
+//    public ResponseResult updateCount(Long commodityId,int count) {
+//        return inventoryService.updateCount(commodityId,count);
+//    }
 
     @PutMapping("/update/totalcount")
     public ResponseResult updateTotalCount(Long commodityId,int totalCount){

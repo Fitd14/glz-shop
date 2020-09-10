@@ -1,9 +1,14 @@
 package com.cloud.smy.config;
 
+import com.alibaba.fastjson.JSON;
 import com.cloud.smy.util.JWTTokenUtil;
+import com.glz.constant.HttpStatus;
+import com.glz.model.ResponseResult;
+import com.glz.model.UserDTO;
 import com.glz.pojo.User;
 import com.smy.shop.service.UserService;
 import org.apache.dubbo.config.annotation.Reference;
+import org.apache.http.entity.ContentType;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -12,8 +17,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+
 
 @Configuration
 public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
@@ -32,12 +38,18 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
 
         User user = userService.selectByUsername(username);
 
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername(username);
+        userDTO.setToken(token);
+        userDTO.setRefreshToken(refreshToken);
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
+        // response.setHeader("token", tokenStr);
 
-        // 封装返回参数
-        Map<String,Object> resultData = new HashMap<>();
-        resultData.put("code","200");
-        resultData.put("msg", "登录成功");
-        resultData.put("token",token);
-        // ResultUtil.responseJson(response,resultData);
+        PrintWriter writer = response.getWriter();
+        Integer code = HttpStatus.OK;
+        writer.write(JSON.toJSONString(new ResponseResult(code.toString(),"登陆成功",userDTO)));
+        writer.flush();
+        writer.close();
     }
 }

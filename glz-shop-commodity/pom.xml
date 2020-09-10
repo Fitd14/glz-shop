@@ -30,8 +30,11 @@
             <artifactId>glz-shop-commodity-api</artifactId>
             <version>${project.version}</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>com.smy.shop</groupId>
+            <artifactId>glz-shop-inventory-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
@@ -40,12 +43,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-devtools</artifactId>-->
-<!--            <scope>runtime</scope>-->
-<!--            <optional>true</optional>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,17 +82,37 @@
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-registry-nacos</artifactId>
             <version>2.7.6</version>
-            <!--<exclusions>
-                <exclusion>
-                    <groupId>log4j</groupId>
-                    <artifactId>log4j</artifactId>
-                </exclusion>
-            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+
+        <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-all</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+        <groupId>io.seata</groupId>
+        <artifactId>seata-spring-boot-starter</artifactId>
+        <version>1.2.0</version>
+    </dependency>
     </dependencies>
 
 </project>

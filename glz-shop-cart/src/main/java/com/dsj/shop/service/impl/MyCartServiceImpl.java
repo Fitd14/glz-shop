@@ -86,7 +86,7 @@ public class MyCartServiceImpl implements MyCartService {
      * @return
      */
     @Override
-    public ResponseResult deleteCart(Long userId, Long commodityId) {
+    public ResponseResult deleteCart(Long userId, String commodityId) {
 
         Map<String, Object> deleteMap = new HashMap<>();
         deleteMap.put("user_id", userId);
@@ -128,7 +128,7 @@ public class MyCartServiceImpl implements MyCartService {
      * @return
      */
     @Override
-    public ResponseResult updateCommodityCount(Long userId, Long commodityId, Integer commodityCount) {
+    public ResponseResult updateCommodityCount(Long userId, String commodityId, Integer commodityCount) {
         Cart one = cartMapper.selectOne(new QueryWrapper<Cart>().eq("user_id", userId)
                 .eq("commodity_id", commodityId));
 
@@ -149,7 +149,7 @@ public class MyCartServiceImpl implements MyCartService {
      * @return
      */
     @Override
-    public ResponseResult batchDelete(Long userId, Long[] commodityIds) {
+    public ResponseResult batchDelete(Long userId, String[] commodityIds) {
         Map batchDeleteMap = new HashMap();
         batchDeleteMap.put("userId", userId);
         batchDeleteMap.put("commodityId", commodityIds);

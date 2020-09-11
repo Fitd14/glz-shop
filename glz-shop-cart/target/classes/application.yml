@@ -28,18 +28,10 @@ dubbo:
   registry:
     address: nacos://39.106.162.221:8848
 
-
 logging:
   level:
     com.dsj.shop.mapper: debug
-#seata:
-#  application-id: ${spring.application.name}
-#  tx-service-group: seata-shop-cart
-#  service:
-#    vgroup-mapping:
-#      seata-shop-cart: shop-cart-tx
-#    grouplist:
-#      shop-cart-tx: 127.0.0.1:8091
+
 management:
   endpoints:
     web:

@@ -17,4 +17,9 @@ public class CommodityCategoryContoller {
     public ResponseResult add(CommodityCategory commodityCategory){
         return service.add(commodityCategory);
     }
+
+    @RequestMapping("/selAll")
+    public ResponseResult selAll(){
+        return service.selAll();
+    }
 }

@@ -17,4 +17,10 @@ public class CommodityVertityRecordController {
     public ResponseResult add(CommodityVertityRecord vertityRecord){
         return service.add(vertityRecord);
     }
+
+    @RequestMapping("/del")
+    public ResponseResult del(String id){
+        return service.del(id);
+    }
+
 }

@@ -5,4 +5,6 @@ import com.glz.pojo.CommodityVertityRecord;
 
 public interface CommodityVertityRecordService {
     ResponseResult add(CommodityVertityRecord vertityRecord);
+
+    ResponseResult del(String id);
 }

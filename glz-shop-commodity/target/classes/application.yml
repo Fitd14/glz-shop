@@ -16,11 +16,14 @@ server:
   port: 9500
 
 dubbo:
+  cloud:
+    subscribed-services: glz-shop-inventory
   protocol:
     name: dubbo
     port: -1
   scan:
     base-packages: com.smy.shop.service.impl
+
 
 
 logging:
@@ -29,5 +32,10 @@ logging:
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
+
+
+localtion: D:/Download
+
+
 
 

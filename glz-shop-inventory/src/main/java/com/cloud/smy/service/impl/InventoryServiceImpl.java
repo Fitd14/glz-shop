@@ -1,11 +1,14 @@
 package com.cloud.smy.service.impl;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.cloud.smy.mapper.InventoryMapper;
 import com.cloud.smy.service.InventoryService;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Inventory;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,8 +24,12 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public ResponseResult insert(Inventory inventory) {
-
+        inventory.setId(IdUtil.simpleUUID());
         inventory.setExistingCount(inventory.getTotalCount());
+        inventory.setCreated(DateUtil.now());
+        inventory.setUpdated(DateUtil.now());
+        inventory.setExistingCount(0);
+        inventory.setConsumeCount(inventory.getTotalCount());
         int row = inventoryMapper.insert(inventory);
         if(row > 0){
             return ResponseResult.success();

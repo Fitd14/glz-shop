@@ -28,7 +28,7 @@ public class Cart {
     /**
      * 商品ID
      */
-    private Long commodityId;
+    private String commodityId;
 
     /**
      * 购买价格

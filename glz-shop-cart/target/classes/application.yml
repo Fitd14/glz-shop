@@ -29,6 +29,7 @@ dubbo:
     address: nacos://39.106.162.221:8848
 
 
+
 logging:
   level:
     com.dsj.shop.mapper: debug

@@ -43,6 +43,16 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem
                 .eq("order_no", orderNo));
         return new ResponseResult("200", "success", items.getRecords());
     }
+    /**
+     * 不分页查询
+     * */
+    @Override
+    public ResponseResult selItem(String orderNo) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("order_no", orderNo);
+        List<OrderItem> items = orderItemMapper.selectByMap(map);
+        return new ResponseResult("200","success",items);
+    }
 
     /**
      * 根据ID删除订单明细

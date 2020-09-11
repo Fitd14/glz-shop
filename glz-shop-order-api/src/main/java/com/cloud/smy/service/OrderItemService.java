@@ -18,6 +18,11 @@ public interface OrderItemService extends IService<OrderItem> {
     ResponseResult selItemPage(String orderNo, int pageNo, int pageSize);
 
     /**
+     * 不分页查询
+     */
+    ResponseResult selItem(String orderNo);
+
+    /**
      * 根据订单号批量删除订单详细
      */
     int delOrderItem(String orderNo);

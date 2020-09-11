@@ -95,7 +95,7 @@ public class OrderController {
      *
      * @Param ids 订单ID集合
      */
-    @GetMapping("/order/del/ids")
+    @GetMapping("/del/ids")
     public ResponseResult delBatch(List<String> ids) {
         return orderService.delByIdlist(ids);
     }
@@ -103,7 +103,7 @@ public class OrderController {
     /**
      * 根据收货状态查询
      */
-    @GetMapping("/order/status")
+    @GetMapping("/status")
     public ResponseResult getByStatus(@RequestParam("userId") int userId, @RequestParam("status") int status) {
         return orderService.getByStatus(userId, status);
     }
@@ -111,7 +111,7 @@ public class OrderController {
     /**
      * 根据付款状态查询
      */
-    @GetMapping("/order/pay/status")
+    @GetMapping("/pay/status")
     public ResponseResult getByPaytatus(@RequestParam("userId") int userId, @RequestParam("payStatus") int payStatus) {
         return orderService.getByPayStatus(userId, payStatus);
     }

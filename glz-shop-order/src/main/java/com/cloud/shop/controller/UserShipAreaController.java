@@ -20,11 +20,17 @@ public class UserShipAreaController {
     public ResponseResult getArea(@PathVariable("userId") Long userId) {
         return userShipAreaService.allShipArea(userId);
     }
+
     /**
-     * 添加收货地址
-     * */
+     * 添加/更新收货地址
+     * 对象有ID时为更新 无ID时为添加
+     */
     @PostMapping("/add")
-    public ResponseResult addShipArea(UserShipArea userShipArea) {
+    public ResponseResult addShipArea(@RequestBody UserShipArea userShipArea) {
+        if (userShipArea.getId() != null) {
+            return userShipAreaService.udpShipArea(userShipArea);
+        }
+        System.out.println(userShipArea);
         return userShipAreaService.addShipArea(userShipArea);
     }
 

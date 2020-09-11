@@ -22,7 +22,13 @@ public class OrderItemController {
         return orderItemService.selItemPage(orderNo, pageNo, pageSize);
     }
 
-
+    /**
+     * 不分页查询
+     * */
+    @GetMapping("/orderItem/list")
+    public ResponseResult getList(@RequestParam("orderNo") String orderNo){
+        return orderItemService.selItem(orderNo);
+    }
     /**
      * 根据更新订单明细
      */

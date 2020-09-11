@@ -28,7 +28,7 @@ public class OrderItem {
     /**
      * 商品ID
      * */
-    Long commodityId;
+    String commodityId;
     /**
      * 数量
      * */

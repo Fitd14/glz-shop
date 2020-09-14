@@ -18,6 +18,14 @@ public class OrderController {
     OrderService orderService;
 
     /**
+     * 获得所有订单
+     */
+    @GetMapping("/all")
+    public ResponseResult all() {
+        return orderService.allOrder();
+    }
+
+    /**
      * 跨域测试
      */
     @GetMapping("/aaa")

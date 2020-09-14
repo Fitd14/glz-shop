@@ -4,9 +4,7 @@ import com.cloud.smy.service.OrderItemService;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class OrderItemController {
@@ -23,23 +21,27 @@ public class OrderItemController {
     }
 
     /**
-     * 不分页查询
-     * */
+     * 不分页根据订单号查询
+     */
     @GetMapping("/orderItem/list")
-    public ResponseResult getList(@RequestParam("orderNo") String orderNo){
+    public ResponseResult getList(@RequestParam("orderNo") String orderNo) {
         return orderItemService.selItem(orderNo);
     }
+
     /**
      * 根据更新订单明细
      */
-    public ResponseResult updateOrderItem(OrderItem orderItem) {
-        int i = orderItemService.updateOrderItem(orderItem);
-        if (i != 0) {
-            return ResponseResult.success();
-        } else {
-            return ResponseResult.error();
-        }
+    @PostMapping("/orderItem/udp")
+    public ResponseResult updateOrderItem(@RequestBody OrderItem orderItem) {
+        return orderItemService.updateOrderItem(orderItem);
     }
 
+    /**
+     * 根据订单号和商品号查询一条订单明细
+     */
+    @GetMapping("/orderItem/getByOCid")
+    public ResponseResult getByOrderNoAndCid(@RequestParam("orderNo") String orderBo, @RequestParam("cid") String cid) {
+        return orderItemService.getByOrderNoAndCid(orderBo, cid);
+    }
 
 }

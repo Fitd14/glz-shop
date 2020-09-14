@@ -1,0 +1,10 @@
+from = glz_shop@163.com
+pass = XWNRJMELACZEFSTR
+
+user = glz_shop
+
+host = smtp.163.com
+port = 25
+
+timeout = 60
+connectionTimeout = 60

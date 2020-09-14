@@ -1,7 +1,50 @@
 server:
   port: 6011
 
+
 spring:
-  application:
-    name: glz-shop-sso-service
+  cache:
+    type: redis
+  profiles:
+    active: dev
+  redis:
+    host: 39.106.162.221
+    port: 6379
+    password:
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 4
+        max-wait: 10000
+        min-idle: 0
+      shutdown-timeout: 4000
+    timeout: 10000
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://39.106.162.221:3306/glz-shop
+    username: admin
+    password: shop1234
+
+
+# JWT配置
+jwt:
+  # 密匙KEY
+  secret: JWTSecret
+  # HeaderKEY
+  tokenHeader: Authorization
+  # Token前缀字符
+  tokenPrefix: basic-
+  # 过期时间 单位秒 1天后过期=86400 7天后过期=604800
+  expiration: 86400
+  # 配置不需要认证的接口
+  antMatchers: /auth/**,/favicon.ico
+  # 有效时间
+  validTime: 7
+
+dubbo:
+  cloud:
+    subscribed-services: glz-shop-user
+
+
 

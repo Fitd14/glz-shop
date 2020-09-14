@@ -56,7 +56,7 @@ public class Commodity {
     private Integer status;
 
     /**
-     * 上下架状态 0上架   1下架
+     * 上下架状态 1上架   0下架
      */
     private Integer  putawayStatus = 0;
 
@@ -86,7 +86,15 @@ public class Commodity {
      */
     private double width;
 
+    /**
+     * 详细属性（尺寸、颜色）
+     */
     private String specificType;
+
+    /**
+     * 商品详情
+     */
+    private String productDetail;
 
     private String createTime;
 

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -158,5 +157,20 @@ public class MyCartServiceImpl implements MyCartService {
             ResponseResult.success();
         }
         return ResponseResult.error();
+    }
+
+    /**
+     * 查询多条
+     * @param userId
+     * @param commodityIds
+     * @return
+     */
+    @Override
+    public ResponseResult batchCart(Long userId, String[] commodityIds) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("commodityId", commodityIds);
+        List<Cart> carts = cartMapper.batchCart(map);
+        return new ResponseResult("200", "success", carts);
     }
 }

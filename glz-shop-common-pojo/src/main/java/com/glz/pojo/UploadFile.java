@@ -26,4 +26,6 @@ public class UploadFile {
     private String createTime;
 
     private String updateTime;
+
+    private String productId;
 }

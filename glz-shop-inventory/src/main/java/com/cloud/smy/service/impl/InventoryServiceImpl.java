@@ -38,7 +38,7 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public int updateCount(Long commodityId, int count) {
+    public int updateCount(String commodityId, int count) {
         Inventory oldInventory = inventoryMapper.selectOne(new QueryWrapper<Inventory>()
                 .eq("commodity_id", commodityId));
         oldInventory.setExistingCount(oldInventory.getExistingCount()-count);
@@ -50,7 +50,7 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public ResponseResult updateTotalCount(Long commodityId, int totalCount) {
+    public ResponseResult updateTotalCount(String commodityId, int totalCount) {
         Inventory oldInventory = inventoryMapper.selectOne(new QueryWrapper<Inventory>()
                 .eq("commodity_id", commodityId));
         oldInventory.setTotalCount(oldInventory.getExistingCount()+totalCount);
@@ -70,7 +70,7 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public ResponseResult delete(Long commodityId) {
+    public ResponseResult delete(String commodityId) {
         HashMap<String, Object> condition = new HashMap<>();
         condition.put("commodity_id",commodityId);
         int result = inventoryMapper.deleteByMap(condition);

@@ -58,4 +58,12 @@ public interface MyCartService {
      * @return
      */
     ResponseResult batchDelete(Long userId, String[] commodityIds);
+
+    /**
+     * 查询多条
+     * @param userId
+     * @param commodityIds
+     * @return
+     */
+    ResponseResult batchCart(Long userId, String[] commodityIds);
 }

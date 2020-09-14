@@ -17,4 +17,8 @@ public class CommodityCategory {
     private int showStatus;
     private int sort;
     private String keywords;
+    /**
+     * 下一接層類型
+     */
+    private Long children;
 }

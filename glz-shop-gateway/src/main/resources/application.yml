@@ -13,7 +13,18 @@ spring:
           uri: lb://glz-shop-inventory
           predicates:
             - Path=/inventory/**
+
         - id: glz-shop-sso
           uri: lb://glz-shop-sso
           predicates:
             - Path=/auth/**
+        - id: glz-shop-user
+          uri: lb://glz-shop-user
+          predicates:
+            - Path=/role/**,/role/menu/**,/user/**,/role/user/**,/menu/**,/member/**
+
+        - id: glz-shop-commodity
+          uri: lb://glz-shop-commodity
+          predicates:
+            - Path=/commodity/**,/commodityCategory/**
+

@@ -7,6 +7,8 @@ import com.glz.pojo.CommodityAttribute;
 import com.glz.pojo.CommodityCategory;
 import com.glz.pojo.Inventory;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
+
 
 public interface CommodityService {
 
@@ -31,4 +33,6 @@ public interface CommodityService {
     ResponseResult selectOne(String id);
 
     ResponseResult  selectAll();
+
+    ResponseResult update(Commodity commodity);
 }

@@ -20,6 +20,9 @@ public class CommodityCategoryServiceImpl implements CommodityCategoryService {
     CommodityCategoryMapper commodityCategoryMapper;
     @Override
     public ResponseResult add(CommodityCategory commodityCategory) {
+        commodityCategory.setNavStatus(1);
+        commodityCategory.setShowStatus(1);
+
         int insert = commodityCategoryMapper.insert(commodityCategory);
         if (insert > 0){
             return ResponseResult.success();
@@ -29,8 +32,19 @@ public class CommodityCategoryServiceImpl implements CommodityCategoryService {
 
     @Override
     public ResponseResult update(CommodityCategory commodityCategory) {
-        CommodityCategory category = commodityCategoryMapper.selectById(commodityCategory.getId());
-        int update = commodityCategoryMapper.update(category, new UpdateWrapper<CommodityCategory>().eq("id", commodityCategory.getId()));
+//        CommodityCategory category = commodityCategoryMapper.selectById(commodityCategory.getId());
+        int update = commodityCategoryMapper.update(commodityCategory, new UpdateWrapper<CommodityCategory>().eq("id", commodityCategory.getId()));
+        if (update > 0){
+            return ResponseResult.success();
+        }
+        return ResponseResult.error();
+    }
+
+    @Override
+    public ResponseResult updateByParentId(Long id,String name) {
+        CommodityCategory fathercategory = commodityCategoryMapper.selectById(id);
+        CommodityCategory childrencategory = commodityCategoryMapper.selectOne(new QueryWrapper<CommodityCategory>().eq("name",name));
+        int update = commodityCategoryMapper.update(fathercategory, new UpdateWrapper<CommodityCategory>().set("children", childrencategory.getId()).eq("id",id));
         if (update > 0){
             return ResponseResult.success();
         }
@@ -54,4 +68,33 @@ public class CommodityCategoryServiceImpl implements CommodityCategoryService {
         }
         return ResponseResult.error();
     }
+
+    @Override
+    public ResponseResult selByParentId(Long parentId) {
+        List<CommodityCategory> commodityCategories = commodityCategoryMapper.selectList(new QueryWrapper<CommodityCategory>().eq("parent_id",parentId));
+        if (commodityCategories.size()>0){
+            return new ResponseResult("200","success",commodityCategories);
+        }
+        return ResponseResult.error();
+    }
+
+    @Override
+    public ResponseResult selById(Long id) {
+        CommodityCategory category = commodityCategoryMapper.selectById(id);
+        if (category!=null){
+            return new ResponseResult("200","success",category);
+        }
+        return ResponseResult.error();
+    }
+
+    @Override
+    public ResponseResult selByName(String name) {
+        CommodityCategory category = commodityCategoryMapper.selectOne(new QueryWrapper<CommodityCategory>().eq("name",name));
+        if (category!=null){
+            return new ResponseResult("200","success",category);
+        }
+        return ResponseResult.error();
+    }
+
+
 }

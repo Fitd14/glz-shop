@@ -24,7 +24,7 @@ public interface UserService {
      * @param uid
      * @return
      */
-    ResponseResult Delete(Long uid);
+    ResponseResult delete(Long uid);
 
     /**
      * 通过id查询某个用户
@@ -34,12 +34,13 @@ public interface UserService {
     ResponseResult selectById(Long uid);
 
     /**
-     *
+     * 通过username查询用户
      * @param username
-     * @param password
      * @return
      */
-    ResponseResult selectByUsernameAndPassword(String username,String password);
-
     User selectByUsername(String username);
+
+    ResponseResult updatePasswordByUsername(String username,String password);
+
+    ResponseResult selectAll();
 }

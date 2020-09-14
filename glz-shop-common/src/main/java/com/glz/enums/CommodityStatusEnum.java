@@ -5,6 +5,7 @@ public enum CommodityStatusEnum {
     OK(0,"已发布"),
     CHECKING(1,"审核中");
 
+
     private int code;
     private String message;
 

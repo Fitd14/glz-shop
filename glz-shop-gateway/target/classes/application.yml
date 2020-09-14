@@ -6,10 +6,21 @@ spring:
     name: glz-shop-gateway
   cloud:
     nacos:
-      server-addr: 127.0.0.1:8848
-#    gateway:
-#      routes:
-#        - id:
-#          uri:
-#          predicates:
-#            - Path=/user/**
+      server-addr: 39.106.162.221:8848
+    gateway:
+      routes:
+        - id: glz-shop-inventory
+          uri: lb://glz-shop-inventory
+          predicates:
+            - Path=/inventory/**
+
+        - id: glz-shop-sso
+          uri: lb://glz-shop-sso
+          predicates:
+            - Path=/auth/**
+
+        - id: glz-shop-commodity
+          uri: lb://glz-shop-commodity
+          predicates:
+            - Path=/commodity/**,/commodityCategory/**
+

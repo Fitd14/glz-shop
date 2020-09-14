@@ -25,17 +25,17 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getURI().getPath();
 
-        if(!antPathMatcher.match("/auth/**",path)){
-            List<String> tokenList = request.getHeaders().get("Authorization");
-            if(null == tokenList) {
-                ServerHttpResponse response = exchange.getResponse();
-                return out(response);
-            }
-        }
-        if(antPathMatcher.match("/**/inner/**", path)) {
-            ServerHttpResponse response = exchange.getResponse();
-            return out(response);
-        }
+//        if(!antPathMatcher.match("/auth/**",path)){
+//            List<String> tokenList = request.getHeaders().get("Authorization");
+//            if(null == tokenList) {
+//                ServerHttpResponse response = exchange.getResponse();
+//                return out(response);
+//            }
+//        }
+//        if(antPathMatcher.match("/**/inner/**", path)) {
+//            ServerHttpResponse response = exchange.getResponse();
+//            return out(response);
+//        }
         return chain.filter(exchange);
     }
 

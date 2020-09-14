@@ -1,14 +1,10 @@
 package com.smy.shop.controller;
 
-import com.cloud.smy.util.SecurityUtils;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.User;
 import com.smy.shop.service.UserService;
-import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Random;
 
 @RestController
 @RequestMapping("/user")
@@ -18,18 +14,17 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/save")
-    public ResponseResult save(User user){
+    public ResponseResult save(@RequestBody User user){
         return userService.insert(user);
     }
 
     @PutMapping("/put/password")
-    public ResponseResult updatePassword(String username,String password){
+    public ResponseResult updatePassword(@RequestBody String username,@RequestBody String password){
         return userService.updatePasswordByUsername(username,password);
     }
 
-    @GetMapping("/put/fp")
+    @PutMapping("/put/fp")
     public ResponseResult forgotPassword(){
-        SecurityUtils.getUser().getUsername();
         return new ResponseResult();
     }
 
@@ -37,10 +32,19 @@ public class UserController {
     public ResponseResult delete(@PathVariable Long id){
         return userService.delete(id);
     }
-
     @GetMapping("/all")
     public ResponseResult getAll(){
         return userService.selectAll();
+    }
+
+    @GetMapping("{id}")
+    public ResponseResult get(@PathVariable Long id){
+        return userService.selectById(id);
+    }
+
+    @PutMapping("/put")
+    public ResponseResult modify(@RequestBody User user){
+        return userService.update(user);
     }
 
 }

@@ -1,9 +1,15 @@
 package com.glz.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.beans.Transient;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 后台菜单表
@@ -11,10 +17,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @TableName("t_permission")
-public class Permission {
+public class Permission implements Serializable {
 
     @TableId
-    private long id;
+    private String id;
 
     //父节点id
     private long pid;
@@ -42,4 +48,7 @@ public class Permission {
 
     //排序
     private String sort;
+
+    @TableField(exist = false)
+    private Set<Permission> permissions;
 }

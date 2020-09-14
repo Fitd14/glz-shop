@@ -56,10 +56,5 @@
             <version>2.7.6</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.smy.shop</groupId>
-            <artifactId>glz-shop-web-sso</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 </project>

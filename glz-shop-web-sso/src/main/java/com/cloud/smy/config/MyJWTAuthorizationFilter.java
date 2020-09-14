@@ -1,8 +1,10 @@
 package com.cloud.smy.config;
 
+import com.cloud.smy.service.CustomUserDetailsService;
 import com.cloud.smy.util.JWTTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.One;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +22,9 @@ import java.io.IOException;
 @Component
 @Slf4j
 public class MyJWTAuthorizationFilter extends OncePerRequestFilter {
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
     /**
      *
@@ -44,7 +49,7 @@ public class MyJWTAuthorizationFilter extends OncePerRequestFilter {
             String username = JWTTokenUtil.getUsernameFromToken(token);
             UsernamePasswordAuthenticationToken authenticationToken = null;
             if (username != null) {
-                //UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+//                UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
 //                authenticationToken =
 //                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             }

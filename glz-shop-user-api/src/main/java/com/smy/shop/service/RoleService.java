@@ -9,11 +9,11 @@ public interface RoleService {
 
     ResponseResult save(Role role);
 
-    ResponseResult deleteById(long id);
+    ResponseResult deleteById(String id);
 
     List<Role> selectAll();
 
     ResponseResult update(Role role);
 
-    Role selectById(long id);
+    Role selectById(String id);
 }

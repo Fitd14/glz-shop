@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smy.shop.mapper.RoleMenuMapper">
+    <resultMap id="roleMenuMap" type="com.glz.pojo.RoleMenu">
+        <id column="role_id" property="roleId"></id>
+        <collection property="menuAll" ofType="com.glz.pojo.Permission">
+            <id column = "id" property ="id" />
+            <result column = "pid" property ="pid" />
+            <result column = "name" property ="name" />
+            <result column = "value" property ="value" />
+            <result column = "icon" property ="icon" />
+            <result column = "type" property ="type" />
+            <result column = "uri" property ="uri" />
+            <result column = "status" property ="status" />
+            <result column = "sort" property ="sort" />
+        </collection>
+    </resultMap>
+
+    <select id="findAll" resultMap="roleMenuMap">
+        select * from t_role_menu ru inner join t_role r on r.id = ru.role_id
+        inner join t_permission p on p.id = ru.menu_id
+    </select>
+
+    <select id="findByRoleId" resultMap="roleMenuMap">
+         select * from t_role_menu ru inner join t_permission p on p.id = ru.menu_id where ru.role_id = #{roleId}
+    </select>
+
+</mapper>

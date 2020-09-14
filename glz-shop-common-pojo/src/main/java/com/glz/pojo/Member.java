@@ -5,15 +5,17 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 用户表
  */
 @Data
 @TableName("t_member")
-public class Member {
+public class Member implements Serializable {
 
     @TableId(type = IdType.ASSIGN_ID)
-    private long id;
+    private String id;
 
     //用户名
     private String username;
@@ -39,7 +41,7 @@ public class Member {
     //生日
     private String birthday;
 
-    private String creatTime;
+    private String createTime;
 
     private String updateTime;
 }

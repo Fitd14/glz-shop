@@ -12,4 +12,6 @@ public interface MemberService {
     Member findByUsername(String username);
 
     ResponseResult updateNickname(String username,String nickname);
+    
+    ResponseResult findAll();
 }

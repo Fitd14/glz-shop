@@ -1,6 +1,10 @@
 package com.cloud.smy.config;
 
+import cn.hutool.core.io.IoUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.cloud.smy.util.SecurityUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
@@ -14,7 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+@Slf4j
 public class MyValidateCodeFilter extends OncePerRequestFilter {
+
+    //
 
     @Autowired
     SecurityUtils securityUtils;
@@ -26,18 +33,15 @@ public class MyValidateCodeFilter extends OncePerRequestFilter {
 
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response
         , FilterChain filterChain) throws ServletException, IOException {
-            // 判断是否登录认证请求
         if ("/auth".equals(request.getRequestURI()) && "POST".equalsIgnoreCase(request.getMethod())) {
             // 判断当前登录是否需要验证码验证(根据用户名、ip、session)
             if (securityUtils.isUseValidateCode(request)) {
                 String captchaId = ServletRequestUtils.getStringParameter(request, "captchaId");
                 String captchaCode = ServletRequestUtils.getStringParameter(request, "captchaCode");
                 // 进行验证码的校验
-
-                System.out.println(captchaCode);
-                System.out.println(captchaId);
                 if (!securityUtils.isVerValidateCode(captchaId, captchaCode)) {
                     // 如果校验不通过，调用自定义校验失败处理器
+                    log.info("验证码验证错误");
                     myJWTFailureHandler.onAuthenticationFailure(request, response,
                             new UsernameNotFoundException("验证码错误"));
                     return;

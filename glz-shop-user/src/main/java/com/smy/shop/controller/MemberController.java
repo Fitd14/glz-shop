@@ -28,5 +28,9 @@ public class MemberController {
         return memberService.updateNickname(username,nickname);
     }
 
+    @GetMapping("/getAll")
+    public ResponseResult getAll(){
+        return memberService.findAll();
+    }
 }
 

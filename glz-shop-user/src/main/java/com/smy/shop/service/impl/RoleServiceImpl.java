@@ -10,6 +10,7 @@ import com.smy.shop.service.RoleService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.yaml.snakeyaml.events.Event;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public ResponseResult save(Role role) {
-        role.setId(IdUtil.getSnowflake(1,1).nextId());
+        role.setId(IdUtil.simpleUUID());
         role.setCreateTime(DateUtil.now());
         int result = roleMapper.insert(role);
         if(result > 0){
@@ -32,7 +33,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public ResponseResult deleteById(long id) {
+    public ResponseResult deleteById(String id) {
         int result = roleMapper.deleteById(id);
         if(result > 0){
             return ResponseResult.success();
@@ -47,7 +48,11 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public ResponseResult update(Role role) {
-        int result = roleMapper.updateById(role);
+        Role oldRole = roleMapper.selectById(role.getId());
+        oldRole.setCode(role.getCode());
+        oldRole.setName(role.getName());
+        oldRole.setUpdateTime(DateUtil.now());
+        int result = roleMapper.updateById(oldRole);
         if(result > 0){
             return ResponseResult.success();
         }
@@ -55,7 +60,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role selectById(long id) {
+    public Role selectById(String id) {
         return roleMapper.selectById(id);
     }
 }

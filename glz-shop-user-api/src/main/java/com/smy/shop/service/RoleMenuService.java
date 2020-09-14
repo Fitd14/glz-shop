@@ -3,17 +3,22 @@ package com.smy.shop.service;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.RoleMenu;
 
-import java.util.List;
+import java.util.Set;
 
 public interface RoleMenuService {
 
     ResponseResult addRoleMenu(RoleMenu roleMenu);
 
-    ResponseResult delete(long roleMenuId);
+    ResponseResult delete(String roleId,String menuId);
 
     ResponseResult update(RoleMenu roleMenu);
 
-    List<RoleMenu> selectAll(RoleMenu roleMenu);
+    Set<RoleMenu> selectAll();
 
-    RoleMenu selectByRoleId(long roleId);
+    RoleMenu selectByRoleId(String roleId);
+
+    RoleMenu selectByUserId(String userId);
+
+    RoleMenu selectByMenuIdAndByRoleId(String menuId,String roleId);
+
 }

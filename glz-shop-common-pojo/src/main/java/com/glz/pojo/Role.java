@@ -4,15 +4,17 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 角色表
  */
 @Data
 @TableName("t_role")
-public class Role {
+public class Role implements Serializable {
 
     @TableId
-    private long id;
+    private String id;
 
     //角色code
     private String code;

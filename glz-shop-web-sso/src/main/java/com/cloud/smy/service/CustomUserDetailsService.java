@@ -1,5 +1,6 @@
 package com.cloud.smy.service;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.glz.pojo.*;
 import com.smy.shop.service.*;
@@ -31,35 +32,58 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Reference
     RoleUserService roleUserService;
 
+    @Reference
+    RoleMenuService roleMenuService;
+
+    @Reference
+    MemberService memberService;
+
     @Override
     @Cacheable(cacheNames="spring:security:userDetails", key="#username")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         User user = userService.selectByUsername(username);
 
+        String userName = null;
+        String password = null;
+        String uid = null;
+        String roleId = null;
+
         if(ObjectUtils.isEmpty(user)){
-            throw new UsernameNotFoundException("用户名或密码错误");
+            System.out.println(username);
+            System.out.println("后台用户登陆失败");
+            Member byUsername = memberService.findByUsername(username);
+            System.out.println(byUsername);
+            if(ObjectUtils.isEmpty(byUsername)){
+                throw new UsernameNotFoundException("用户名或密码错误");
+            }
+            userName = byUsername.getUsername();
+            password = byUsername.getPassword();
+            uid = byUsername.getId();
         }
+
         Set<GrantedAuthority> grantedAuthoritySet = new HashSet<>();
-        RoleUser roleUser = roleUserService.selectByUserId(user.getId());
+        RoleUser roleUser = roleUserService.selectByUserId(uid);
 
         if(ObjectUtils.isEmpty(roleUser)){
-            return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),
+            grantedAuthoritySet.add(new SimpleGrantedAuthority("ROLE_visitor"));
+            grantedAuthoritySet.add(new SimpleGrantedAuthority("desk:show"));
+            return new org.springframework.security.core.userdetails.User(userName,password,
                     true,true,true,true,grantedAuthoritySet);
         }
-        Role role = roleService.selectById(roleUser.getRoleId());
+        System.out.println("-----------------");
+        roleId = roleUser.getRoleId();
+        Role role = roleService.selectById(roleId);
 
-        if(ObjectUtils.isEmpty(role)){
-            return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),
-                    true,true,true,true,grantedAuthoritySet);
-        }
         grantedAuthoritySet.add(new SimpleGrantedAuthority("ROLE_"+ role.getCode()));
 
-        List<Permission> permissions = permissionService.selectByRoleId(role.getId());
+        RoleMenu roleMenu = roleMenuService.selectByRoleId(uid);
 
-        for (Permission permission : permissions){
+        for (Permission permission : roleMenu.getMenuAll()){
             grantedAuthoritySet.add(new SimpleGrantedAuthority(permission.getName()+":"+permission.getValue()));
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),
+
+        return new org.springframework.security.core.userdetails.User(userName,password,
                 true,true,true,true,grantedAuthoritySet);
 
     }
@@ -69,8 +93,8 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     // TODO 在权限变更时需要清空对应缓存
     @Cacheable(cacheNames="spring:security", key="'allSysPermissions'")
-    public List<Permission> allSysPermissions() {
-        List<Permission> permissions = permissionService.selectAll();
+    public Set<Permission> allSysPermissions() {
+        Set<Permission> permissions = permissionService.selectAll();
         return permissions;
     }
 }

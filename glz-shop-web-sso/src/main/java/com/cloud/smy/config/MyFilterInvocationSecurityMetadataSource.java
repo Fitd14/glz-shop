@@ -9,12 +9,9 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Component
@@ -28,7 +25,7 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         HttpServletRequest request = ((FilterInvocation)object).getHttpRequest();
         AntPathRequestMatcher matcher;
-        List<Permission> permissions = customUserDetailsService.allSysPermissions();
+        Set<Permission> permissions = customUserDetailsService.allSysPermissions();
         Set<ConfigAttribute> configAttributeSet = new HashSet<>();
         ConfigAttribute configAttribute;
         for (Permission permission : permissions) {

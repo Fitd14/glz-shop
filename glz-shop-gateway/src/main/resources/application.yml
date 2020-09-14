@@ -17,3 +17,7 @@ spring:
           uri: lb://glz-shop-sso
           predicates:
             - Path=/auth/**
+        - id: glz-shop-user
+          uri: lb://glz-shop-user
+          predicates:
+            - Path=/role/**,/role/menu/**,/user/**,/role/user/**,/menu/**,/member/**

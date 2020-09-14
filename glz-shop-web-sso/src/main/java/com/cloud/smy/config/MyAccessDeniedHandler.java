@@ -2,6 +2,7 @@ package com.cloud.smy.config;
 
 import com.alibaba.fastjson.JSON;
 import com.glz.constant.HttpStatus;
+import com.glz.enums.ResultEnum;
 import com.glz.model.ResponseResult;
 import org.apache.http.entity.ContentType;
 import org.springframework.security.access.AccessDeniedException;
@@ -23,7 +24,7 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
         response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
         PrintWriter writer = response.getWriter();
         Integer code = HttpStatus.UNAUTHORIZED;
-        writer.write(JSON.toJSONString(new ResponseResult(code.toString(), "未登录")));
+        writer.write(JSON.toJSONString(new ResponseResult(ResultEnum.NO_LOGIN.getCode(),ResultEnum.NO_LOGIN.getValue())));
         writer.flush();
         writer.close();
     }

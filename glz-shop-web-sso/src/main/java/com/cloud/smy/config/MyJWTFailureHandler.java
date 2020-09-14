@@ -34,13 +34,14 @@ public class MyJWTFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         log.info("[" + request.getParameter("username")  + "] => api登录失败 -> " + exception.getMessage());
-        // securityUtils.cacheLoginErrorCount(request);
+
+        securityUtils.cacheLoginErrorCount(request);
 
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
         PrintWriter writer = response.getWriter();
         Integer code = HttpStatus.UNAUTHORIZED;
-        writer.write(JSON.toJSONString(new ResponseResult(code.toString(), exception.getMessage())));
+        writer.write(JSON.toJSONString(new ResponseResult(code.toString(), "用户名或密码错误!")));
         writer.flush();
         writer.close();
     }

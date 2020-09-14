@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotNull;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 
@@ -35,10 +36,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseResult insert(User user) {
         User existUser = selectByUsername(user.getUsername());
-        if(ObjectUtil.isEmpty(existUser)){
+        if(ObjectUtil.isNotEmpty(existUser)){
             return new ResponseResult(ResultEnum.PARAME_ERROR.getCode(),"用户已存在");
         }
-        user.setId(IdUtil.getSnowflake(1,1).nextId());
+        user.setId(IdUtil.simpleUUID());
         user.setCreated(DateUtil.now());
         String encodePassword = BCryptUtils.encodePassword(user.getPassword());
         user.setPassword(encodePassword);
@@ -51,7 +52,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseResult update(User user) {
-        int row = userMapper.updateById(user);
+        User oldUser = userMapper.selectById(user.getId());
+        oldUser.setUpdated(DateUtil.now());
+        oldUser.setEmail(user.getEmail());
+        oldUser.setNickname(user.getNickname());
+        oldUser.setStatus(user.getStatus());
+        oldUser.setPhone(user.getPhone());
+        oldUser.setIcon(user.getIcon());
+        int row = userMapper.updateById(oldUser);
         if(row > 0){
             return ResponseResult.success();
         }
@@ -68,7 +76,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseResult selectById(@NotNull Long uid) {
+    public ResponseResult selectById(Long uid) {
         User user = userMapper.selectById(uid);
         return new ResponseResult("200","查询成功",user);
     }

@@ -6,7 +6,7 @@
     <select id="getByOther" resultMap="commodityMap">
          SELECT
             t1.*
-         FROM t_commodity t1 
+         FROM t_commodity t1
         <where>
             <if test="commodityName != null">
                 and t1.commodity_name like CONCAT('%',#{commodityName},'%')
@@ -17,7 +17,38 @@
             <if test="brand !=null ">
                 and t1.brand like CONCAT('%',#{brand},'%')
             </if>
+            <if test="specificType != null">
+                and t1.specific_type = #{specificType}
+            </if>
+
+            <choose>
+                <when test="max!=null and min!=null">
+                    and t1.price between #{min} and #{max}
+                </when>
+                <when test="max==null and min!=null">
+                    and t1.price >= #{min}
+                </when>
+                <when test="max!=null and min==null">
+                    and t1.price <![CDATA[<=]]> #{max}
+                </when>
+            </choose>
+            <choose>
+                <when test="putawayStatus == 0 ">
+                    and t1.putaway_status = #{putawayStatus}
+                </when>
+                <when test="putawayStatus == 1 ">
+                    and t1.putaway_status = #{putawayStatus}
+                </when>
+                <otherwise>
+
+                </otherwise>
+            </choose>
         </where>
+        <choose>
+            <when test="pageNo>=0 and pageSize>0">
+                limit #{pageNo},#{pageSize}
+            </when>
+        </choose>
     </select>
 
     <resultMap id="commodityMap" type="com.glz.pojo.Commodity" >
@@ -34,12 +65,40 @@
         <result column="price" property="price" />
         <result column="create_time" property="createTime"  />
         <result column="update_time" property="updateTime"  />
-
+        <result column="width" property="width"  />
+        <result column="length" property="length" />
+        <result column="height" property="height"  />
+        <result column="weight" property="weight"  />
+        <result column="specific_type" property="specificType" />
     </resultMap>
 
 
 
     <select id="selectAll" resultMap="commodityMap">
         select * from t_commodity
+    </select>
+
+    <select id="getLimit" resultMap="commodityMap">
+        SELECT
+        t1.*
+        FROM t_commodity t1
+        <where>
+        <choose>
+            <when test="putawayStatus == 0 ">
+                and t1.putaway_status = #{putawayStatus}
+            </when>
+            <when test="putawayStatus == 1 ">
+                and t1.putaway_status = #{putawayStatus}
+            </when>
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        </where>
+        <choose>
+            <when test="pageNo>=0 and pageSize>0">
+                limit #{pageNo},#{pageSize}
+            </when>
+        </choose>
     </select>
 </mapper>

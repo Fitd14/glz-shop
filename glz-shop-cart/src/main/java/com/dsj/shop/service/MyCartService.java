@@ -3,9 +3,6 @@ package com.dsj.shop.service;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Cart;
 
-import java.util.List;
-import java.util.Map;
-
 public interface MyCartService {
 
     /**
@@ -37,7 +34,7 @@ public interface MyCartService {
      * @param commodityId
      * @return
      */
-    ResponseResult deleteCart(Long userId, Long commodityId);
+    ResponseResult deleteCart(Long userId, String commodityId);
 
     /**
      * 清空购物车
@@ -53,12 +50,12 @@ public interface MyCartService {
      * @param commodityCount
      * @return
      */
-    ResponseResult updateCommodityCount(Long userId, Long commodityId, Integer commodityCount);
+    ResponseResult updateCommodityCount(Long userId, String commodityId, Integer commodityCount);
 
     /**
      * 批量删除
      * @param
      * @return
      */
-    ResponseResult batchDelete(Long userId, Long[] commodityIds);
+    ResponseResult batchDelete(Long userId, String[] commodityIds);
 }

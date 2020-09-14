@@ -16,11 +16,14 @@ server:
   port: 9500
 
 dubbo:
+  cloud:
+    subscribed-services: glz-shop-inventory
   protocol:
     name: dubbo
     port: -1
   scan:
     base-packages: com.smy.shop.service.impl
+
 
 
 logging:
@@ -30,14 +33,9 @@ logging:
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
 
-seata:
-  application-id: ${spring.application.name}
-  tx-service-group: seata-shop-service-tx-group
-  service:
-    vgroupMapping:
-      seata-shop-service-tx-group: vm-shop-tx-group
-    grouplist:
-      vm-shop-tx-group: 127.0.0.1:8091
-
 
 localtion: D:/Download
+
+
+
+

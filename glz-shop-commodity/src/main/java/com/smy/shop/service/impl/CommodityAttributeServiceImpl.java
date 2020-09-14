@@ -47,4 +47,13 @@ public class CommodityAttributeServiceImpl implements ComodityAttributeService {
         }
         return ResponseResult.error();
     }
+
+    @Override
+    public ResponseResult del(Long id) {
+        int delete = commodityAttributeMapper.deleteById(id);
+        if (delete > 0){
+            return ResponseResult.success();
+        }
+        return ResponseResult.error();
+    }
 }

@@ -3,7 +3,6 @@ package com.dsj.shop.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dsj.shop.mapper.CartMapper;
 import com.dsj.shop.service.CartService;
-import com.glz.model.ResponseResult;
 import com.glz.pojo.Cart;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +22,13 @@ public class CartServiceImpl implements CartService
     private CartMapper cartMapper;
 
     @Override
-    public Cart getCart(Long userId, Long commodityId) {
+    public Cart getCart(Long userId, String commodityId) {
         Cart cart = cartMapper.selectOne(new QueryWrapper<Cart>().eq("user_id", userId).eq("commodity_id", commodityId));
         return cart;
     }
 
     @Override
-    public Integer deleteCart(Long userId, Long commodityId) {
+    public Integer deleteCart(Long userId, String commodityId) {
         Map<String, Object> map = new HashMap<>();
         map.put("user_id", userId);
         map.put("commodity_id", commodityId);
@@ -52,7 +51,7 @@ public class CartServiceImpl implements CartService
     }
 
     @Override
-    public Integer batchDelete(Long userId, Long[] commodityIds) {
+    public Integer batchDelete(Long userId, String[] commodityIds) {
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
         map.put("commodityId", commodityIds);
@@ -61,7 +60,7 @@ public class CartServiceImpl implements CartService
     }
 
     @Override
-    public List<Cart> batchCart(Long userId, Long[] commodityIds) {
+    public List<Cart> batchCart(Long userId, String[] commodityIds) {
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
         map.put("commodityId", commodityIds);

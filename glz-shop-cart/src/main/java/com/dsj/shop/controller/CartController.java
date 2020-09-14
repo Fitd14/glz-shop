@@ -88,4 +88,9 @@ public class CartController {
     public ResponseResult deleteAllCart(@RequestParam("userId") Long userId){
         return myCartService.clearCart(userId);
     }
+
+    @GetMapping("/list/batch")
+    public ResponseResult batchCart(@RequestParam("userId") Long userId, @RequestParam("commodityIds") String[] commodityIds){
+        return myCartService.batchCart(userId, commodityIds);
+    }
 }

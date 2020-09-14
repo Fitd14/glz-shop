@@ -1,12 +1,11 @@
 
-
 spring:
   application:
     name: glz-shop-user
   datasource:
     username: admin
     password: shop1234
-    url: jdbc:mysql://39.106.162.221:3306/glz-shop
+    url: jdbc:mysql://39.106.162.221:3306/glz-shop?useUnicode=true&characterEncoding=UTF8
   cloud:
     nacos:
       discovery:
@@ -22,8 +21,17 @@ dubbo:
 server:
   port: 10001
 
+mybatis:
+  type-aliases-package: com.glz.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  
 management:
   endpoints:
     web:
       exposure:
         include: dubborestmetadata
+
+

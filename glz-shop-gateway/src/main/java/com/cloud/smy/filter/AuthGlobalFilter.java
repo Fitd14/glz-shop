@@ -25,13 +25,14 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getURI().getPath();
 
-//        if(!antPathMatcher.match("/auth/**",path)){
-//            List<String> tokenList = request.getHeaders().get("Authorization");
-//            if(null == tokenList) {
-//                ServerHttpResponse response = exchange.getResponse();
-//                return out(response);
-//            }
-//        }
+        //判断权限
+        if(!antPathMatcher.match("/auth/**",path)){
+            List<String> tokenList = request.getHeaders().get("Authorization");
+            if(null == tokenList) {
+                ServerHttpResponse response = exchange.getResponse();
+                return out(response);
+            }
+        }
 //        if(antPathMatcher.match("/**/inner/**", path)) {
 //            ServerHttpResponse response = exchange.getResponse();
 //            return out(response);
@@ -46,9 +47,8 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
     private Mono<Void> out(ServerHttpResponse response) {
         JsonObject message = new JsonObject();
-        message.addProperty("success", false);
-        message.addProperty("code", 28004);
-        message.addProperty("data", "未登录,请登录");
+        message.addProperty("code", 401);
+        message.addProperty("message", "未登录,请登录");
         byte[] bits = message.toString().getBytes(StandardCharsets.UTF_8);
         DataBuffer buffer = response.bufferFactory().wrap(bits);
         //response.setStatusCode(HttpStatus.UNAUTHORIZED);

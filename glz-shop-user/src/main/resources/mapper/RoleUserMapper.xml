@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smy.shop.mapper.RoleUserMapper">
+    <resultMap id="roleUserMap" type="com.glz.model.RoleUserDTO">
+        <collection column="role_id" property="roleId" ofType="com.glz.pojo.Role">
+            <id column ="role_id" property ="id"/>
+            <result column = "code" property ="code" />
+            <result column = "name" property ="name" />
+            <result column = "create_time" property ="createTime" />
+            <result column = "update_time" property ="updateTime" />
+        </collection>
+        <collection column="user_id" property="userId" ofType="com.glz.pojo.User">
+           <id column ="user_id" property ="id" />
+           <result column ="username" property ="username"/>
+           <result column ="phone" property ="phone"/>
+           <result column ="email" property ="email"/>
+           <result column ="icon" property ="icon"/>
+           <result column ="nickname" property ="nickname"/>
+           <result column ="status" property ="status"/>
+        </collection>
+    </resultMap>
+
+    <select id="findAll" resultMap="roleUserMap">
+        select * from t_role_user ru inner join t_role r on r.id = ru.role_id
+        inner join t_user u on u.id = ru.user_id
+    </select>
+
+</mapper>

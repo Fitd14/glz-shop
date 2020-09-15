@@ -7,6 +7,8 @@ import com.glz.pojo.CommodityAttribute;
 import com.glz.pojo.CommodityCategory;
 import com.glz.pojo.Inventory;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
+
 
 public interface CommodityService {
 
@@ -17,7 +19,7 @@ public interface CommodityService {
 
     ResponseResult updateAwayStatusById(String id,Integer putawayStatus);
 
-    ResponseResult updateStatusById(String id,Long uid,String detail);
+    ResponseResult updateStatusById(String id,Long uid,String detail,int status);
 
     ResponseResult getByOther(@Param("commodityName") String commodityName,
                               @Param("commoditySubHead") String commoditySubHead,
@@ -31,4 +33,6 @@ public interface CommodityService {
     ResponseResult selectOne(String id);
 
     ResponseResult  selectAll();
+
+    ResponseResult update(Commodity commodity);
 }

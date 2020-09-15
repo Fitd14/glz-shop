@@ -19,17 +19,17 @@ public class InventoryController {
     }
 
 //    @PutMapping("/update/count")
-//    public ResponseResult updateCount(Long commodityId,int count) {
+//    public ResponseResult updateCount(String commodityId,int count) {
 //        return inventoryService.updateCount(commodityId,count);
 //    }
 
     @PutMapping("/update/totalcount")
-    public ResponseResult updateTotalCount(Long commodityId,int totalCount){
+    public ResponseResult updateTotalCount(String commodityId,int totalCount){
         return inventoryService.updateTotalCount(commodityId,totalCount);
     }
 
     @DeleteMapping("/del/{commodityId}")
-    public ResponseResult delByCommodity(@PathVariable Long commodityId){
+    public ResponseResult delByCommodity(@PathVariable String commodityId){
         return inventoryService.delete(commodityId);
     }
 

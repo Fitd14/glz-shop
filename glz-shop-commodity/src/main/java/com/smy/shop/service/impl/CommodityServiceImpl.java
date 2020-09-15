@@ -12,12 +12,9 @@ import com.cloud.smy.service.InventoryService;
 import com.glz.enums.CommodityStatusEnum;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.*;
+import com.google.gson.internal.$Gson$Preconditions;
 import com.smy.shop.mapper.CommodityMapper;
-import com.smy.shop.service.CommodityCategoryService;
-import com.smy.shop.service.CommodityService;
-import com.smy.shop.service.CommodityVertityRecordService;
-import com.smy.shop.service.ComodityAttributeService;
-import io.seata.spring.annotation.GlobalTransactional;
+import com.smy.shop.service.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
@@ -49,34 +46,13 @@ public class CommodityServiceImpl implements CommodityService {
     String localtion;
     @Reference
     InventoryService inventoryService;
+    @Autowired
+    UploadService uploadService;
 
     public String date(){
         String now = DateUtil.now();
         return now;
     }
-
-    public String upload(MultipartFile[] files) throws IOException {
-        String  savePath = localtion;
-        File file1 = new File( savePath);
-        if(localtion.isEmpty()){
-            file1.mkdir();
-        }
-        String url = null;
-        for (MultipartFile file: files) {
-            String id = UUID.randomUUID().toString().replace("-", "");
-            String originalFilename = file.getOriginalFilename();
-            String suffex = originalFilename.substring(originalFilename.lastIndexOf("."));
-            String path= id+suffex;
-            if (url == null){
-                url = path;
-            }else {
-                url = url +"," + path;
-            }
-            FileUtils.copyInputStreamToFile(file.getInputStream(),new File(localtion + File.separator +path) );
-        }
-        return url;
-    }
-
     @Override
     @Transactional
     public ResponseResult save(Commodity commodity,
@@ -90,7 +66,13 @@ public class CommodityServiceImpl implements CommodityService {
         int row = commodityMapper.insert(commodity);
         inventory.setCommodityId(UUID);
         inventory.setTotalCount(commodity.getInventory());
-        System.out.println(inventory);
+        String[] split = commodity.getPhoto().split(",");
+        for (String path: split) {
+            UploadFile uploadFile = new UploadFile();
+            uploadFile.setPath(path);
+            uploadFile.setProductId(commodity.getId());
+            uploadService.upload(uploadFile);
+        }
         inventoryService.insert(inventory);
         if(row > 0){
             return ResponseResult.success();
@@ -101,6 +83,7 @@ public class CommodityServiceImpl implements CommodityService {
     @Override
     public ResponseResult deleteById(String id) {
         int row = commodityMapper.deleteById(id);
+        inventoryService.delete(id);
         if(row > 0){
             return ResponseResult.success();
         }
@@ -122,18 +105,18 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     @Transactional
-    public ResponseResult updateStatusById(String id, Long uid,String detail) {
+    public ResponseResult updateStatusById(String id, Long uid,String detail,int status) {
         Commodity oldCommodity = commodityMapper.selectById(id);
         CommodityVertityRecord vertityRecord = new CommodityVertityRecord();
         vertityRecord.setProductId(id);
-        vertityRecord.setCreateTime(date());
-        vertityRecord.setStatus(CommodityStatusEnum.OK.getCode());
+        vertityRecord.setStatus(status);
         vertityRecord.setDetail(detail);
         vertityRecord.setVertityMan(uid);
+        vertityRecord.setDetail(detail);
         commodityVertityRecordService.add(vertityRecord);
         int row = commodityMapper.update(oldCommodity, new UpdateWrapper<Commodity>()
                 .set("update_time",date())
-                .set("status", CommodityStatusEnum.OK.getCode())
+                .set("status",status)
                 .eq("id", id));
         if (row >0){
             return ResponseResult.success();
@@ -187,6 +170,16 @@ public class CommodityServiceImpl implements CommodityService {
                 System.out.println("commodity = " + commodity);
             }
             return new ResponseResult("200","success",commodities);
+        }
+        return ResponseResult.error();
+    }
+
+    @Override
+    public ResponseResult update(Commodity commodity) {
+        commodity.setUpdateTime(DateUtil.now());
+        int row = commodityMapper.updateById(commodity);
+        if (row >0){
+            return ResponseResult.success();
         }
         return ResponseResult.error();
     }

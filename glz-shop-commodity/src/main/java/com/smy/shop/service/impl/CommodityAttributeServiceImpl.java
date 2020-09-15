@@ -41,9 +41,9 @@ public class CommodityAttributeServiceImpl implements ComodityAttributeService {
     @Override
     public ResponseResult sel(Long id) {
         CommodityAttribute commodityAttributes =
-                commodityAttributeMapper.selectById(new QueryWrapper<CommodityAttribute>().eq("id",id));
+                commodityAttributeMapper.selectById(id);
         if (commodityAttributes != null){
-            return ResponseResult.success();
+            return new ResponseResult("200","success",commodityAttributes);
         }
         return ResponseResult.error();
     }

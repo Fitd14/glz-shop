@@ -2,9 +2,11 @@ package com.smy.shop.service.impl;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.glz.enums.ResultEnum;
+import com.glz.model.MemberDTO;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Member;
 import com.smy.shop.mapper.MemberMapper;
@@ -25,6 +27,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public ResponseResult save(Member member) {
+        Member isMember = findByUsername(member.getUsername());
+        if (!ObjectUtil.isEmpty(isMember)){
+            return new ResponseResult(ResultEnum.PARAME_ERROR.getCode(),"账户已存在");
+        }
         member.setId(IdUtil.simpleUUID());
         member.setCreateTime(DateUtil.now());
         member.setPassword(BCryptUtils.encodePassword(member.getPassword()));
@@ -52,7 +58,6 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member findByUsername(String username) {
-        System.out.println(username);
         return memberMapper.selectOne(new QueryWrapper<Member>().eq("username", username));
     }
 
@@ -76,5 +81,9 @@ public class MemberServiceImpl implements MemberService {
         return new ResponseResult(ResultEnum.OK.getCode(),ResultEnum.OK.getValue(),members);
     }
 
-
+    @Override
+    public ResponseResult findMemberInfoByUsername(String username) {
+        MemberDTO memberInfo = memberMapper.findMemberInfo(username);
+        return new ResponseResult(ResultEnum.OK.getCode(),ResultEnum.OK.getValue(),memberInfo);
+    }
 }

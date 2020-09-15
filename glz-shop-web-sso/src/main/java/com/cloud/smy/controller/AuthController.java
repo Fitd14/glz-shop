@@ -27,6 +27,8 @@ public class AuthController {
     @GetMapping("/isUseCaptcha")
     @ResponseBody
     public ResponseResult<Boolean> checkUsername(HttpServletRequest request) throws IOException {
+        System.out.println(request.getRequestURI());
+        System.out.println(request.getParameter("username"));
         return new ResponseResult("200","是否需要验证码",securityUtils.isUseValidateCode(request));
     }
 
@@ -54,8 +56,5 @@ public class AuthController {
         map.put("refreshToken", JWTTokenUtil.TOKEN_PREFIX + newRefreshToken);
         return new ResponseResult("200","token",map);
     }
-
-
-
 
 }

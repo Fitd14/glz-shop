@@ -38,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
      * 通过用戶ID查询该用户的所有订单
      */
     @Override
-    public ResponseResult listOrder(Long userId) {
+    public ResponseResult listOrder(String userId) {
         Map<String, Object> map = new HashMap<>();
         map.put("user_id", userId);
         List<Order> orders = orderMapper.selectByMap(map);
@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
      * 分页查询订单
      */
     @Override
-    public ResponseResult listOrderPage(Long userId, int pageSize, int pageNo) {
+    public ResponseResult listOrderPage(String userId, int pageSize, int pageNo) {
         Page<Order> pages = new Page<>(pageSize, pageNo);
         Page<Order> page = orderMapper.selectPage(pages, new QueryWrapper<Order>()
                 .eq("user_id", userId));
@@ -61,7 +61,7 @@ public class OrderServiceImpl implements OrderService {
      * 添加订单
      */
     @Override
-    public ResponseResult addOrder(Long userId, List<Long> cids, Long id) {
+    public ResponseResult addOrder(String userId, List<Long> cids, String id) {
         List<Cart> carts = cartService.listCart(userId);
         Cart cart = carts.get(0);
         Order order = new Order();
@@ -74,7 +74,6 @@ public class OrderServiceImpl implements OrderService {
         if (userShipArea != null && carts != null) {
             String uuid = UUID.randomUUID().toString().replaceAll("-", "");
             order.setOrderNo(uuid);
-            order.setUserId(cart.getUserId());
             order.setPayment(cart.getTotalPrice());
             order.setUserId(cart.getUserId());
             order.setShipName(userShipArea.getName());
@@ -148,7 +147,7 @@ public class OrderServiceImpl implements OrderService {
      * 根据用户id查询某一时间后的订单 没有实现
      */
     @Override
-    public List<Order> timeOrders(Long userId, String createTime) {
+    public List<Order> timeOrders(String userId, String createTime) {
         List<Order> list = orderMapper.lists();
         return list;
     }
@@ -183,7 +182,7 @@ public class OrderServiceImpl implements OrderService {
      * 根据收货状态查询
      */
     @Override
-    public ResponseResult getByStatus(int userId, int status) {
+    public ResponseResult getByStatus(String userId, int status) {
         Map<String, Object> map = new HashMap<>();
         map.put("user_id", userId);
         map.put("status", status);
@@ -195,7 +194,7 @@ public class OrderServiceImpl implements OrderService {
      * 根据付款状态查询
      */
     @Override
-    public ResponseResult getByPayStatus(int userId, int payStatus) {
+    public ResponseResult getByPayStatus(String userId, int payStatus) {
         Map<String, Object> map = new HashMap<>();
         map.put("user_id", userId);
         map.put("payment_status", payStatus);

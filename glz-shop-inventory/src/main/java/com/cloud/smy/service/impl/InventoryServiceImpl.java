@@ -1,11 +1,14 @@
 package com.cloud.smy.service.impl;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.cloud.smy.mapper.InventoryMapper;
 import com.cloud.smy.service.InventoryService;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Inventory;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,8 +24,12 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public ResponseResult insert(Inventory inventory) {
-
+        inventory.setId(IdUtil.simpleUUID());
         inventory.setExistingCount(inventory.getTotalCount());
+        inventory.setCreated(DateUtil.now());
+        inventory.setUpdated(DateUtil.now());
+        inventory.setExistingCount(0);
+        inventory.setConsumeCount(inventory.getTotalCount());
         int row = inventoryMapper.insert(inventory);
         if(row > 0){
             return ResponseResult.success();
@@ -31,23 +38,19 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public ResponseResult updateCount(Long commodityId, int count) {
+    public int updateCount(String commodityId, int count) {
         Inventory oldInventory = inventoryMapper.selectOne(new QueryWrapper<Inventory>()
                 .eq("commodity_id", commodityId));
         oldInventory.setExistingCount(oldInventory.getExistingCount()-count);
         oldInventory.setConsumeCount(oldInventory.getConsumeCount()+count);
-        int result = inventoryMapper.update(oldInventory, new UpdateWrapper<Inventory>()
+        return inventoryMapper.update(oldInventory, new UpdateWrapper<Inventory>()
                 .set("existing_count", oldInventory.getExistingCount())
                 .set("consume_count", oldInventory.getConsumeCount())
                 .eq("commodity_id", commodityId));
-        if(result > 0){
-            return ResponseResult.success();
-        }
-        return ResponseResult.error();
     }
 
     @Override
-    public ResponseResult updateTotalCount(Long commodityId, int totalCount) {
+    public ResponseResult updateTotalCount(String commodityId, int totalCount) {
         Inventory oldInventory = inventoryMapper.selectOne(new QueryWrapper<Inventory>()
                 .eq("commodity_id", commodityId));
         oldInventory.setTotalCount(oldInventory.getExistingCount()+totalCount);
@@ -67,7 +70,7 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public ResponseResult delete(Long commodityId) {
+    public ResponseResult delete(String commodityId) {
         HashMap<String, Object> condition = new HashMap<>();
         condition.put("commodity_id",commodityId);
         int result = inventoryMapper.deleteByMap(condition);

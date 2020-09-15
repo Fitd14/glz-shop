@@ -18,7 +18,7 @@ public interface InventoryService {
      * @param count
      * @return
      */
-    ResponseResult updateCount(Long commodityId,int count);
+    int updateCount(String commodityId,int count);
 
     /**
      * 更新库存总数
@@ -26,12 +26,12 @@ public interface InventoryService {
      * @param totalCount
      * @return
      */
-    ResponseResult updateTotalCount(Long commodityId,int totalCount);
+    ResponseResult updateTotalCount(String commodityId,int totalCount);
 
     /**
      * 删除库存
      * @param commodityId
      * @return
      */
-    ResponseResult delete(Long commodityId);
+    ResponseResult delete(String commodityId);
 }

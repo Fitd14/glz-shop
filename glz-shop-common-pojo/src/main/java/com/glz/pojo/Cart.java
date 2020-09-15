@@ -23,12 +23,12 @@ public class Cart {
     /**
      * 用户ID
      */
-    private Long userId;
+    private String userId;
 
     /**
      * 商品ID
      */
-    private Long commodityId;
+    private String commodityId;
 
     /**
      * 购买价格

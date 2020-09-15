@@ -17,7 +17,7 @@ public class Commodity {
      * 主键
      */
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private String id;
 
     /**
      * 商品名称
@@ -50,15 +50,15 @@ public class Commodity {
     private Integer sort;
 
     /**
-     * 审核状态 1是审核中   0审核过
+     * 审核状态 1是审核中   0审核过    2审核没通过
      */
 
     private Integer status;
 
     /**
-     * 上下架状态 0上架   1下架
+     * 上下架状态 1上架   0下架
      */
-    private Integer putawayStatus;
+    private Integer  putawayStatus = 0;
 
     /**
      * 图片
@@ -69,6 +69,32 @@ public class Commodity {
      * 商品价格
      */
     private double price;
+    /**
+     * 商品重量
+     */
+    private double weight;
+    /**
+     * 商品高度
+     */
+    private double height;
+    /**
+     * 商品长度
+     */
+    private double length;
+    /**
+     * 商品宽度
+     */
+    private double width;
+
+    /**
+     * 详细属性（尺寸、颜色）
+     */
+    private String specificType;
+
+    /**
+     * 商品详情
+     */
+    private String productDetail;
 
     private String createTime;
 

@@ -1,6 +1,5 @@
 package com.dsj.shop.service;
 
-import com.glz.model.ResponseResult;
 import com.glz.pojo.Cart;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public interface CartService {
      * @param commodityId 商品ID
      * @return
      */
-    Cart getCart(Long userId, Long commodityId);
+    Cart getCart(String userId, String commodityId);
 
     /**
      * 删除购物车
@@ -24,21 +23,21 @@ public interface CartService {
      * @param commodityId 商品ID
      * @return
      */
-    Integer deleteCart(Long userId, Long commodityId);
+    Integer deleteCart(String userId, String commodityId);
 
     /**
      * 获取购物车列表
      * @param userId
      * @return
      */
-    List<Cart> listCart(Long userId);
+    List<Cart> listCart(String userId);
 
     /**
      * 清空购物车
      * @param userId
      * @return
      */
-    Integer deleteCartAll(Long userId);
+    Integer deleteCartAll(String userId);
 
     /**
      * 批量删除
@@ -46,7 +45,7 @@ public interface CartService {
      * @param commodityIds
      * @return
      */
-    Integer batchDelete(Long userId, Long[] commodityIds);
+    Integer batchDelete(String userId, String[] commodityIds);
 
     /**
      * 批量查询
@@ -54,5 +53,5 @@ public interface CartService {
      * @param commodityIds
      * @return
      */
-    List<Cart> batchCart(Long userId, Long[] commodityIds);
+    List<Cart> batchCart(String userId, String[] commodityIds);
 }

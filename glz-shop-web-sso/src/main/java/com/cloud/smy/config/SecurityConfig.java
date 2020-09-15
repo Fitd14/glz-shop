@@ -1,10 +1,8 @@
 package com.cloud.smy.config;
 
+import com.cloud.smy.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -15,6 +13,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
     @Autowired
     private UserLoginSuccessHandler userLoginSuccessHandler;
@@ -37,16 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyAccessDeniedHandler myAccessDeniedHandler;
 
-
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 开启跨域配置
-        http.cors();
+        // http.cors();
         // 关闭csrf攻击保护，否则若未实现csrf保护的情况下，请求会异常，如：/api/auth的post请求
         http.csrf().disable();
         // 指定匿名放行资源(登录认证接口)
@@ -69,6 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // 禁用缓存
         http.headers().cacheControl();
+
     }
 
     @Override
@@ -79,11 +75,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 自定义认证资源，密码加密方式
-     * @param auth
+     * @param builder
      * @throws Exception
      */
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // builder.userDetailsService(customUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+    protected void configure(AuthenticationManagerBuilder builder) throws Exception {
+        builder.userDetailsService(customUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
+
 }

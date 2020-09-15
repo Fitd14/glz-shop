@@ -1,0 +1,4 @@
+com\cloud\smy\mapper\InventoryMapper.class
+com\cloud\smy\service\impl\InventoryServiceImpl.class
+com\cloud\smy\controller\InventoryController.class
+com\cloud\smy\InventoryApplication.class

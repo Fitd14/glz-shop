@@ -23,7 +23,7 @@ public class UploadFile {
     /**
      * 是否为图片：0，图片。1，不是图片
      */
-    private Integer isImg;
+    private boolean isImg;
     /**
      * 文件后缀名
      */
@@ -48,4 +48,6 @@ public class UploadFile {
      * 修改时间
      */
     private String updateTime;
+
+    private String productId;
 }

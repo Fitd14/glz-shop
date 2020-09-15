@@ -11,7 +11,6 @@ public class CommodityAttribute {
 
     @TableId(type = IdType.AUTO)
     private Long id;
-    private Long productAttributeCategoryId;
     private String name;
     private String inputList;
     private int sort;

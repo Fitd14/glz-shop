@@ -6,10 +6,9 @@ import com.glz.pojo.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
+//@CrossOrigin
 @RequestMapping("/cart")
 public class CartController {
 
@@ -32,7 +31,7 @@ public class CartController {
      * @return
      */
     @GetMapping("/list/{userId}")
-    public ResponseResult listCart(@PathVariable Long userId){
+    public ResponseResult listCart(@PathVariable String userId){
         return myCartService.listCart(userId);
     }
 
@@ -44,7 +43,7 @@ public class CartController {
      * @return
      */
     @GetMapping("/list/page")
-    public ResponseResult pageCart(@RequestParam("userId") Long userId, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+    public ResponseResult pageCart(@RequestParam("userId") String userId, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
         return myCartService.pageCart(userId, pageNo, pageSize);
     }
 
@@ -56,7 +55,7 @@ public class CartController {
      * @return
      */
     @PutMapping("/update/count")
-    public ResponseResult updateCount(@RequestParam("userId") Long userId, @RequestParam("commodityId") Long commodityId, @RequestParam("commodityCount") Integer commodityCount){
+    public ResponseResult updateCount(@RequestParam("userId") String userId, @RequestParam("commodityId") String commodityId, @RequestParam("commodityCount") Integer commodityCount){
         return myCartService.updateCommodityCount(userId, commodityId, commodityCount);
     }
 
@@ -67,7 +66,7 @@ public class CartController {
      * @return
      */
     @DeleteMapping("/delete")
-    public ResponseResult deleteCart(@RequestParam("userId") Long userId, @RequestParam("commodityId") Long commodityId){
+    public ResponseResult deleteCart(@RequestParam("userId") String userId, @RequestParam("commodityId") String commodityId){
         return myCartService.deleteCart(userId, commodityId);
     }
 
@@ -76,7 +75,7 @@ public class CartController {
      * @return
      */
     @DeleteMapping("/delete/batch")
-    public ResponseResult lists(@RequestParam("userId") Long userId, @RequestParam("commodityIds") Long[] commodityIds){
+    public ResponseResult lists(@RequestParam("userId") String userId, @RequestParam("commodityIds") String[] commodityIds){
         return myCartService.batchDelete(userId, commodityIds);
     }
 
@@ -86,7 +85,12 @@ public class CartController {
      * @return
      */
     @DeleteMapping("/deleteAll")
-    public ResponseResult deleteAllCart(@RequestParam("userId") Long userId){
+    public ResponseResult deleteAllCart(@RequestParam("userId") String userId){
         return myCartService.clearCart(userId);
+    }
+
+    @GetMapping("/list/batch")
+    public ResponseResult batchCart(@RequestParam("userId") String userId, @RequestParam("commodityIds") String[] commodityIds){
+        return myCartService.batchCart(userId, commodityIds);
     }
 }

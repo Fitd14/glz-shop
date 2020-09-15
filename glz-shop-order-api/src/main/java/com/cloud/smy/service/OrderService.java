@@ -11,7 +11,7 @@ public interface OrderService {
     /**
      * 添加订单
      */
-    ResponseResult addOrder(Long userId, List<Long> cids, Long id);
+    ResponseResult addOrder(String userId, List<Long> cids, String id);
 
     /**
      * 根据订单号删除订单
@@ -26,17 +26,17 @@ public interface OrderService {
     /**
      * 查詢所有订单
      */
-    ResponseResult listOrder(Long userId);
+    ResponseResult listOrder(String userId);
 
     /**
      * 分页查询
      */
-    ResponseResult listOrderPage(Long userId, int pageNo, int pageSize);
+    ResponseResult listOrderPage(String userId, int pageNo, int pageSize);
 
     /**
      * 测试动态sql
      */
-    List<Order> timeOrders(Long userId, String createTime);
+    List<Order> timeOrders(String userId, String createTime);
 
     /**
      * 更新订单状态
@@ -51,10 +51,10 @@ public interface OrderService {
     /**
      * 根据收货状态查询
      */
-    ResponseResult getByStatus(int userId, int status);
+    ResponseResult getByStatus(String userId, int status);
 
     /**
      * 根据付款状态查询
      */
-    ResponseResult getByPayStatus(int userId, int payStatus);
+    ResponseResult getByPayStatus(String userId, int payStatus);
 }

@@ -23,12 +23,12 @@ public class OrderItem {
     /**
      * 用户ID；
      */
-    Long userId;
+    String userId;
 
     /**
      * 商品ID
      * */
-    Long commodityId;
+    String commodityId;
     /**
      * 数量
      * */

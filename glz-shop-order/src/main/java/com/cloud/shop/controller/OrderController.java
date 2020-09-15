@@ -29,7 +29,7 @@ public class OrderController {
      * 通过一个购物车记录添加一条订单信息
      */
     @PostMapping("/add")
-    public ResponseResult add(Long userId, List<Long> cids, @RequestParam("aid") Long aid) {
+    public ResponseResult add(String userId, List<Long> cids, @RequestParam("aid") String aid) {
 
         return orderService.addOrder(userId, cids, aid);
 
@@ -52,7 +52,7 @@ public class OrderController {
      * @Param userId 用户ID
      */
     @GetMapping("/{userId}")
-    public ResponseResult listOrder(@PathVariable Long userId) {
+    public ResponseResult listOrder(@PathVariable String userId) {
         return new ResponseResult("200", "success", orderService.listOrder(userId));
     }
 
@@ -63,7 +63,7 @@ public class OrderController {
      * @Param createTime 创建时间
      */
     @GetMapping("/time/after")
-    public ResponseResult timeOrder(@RequestParam("userId") Long userId, @RequestParam("createTime") String createTime) {
+    public ResponseResult timeOrder(@RequestParam("userId") String userId, @RequestParam("createTime") String createTime) {
         List<Order> orders = orderService.timeOrders(userId, createTime);
         return new ResponseResult("200", "success", orders);
     }
@@ -86,7 +86,7 @@ public class OrderController {
      * @Param pageSize 当前页展示的条数
      */
     @GetMapping("/page/list")
-    public ResponseResult delOrder(@RequestParam("userId") Long userId, @RequestParam("pageNo") int pageNo, @RequestParam("pageSize") int pageSize) {
+    public ResponseResult delOrder(@RequestParam("userId") String userId, @RequestParam("pageNo") int pageNo, @RequestParam("pageSize") int pageSize) {
         return orderService.listOrderPage(userId, pageSize, pageNo);
     }
 
@@ -104,7 +104,7 @@ public class OrderController {
      * 根据收货状态查询
      */
     @GetMapping("/order/status")
-    public ResponseResult getByStatus(@RequestParam("userId") int userId, @RequestParam("status") int status) {
+    public ResponseResult getByStatus(@RequestParam("userId") String userId, @RequestParam("status") int status) {
         return orderService.getByStatus(userId, status);
     }
 
@@ -112,7 +112,7 @@ public class OrderController {
      * 根据付款状态查询
      */
     @GetMapping("/order/pay/status")
-    public ResponseResult getByPaytatus(@RequestParam("userId") int userId, @RequestParam("payStatus") int payStatus) {
+    public ResponseResult getByPaytatus(@RequestParam("userId") String userId, @RequestParam("payStatus") int payStatus) {
         return orderService.getByPayStatus(userId, payStatus);
     }
 

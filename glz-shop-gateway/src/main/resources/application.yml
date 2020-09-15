@@ -28,3 +28,13 @@ spring:
           predicates:
             - Path=/commodity/**,/commodityCategory/**,/commodityAttribute/**,/commodityVertityRecord/**
 
+        - id: glz-shop-commodity
+          uri: lb://glz-shop-order
+          predicates:
+            - Path=/ship/**,/orderBack/**,/order/**,/orderItem/**
+
+        - id: glz-shop-commodity
+          uri: lb://glz-shop-cart-service
+          predicates:
+            - Path=/cart/**
+

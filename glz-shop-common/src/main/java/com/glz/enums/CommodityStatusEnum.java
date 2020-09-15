@@ -1,8 +1,10 @@
 package com.glz.enums;
 
 public enum CommodityStatusEnum {
+    NOPASS(2,"审核未通过"),
 
     OK(0,"已发布"),
+
     CHECKING(1,"审核中");
 
 

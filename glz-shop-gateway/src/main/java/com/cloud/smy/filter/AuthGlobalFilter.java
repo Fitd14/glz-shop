@@ -26,13 +26,13 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         String path = request.getURI().getPath();
 
         //判断权限
-        if(!antPathMatcher.match("/auth/**",path)){
-            List<String> tokenList = request.getHeaders().get("Authorization");
-            if(null == tokenList) {
-                ServerHttpResponse response = exchange.getResponse();
-                return out(response);
-            }
-        }
+//        if(!antPathMatcher.match("/auth/**",path)){
+//            List<String> tokenList = request.getHeaders().get("Authorization");
+//            if(null == tokenList) {
+//                ServerHttpResponse response = exchange.getResponse();
+//                return out(response);
+//            }
+//        }
 //        if(antPathMatcher.match("/**/inner/**", path)) {
 //            ServerHttpResponse response = exchange.getResponse();
 //            return out(response);

@@ -26,5 +26,5 @@ spring:
         - id: glz-shop-commodity
           uri: lb://glz-shop-commodity
           predicates:
-            - Path=/commodity/**,/commodityCategory/**
+            - Path=/commodity/**,/commodityCategory/**,/commodityAttribute/**,/commodityVertityRecord/**
 

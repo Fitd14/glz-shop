@@ -105,18 +105,18 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     @Transactional
-    public ResponseResult updateStatusById(String id, Long uid,String detail) {
+    public ResponseResult updateStatusById(String id, Long uid,String detail,int status) {
         Commodity oldCommodity = commodityMapper.selectById(id);
         CommodityVertityRecord vertityRecord = new CommodityVertityRecord();
         vertityRecord.setProductId(id);
-        vertityRecord.setCreateTime(date());
-        vertityRecord.setStatus(CommodityStatusEnum.OK.getCode());
+        vertityRecord.setStatus(status);
         vertityRecord.setDetail(detail);
         vertityRecord.setVertityMan(uid);
+        vertityRecord.setDetail(detail);
         commodityVertityRecordService.add(vertityRecord);
         int row = commodityMapper.update(oldCommodity, new UpdateWrapper<Commodity>()
                 .set("update_time",date())
-                .set("status", CommodityStatusEnum.OK.getCode())
+                .set("status",status)
                 .eq("id", id));
         if (row >0){
             return ResponseResult.success();

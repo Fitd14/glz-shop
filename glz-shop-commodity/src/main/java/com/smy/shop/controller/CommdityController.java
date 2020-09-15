@@ -1,19 +1,14 @@
 package com.smy.shop.controller;
 
-import cn.hutool.core.io.FileUtil;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Commodity;
-import com.glz.pojo.CommodityAttribute;
-import com.glz.pojo.CommodityCategory;
 import com.glz.pojo.Inventory;
 import com.smy.shop.service.CommodityService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -44,8 +39,8 @@ public class CommdityController {
     }
 
     @RequestMapping("/check/{id}")
-    public ResponseResult updateStatus(@PathVariable("id") String id,Long uid,String detail){
-        return commodityService.updateStatusById(id, uid,detail);
+    public ResponseResult updateStatus(@PathVariable("id") String id,Long uid,String detail,int status){
+        return commodityService.updateStatusById(id, uid,detail,status);
     }
 
     @RequestMapping("/sel")
@@ -76,7 +71,6 @@ public class CommdityController {
         if(localtion.isEmpty()){
             file1.mkdir();
         }
-
         for (MultipartFile file: files) {
             String id = UUID.randomUUID().toString().replace("-", "");
             String originalFilename = file.getOriginalFilename();
@@ -92,7 +86,6 @@ public class CommdityController {
         System.out.println("gloabURL = " + gloabURL);
         return gloabURL;
     }
-
     @RequestMapping("/update")
     public ResponseResult update(@RequestBody Commodity commodity){
         return commodityService.update(commodity);

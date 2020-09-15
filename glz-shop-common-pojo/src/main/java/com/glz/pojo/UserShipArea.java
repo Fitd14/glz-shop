@@ -48,6 +48,11 @@ public class UserShipArea {
     /**
      * 收货地区
      */
+    String area;
+
+    /**
+     * 收货地区
+     */
     String region;
 
 

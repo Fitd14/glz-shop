@@ -52,13 +52,13 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
         User user = userService.selectByUsername(username);
         PrintWriter writer = null;
         Integer code = HttpStatus.OK;
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         if (ObjectUtil.isEmpty(user)){
             Member member = memberService.findByUsername(username);
             MemberDTO memberDTO = new MemberDTO();
             memberDTO.setUsername(member.getUsername());
-            memberDTO.setUsername(token);
+            memberDTO.setToken(token);
             writer = response.getWriter();
-            response.setCharacterEncoding("utf-8");
             writer.write(JSON.toJSONString(new ResponseResult(code.toString(),"登陆成功",memberDTO)));
             writer.flush();
             writer.close();

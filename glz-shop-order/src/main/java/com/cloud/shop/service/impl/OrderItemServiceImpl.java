@@ -45,6 +45,17 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem
     }
 
     /**
+     * 不分页查询
+     */
+    @Override
+    public ResponseResult selItem(String orderNo) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("order_no", orderNo);
+        List<OrderItem> items = orderItemMapper.selectByMap(map);
+        return new ResponseResult("200", "success", items);
+    }
+
+    /**
      * 根据ID删除订单明细
      */
     @Override
@@ -60,9 +71,13 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem
      */
 
     @Override
-    public int updateOrderItem(OrderItem orderItem) {
-        int i = orderItemMapper.updateById(orderItem);
-        return i;
+    public ResponseResult updateOrderItem(OrderItem orderItem) {
+        int i = -1;
+        i = orderItemMapper.updateById(orderItem);
+        if (i != -1) {
+            return ResponseResult.success();
+        }
+        return ResponseResult.error();
     }
 
 
@@ -79,6 +94,21 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem
         }
 
         return i;
+    }
+
+    /**
+     * 根据订单号和商品号查询一条订单明细
+     */
+    @Override
+    public ResponseResult getByOrderNoAndCid(String orderBo, String cid) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("order_no", orderBo);
+        map.put("commodity_id", cid);
+        List<OrderItem> items = orderItemMapper.selectByMap(map);
+        OrderItem item = new OrderItem();
+        item = items.get(0);
+
+        return new ResponseResult("200", "success", item);
     }
 
 }

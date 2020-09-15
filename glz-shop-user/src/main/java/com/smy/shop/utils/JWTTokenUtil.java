@@ -1,4 +1,4 @@
-package com.cloud.smy.util;
+package com.smy.shop.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -8,7 +8,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import java.time.Duration;
 import java.util.Date;
 
-public class JWTTokenUtil{
+public class JWTTokenUtil {
 
     // 签发者
     private static final String TOKEN_ISSURE = "viosay";
@@ -29,9 +29,10 @@ public class JWTTokenUtil{
      * @return
      */
     public static String getUsernameFromToken(String token) {
+        String[] str = token.split("-");
         JWTVerifier verifier = JWT.require(TOKEN_SECRET).withIssuer(TOKEN_ISSURE).build();
         // 解码JWT
-        DecodedJWT jwt = verifier.verify(token);
+        DecodedJWT jwt = verifier.verify(str[1]);
         // 获取主题(用户名)
         String username = jwt.getSubject();
         return username;

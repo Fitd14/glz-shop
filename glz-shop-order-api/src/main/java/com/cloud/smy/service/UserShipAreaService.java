@@ -22,5 +22,5 @@ public interface UserShipAreaService {
     /**
      * 通过ID删除地址
      */
-    ResponseResult delShipAreaById(Long id);
+    ResponseResult delShipAreaById(String id);
 }

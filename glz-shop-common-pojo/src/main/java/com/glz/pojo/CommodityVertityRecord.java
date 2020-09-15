@@ -13,7 +13,7 @@ public class CommodityVertityRecord {
     private Long id;
     private String productId;
     private String createTime;
-    private Long vertityMan;
+    private Long vertityName;
     private int status;
     private String detail;
 }

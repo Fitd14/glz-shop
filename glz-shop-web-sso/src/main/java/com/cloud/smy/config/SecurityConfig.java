@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 开启跨域配置
-        http.cors();
+        // http.cors();
         // 关闭csrf攻击保护，否则若未实现csrf保护的情况下，请求会异常，如：/api/auth的post请求
         http.csrf().disable();
         // 指定匿名放行资源(登录认证接口)

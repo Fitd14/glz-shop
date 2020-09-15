@@ -3,6 +3,7 @@ package com.glz.pojo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -28,6 +29,9 @@ public class Member implements Serializable {
 
     //手机号
     private String phone;
+
+    //邮箱
+    private String email;
 
     //状态 0为正常 1为禁用
     private int status;

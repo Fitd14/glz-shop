@@ -27,6 +27,10 @@
         <module>glz-shop-gateway</module>
         <module>glz-shop-collect-api</module>
         <module>glz-shop-collect</module>
+        <module>glz-shop-advertise</module>
+        <module>glz-shop-advertise-api</module>
+        <module>glz-shop-new-product</module>
+        <module>glz-shop-new-product-api</module>
     </modules>
     <packaging>pom</packaging>
 

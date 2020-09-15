@@ -13,3 +13,7 @@ spring:
           uri: lb://glz-shop-inventory
           predicates:
             - Path=/inventory/**
+        - id: glz-shop-advertise
+          uri: lb://glz-shop-advertise
+          predicates:
+            - Path=/shop/adver/**,/file/**

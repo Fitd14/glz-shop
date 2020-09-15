@@ -4,7 +4,6 @@ import com.glz.model.ResponseResult;
 import com.glz.pojo.CommodityAttribute;
 import com.smy.shop.service.ComodityAttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,26 +16,22 @@ public class CommodityAttributeController {
     ComodityAttributeService comodityAttributeService;
 
     @RequestMapping("/add")
-    public ResponseResult add(CommodityAttribute commodityAttribute) {
+    public ResponseResult add(CommodityAttribute commodityAttribute){
         return comodityAttributeService.add(commodityAttribute);
     }
 
     @RequestMapping("/update")
-    public ResponseResult update(String inputList, Long id) {
+    public ResponseResult update(String inputList, Long id){
         return comodityAttributeService.update(inputList, id);
     }
 
     @RequestMapping("/del")
-    public ResponseResult del(@RequestBody Long id) {
-
+    public  ResponseResult del(@RequestParam("id") Long id){
         return comodityAttributeService.del(id);
     }
 
     @RequestMapping("/sel")
-    public ResponseResult sel(@RequestParam("id") Long id, @RequestParam("aaa") String aaa) {
-        System.out.println("***********************************");
-        System.out.println(id);
-        System.out.println("***********************************");
+    public  ResponseResult sel(@RequestParam("id") Long id){
         return comodityAttributeService.sel(id);
     }
 }

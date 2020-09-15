@@ -46,8 +46,8 @@ public class CommdityController {
     }
 
     @RequestMapping("/check/{id}")
-    public ResponseResult updateStatus(@PathVariable("id") String id, Long uid, String detail) {
-        return commodityService.updateStatusById(id, uid, detail);
+    public ResponseResult updateStatus(@PathVariable("id") String id, Long uid, String detail,int status) {
+        return commodityService.updateStatusById(id, uid, detail,status);
     }
 
     @RequestMapping("/sel")

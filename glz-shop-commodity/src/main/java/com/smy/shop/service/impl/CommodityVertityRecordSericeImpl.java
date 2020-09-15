@@ -1,5 +1,6 @@
 package com.smy.shop.service.impl;
 
+import cn.hutool.core.date.DateUtil;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.CommodityVertityRecord;
 import com.smy.shop.mapper.CommodityVertityRecordMapper;
@@ -17,6 +18,7 @@ public class CommodityVertityRecordSericeImpl implements CommodityVertityRecordS
 
     @Override
     public ResponseResult add(CommodityVertityRecord vertityRecord) {
+        vertityRecord.setCreateTime(DateUtil.now());
         int insert = mapper.insert(vertityRecord);
         if (insert > 0){
             return ResponseResult.success();

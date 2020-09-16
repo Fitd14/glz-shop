@@ -86,4 +86,17 @@ public class MemberServiceImpl implements MemberService {
         MemberDTO memberInfo = memberMapper.findMemberInfo(username);
         return new ResponseResult(ResultEnum.OK.getCode(),ResultEnum.OK.getValue(),memberInfo);
     }
+
+    @Override
+    public ResponseResult modifyInfo(MemberDTO memberDTO) {
+        Member member = memberMapper.selectOne(new QueryWrapper<Member>().eq("username", memberDTO.getUsername()));
+        memberMapper.update(member,new UpdateWrapper<Member>()
+                .set("nickname",memberDTO.getNickname())
+                .set("phone",memberDTO.getGender())
+                .set("email",memberDTO.getEmail())
+                .set("gender",memberDTO.getGender())
+                .set("update_time",DateUtil.now())
+                .eq("username",memberDTO.getUsername()));
+        return ResponseResult.success();
+    }
 }

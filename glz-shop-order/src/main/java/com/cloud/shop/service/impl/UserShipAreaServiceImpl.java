@@ -22,7 +22,7 @@ public class UserShipAreaServiceImpl implements UserShipAreaService {
      * 根据用户ID查找地址
      */
     @Override
-    public ResponseResult allShipArea(Long userId) {
+    public ResponseResult allShipArea(String userId) {
         Map<String, Object> map = new HashMap<>();
         map.put("user_id", userId);
         List<UserShipArea> userShipAreas = userShipAreaMapper.selectByMap(map);
@@ -45,7 +45,7 @@ public class UserShipAreaServiceImpl implements UserShipAreaService {
      * 根据id查找地址
      */
     @Override
-    public ResponseResult getShipAreaById(Long id) {
+    public ResponseResult getShipAreaById(String id) {
         UserShipArea userShipArea = userShipAreaMapper.selectById(id);
         return new ResponseResult("200", "success", userShipArea);
     }
@@ -54,8 +54,17 @@ public class UserShipAreaServiceImpl implements UserShipAreaService {
      * 根据id删除地址
      */
     @Override
-    public ResponseResult delShipAreaById(Long id) {
+    public ResponseResult delShipAreaById(String id) {
         int i = userShipAreaMapper.deleteById(id);
+        if (i != 0) {
+            return ResponseResult.success();
+        }
+        return ResponseResult.error();
+    }
+
+    @Override
+    public ResponseResult udpShipArea(UserShipArea userShipArea) {
+        int i = userShipAreaMapper.updateById(userShipArea);
         if (i != 0) {
             return ResponseResult.success();
         }

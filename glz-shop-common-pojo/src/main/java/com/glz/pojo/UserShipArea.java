@@ -16,7 +16,7 @@ public class UserShipArea {
     /**
      * 用戶ID
      */
-    Long userId;
+    String userId;
     /**
      * 收貨人姓名
      */
@@ -45,6 +45,11 @@ public class UserShipArea {
      * 收货城市
      */
     String city;
+    /**
+     * 收货地区
+     */
+    String area;
+
     /**
      * 收货地区
      */

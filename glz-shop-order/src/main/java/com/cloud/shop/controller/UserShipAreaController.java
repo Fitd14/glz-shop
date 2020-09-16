@@ -17,14 +17,20 @@ public class UserShipAreaController {
      * 根据用户ID查找地址列表
      */
     @GetMapping("/area/{userId}")
-    public ResponseResult getArea(@PathVariable("userId") Long userId) {
+    public ResponseResult getArea(@PathVariable("userId") String userId) {
         return userShipAreaService.allShipArea(userId);
     }
+
     /**
-     * 添加收货地址
-     * */
+     * 添加/更新收货地址
+     * 对象有ID时为更新 无ID时为添加
+     */
     @PostMapping("/add")
-    public ResponseResult addShipArea(UserShipArea userShipArea) {
+    public ResponseResult addShipArea(@RequestBody UserShipArea userShipArea) {
+        if (userShipArea.getId() != null) {
+            return userShipAreaService.udpShipArea(userShipArea);
+        }
+        System.out.println(userShipArea);
         return userShipAreaService.addShipArea(userShipArea);
     }
 
@@ -32,7 +38,7 @@ public class UserShipAreaController {
      * 根据ID查找地址
      */
     @GetMapping("/area/id/{id}")
-    public ResponseResult getAreaById(@PathVariable("id") Long id) {
+    public ResponseResult getAreaById(@PathVariable("id") String id) {
         return userShipAreaService.getShipAreaById(id);
     }
 
@@ -40,7 +46,7 @@ public class UserShipAreaController {
      * 根据ID删除地址
      */
     @GetMapping("/area/del/{id}")
-    public ResponseResult delAreaById(@PathVariable("id") Long id) {
+    public ResponseResult delAreaById(@PathVariable("id") String id) {
         return userShipAreaService.delShipAreaById(id);
     }
 

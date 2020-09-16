@@ -46,14 +46,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         String userName = null;
         String password = null;
-        String uid = null;
+        String uid = user.getId();
         String roleId = null;
 
         if(ObjectUtils.isEmpty(user)){
-            System.out.println(username);
-            System.out.println("后台用户登陆失败");
             Member byUsername = memberService.findByUsername(username);
-            System.out.println(byUsername);
             if(ObjectUtils.isEmpty(byUsername)){
                 throw new UsernameNotFoundException("用户名或密码错误");
             }
@@ -71,19 +68,20 @@ public class CustomUserDetailsService implements UserDetailsService {
             return new org.springframework.security.core.userdetails.User(userName,password,
                     true,true,true,true,grantedAuthoritySet);
         }
-        System.out.println("-----------------");
+
+
         roleId = roleUser.getRoleId();
         Role role = roleService.selectById(roleId);
 
         grantedAuthoritySet.add(new SimpleGrantedAuthority("ROLE_"+ role.getCode()));
 
-        RoleMenu roleMenu = roleMenuService.selectByRoleId(uid);
+        RoleMenu roleMenu = roleMenuService.selectByRoleId(roleId);
 
         for (Permission permission : roleMenu.getMenuAll()){
             grantedAuthoritySet.add(new SimpleGrantedAuthority(permission.getName()+":"+permission.getValue()));
         }
 
-        return new org.springframework.security.core.userdetails.User(userName,password,
+        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),
                 true,true,true,true,grantedAuthoritySet);
 
     }

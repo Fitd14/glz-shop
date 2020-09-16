@@ -1,16 +1,12 @@
 package com.smy.shop.controller;
 
-import cn.hutool.core.io.FileUtil;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Commodity;
-import com.glz.pojo.CommodityAttribute;
-import com.glz.pojo.CommodityCategory;
 import com.glz.pojo.Inventory;
 import com.smy.shop.service.CommodityService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,11 +18,13 @@ import java.util.UUID;
 @CrossOrigin
 @RequestMapping("/commodity")
 public class CommdityController {
-    String gloabURL = "";
+
     @Autowired
     CommodityService commodityService;
     @Value("${localtion}")
     String localtion;
+    @Value("${httpPath}")
+    String httpPath;
     @RequestMapping("/save")
     public ResponseResult save(@RequestBody Commodity commodity, Inventory inventory)  {
         System.out.println("commodity1111111 = " + commodity);
@@ -44,9 +42,9 @@ public class CommdityController {
         return responseResult;
     }
 
-    @RequestMapping("/check/{id}")
-    public ResponseResult updateStatus(@PathVariable("id") String id,Long uid,String detail){
-        return commodityService.updateStatusById(id, uid,detail);
+    @RequestMapping("/check")
+    public ResponseResult updateStatus(String id,Long uid,int status){
+        return commodityService.updateStatusById(id, uid,status);
     }
 
     @RequestMapping("/sel")
@@ -72,28 +70,27 @@ public class CommdityController {
     @RequestMapping("/upload")
     public String upload(@RequestParam("file") MultipartFile[] files) throws IOException {
         String  savePath = localtion;
-        gloabURL = "";
+        String gloabURL = "";
         File file1 = new File( savePath);
         if(localtion.isEmpty()){
             file1.mkdir();
         }
-
         for (MultipartFile file: files) {
             String id = UUID.randomUUID().toString().replace("-", "");
             String originalFilename = file.getOriginalFilename();
             String suffex = originalFilename.substring(originalFilename.lastIndexOf("."));
             String path= id+suffex;
             if ("".equals(gloabURL)){
-                gloabURL = localtion+path;
+                gloabURL = httpPath+path;
             }else {
-                gloabURL = gloabURL +"," + localtion+path;
+                gloabURL = gloabURL +"," + httpPath+path;
             }
             FileUtils.copyInputStreamToFile(file.getInputStream(),new File(localtion + File.separator +path) );
         }
         System.out.println("gloabURL = " + gloabURL);
         return gloabURL;
-    }
 
+    }
     @RequestMapping("/update")
     public ResponseResult update(@RequestBody Commodity commodity){
         return commodityService.update(commodity);

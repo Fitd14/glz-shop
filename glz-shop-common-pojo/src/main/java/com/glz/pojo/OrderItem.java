@@ -23,12 +23,12 @@ public class OrderItem {
     /**
      * 用户ID；
      */
-    Long userId;
+    String userId;
 
     /**
      * 商品ID
      * */
-    Long commodityId;
+    String commodityId;
     /**
      * 数量
      * */
@@ -38,7 +38,10 @@ public class OrderItem {
      * 价钱
      * */
     BigDecimal price;
-
+    /**
+     * 状态
+     * */
+    int status;
     /**
      * 备注
      */

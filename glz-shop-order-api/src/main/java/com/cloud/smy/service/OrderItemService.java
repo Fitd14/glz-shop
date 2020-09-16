@@ -18,6 +18,11 @@ public interface OrderItemService extends IService<OrderItem> {
     ResponseResult selItemPage(String orderNo, int pageNo, int pageSize);
 
     /**
+     * 不分页查询
+     */
+    ResponseResult selItem(String orderNo);
+
+    /**
      * 根据订单号批量删除订单详细
      */
     int delOrderItem(String orderNo);
@@ -26,7 +31,7 @@ public interface OrderItemService extends IService<OrderItem> {
     /**
      * 更新订单明细状态
      */
-    int updateOrderItem(OrderItem OrderItem);
+    ResponseResult updateOrderItem(OrderItem OrderItem);
 
 
     /**
@@ -34,4 +39,8 @@ public interface OrderItemService extends IService<OrderItem> {
      */
     int updateItemStatus(Order order);
 
+    /**
+     * 根据订单号和商品号查询一条订单明细
+     */
+    ResponseResult getByOrderNoAndCid(String orderBo, String cid);
 }

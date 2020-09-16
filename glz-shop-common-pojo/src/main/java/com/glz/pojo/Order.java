@@ -17,7 +17,7 @@ public class Order {
     /**
      * 用户ID
      */
-    Long UserId;
+    String UserId;
     /**
      * 总价
      */

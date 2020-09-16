@@ -19,7 +19,7 @@ public interface CommodityService {
 
     ResponseResult updateAwayStatusById(String id,Integer putawayStatus);
 
-    ResponseResult updateStatusById(String id,Long uid,String detail);
+    ResponseResult updateStatusById(String id,Long vertifyName,int status);
 
     ResponseResult getByOther(@Param("commodityName") String commodityName,
                               @Param("commoditySubHead") String commoditySubHead,

@@ -10,17 +10,12 @@ import com.glz.model.ResponseResult;
 import com.glz.pojo.User;
 import com.smy.shop.mapper.UserMapper;
 import com.smy.shop.service.UserService;
-import com.smy.shop.util.BCryptUtils;
+import com.smy.shop.utils.BCryptUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
-
-import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.List;
 
 

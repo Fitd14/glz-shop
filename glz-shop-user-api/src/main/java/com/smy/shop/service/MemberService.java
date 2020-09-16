@@ -14,4 +14,6 @@ public interface MemberService {
     ResponseResult updateNickname(String username,String nickname);
     
     ResponseResult findAll();
+
+    ResponseResult findMemberInfoByUsername(String username);
 }

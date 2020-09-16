@@ -17,7 +17,7 @@ public interface MyCartService {
      * @param userId
      * @return
      */
-    ResponseResult listCart(Long userId);
+    ResponseResult listCart(String userId);
 
     /**
      * 分页查询
@@ -26,7 +26,7 @@ public interface MyCartService {
      * @param pageSize
      * @return
      */
-    ResponseResult pageCart(Long userId, Integer pageNo, Integer pageSize);
+    ResponseResult pageCart(String userId, Integer pageNo, Integer pageSize);
 
     /**
      * 删除用户购物车下某一商品
@@ -34,14 +34,14 @@ public interface MyCartService {
      * @param commodityId
      * @return
      */
-    ResponseResult deleteCart(Long userId, String commodityId);
+    ResponseResult deleteCart(String userId, String commodityId);
 
     /**
      * 清空购物车
      * @param userId
      * @return
      */
-    ResponseResult clearCart(Long userId);
+    ResponseResult clearCart(String userId);
 
     /**
      * 修改商品数量
@@ -50,14 +50,14 @@ public interface MyCartService {
      * @param commodityCount
      * @return
      */
-    ResponseResult updateCommodityCount(Long userId, String commodityId, Integer commodityCount);
+    ResponseResult updateCommodityCount(String userId, String commodityId, Integer commodityCount);
 
     /**
      * 批量删除
      * @param
      * @return
      */
-    ResponseResult batchDelete(Long userId, String[] commodityIds);
+    ResponseResult batchDelete(String userId, String[] commodityIds);
 
     /**
      * 查询多条
@@ -65,5 +65,5 @@ public interface MyCartService {
      * @param commodityIds
      * @return
      */
-    ResponseResult batchCart(Long userId, String[] commodityIds);
+    ResponseResult batchCart(String userId, String[] commodityIds);
 }

@@ -7,7 +7,7 @@ public interface UserShipAreaService {
     /**
      * 查找用户的所有地址
      */
-    ResponseResult allShipArea(Long userId);
+    ResponseResult allShipArea(String userId);
 
     /**
      * 添加新地址
@@ -17,10 +17,15 @@ public interface UserShipAreaService {
     /***
      * 通過id查找地址
      * */
-    ResponseResult getShipAreaById(Long id);
+    ResponseResult getShipAreaById(String id);
 
     /**
      * 通过ID删除地址
      */
-    ResponseResult delShipAreaById(Long id);
+    ResponseResult delShipAreaById(String id);
+
+    /**
+     * 更新收货地址
+     */
+    ResponseResult udpShipArea(UserShipArea userShipArea);
 }

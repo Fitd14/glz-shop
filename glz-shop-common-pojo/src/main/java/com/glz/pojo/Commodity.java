@@ -50,7 +50,7 @@ public class Commodity {
     private Integer sort;
 
     /**
-     * 审核状态 1是审核中   0审核过
+     * 审核状态 1是审核中   0审核过    2审核没通过
      */
 
     private Integer status;

@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class MailUtils {
 
+
     private static String HOST = "smtp.163.com";
     private static boolean AUTH = true;
     private static String FROM = "15225407491@163.com";

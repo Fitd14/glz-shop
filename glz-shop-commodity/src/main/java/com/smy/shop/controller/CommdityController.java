@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -16,11 +17,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/commodity")
 public class CommdityController {
-    String gloabURL = "";
+
     @Autowired
     CommodityService commodityService;
     @Value("${localtion}")
     String localtion;
+    @Value("${httpPath}")
+    String httpPath;
     @RequestMapping("/save")
     public ResponseResult save(@RequestBody Commodity commodity, Inventory inventory)  {
         System.out.println("commodity1111111 = " + commodity);
@@ -38,9 +41,9 @@ public class CommdityController {
         return responseResult;
     }
 
-    @RequestMapping("/check/{id}")
-    public ResponseResult updateStatus(@PathVariable("id") String id,Long uid,String detail,int status){
-        return commodityService.updateStatusById(id, uid,detail,status);
+    @RequestMapping("/check")
+    public ResponseResult updateStatus(String id,Long uid,int status){
+        return commodityService.updateStatusById(id, uid,status);
     }
 
     @RequestMapping("/sel")
@@ -66,7 +69,7 @@ public class CommdityController {
     @RequestMapping("/upload")
     public String upload(@RequestParam("file") MultipartFile[] files) throws IOException {
         String  savePath = localtion;
-        gloabURL = "";
+        String gloabURL = "";
         File file1 = new File( savePath);
         if(localtion.isEmpty()){
             file1.mkdir();
@@ -77,14 +80,15 @@ public class CommdityController {
             String suffex = originalFilename.substring(originalFilename.lastIndexOf("."));
             String path= id+suffex;
             if ("".equals(gloabURL)){
-                gloabURL = localtion+path;
+                gloabURL = httpPath+path;
             }else {
-                gloabURL = gloabURL +"," + localtion+path;
+                gloabURL = gloabURL +"," + httpPath+path;
             }
             FileUtils.copyInputStreamToFile(file.getInputStream(),new File(localtion + File.separator +path) );
         }
         System.out.println("gloabURL = " + gloabURL);
         return gloabURL;
+
     }
     @RequestMapping("/update")
     public ResponseResult update(@RequestBody Commodity commodity){

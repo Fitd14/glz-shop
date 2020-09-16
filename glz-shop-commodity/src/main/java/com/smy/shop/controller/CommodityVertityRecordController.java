@@ -4,6 +4,7 @@ import com.glz.model.ResponseResult;
 import com.glz.pojo.CommodityVertityRecord;
 import com.smy.shop.service.CommodityVertityRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,8 @@ public class CommodityVertityRecordController {
     CommodityVertityRecordService service;
 
     @RequestMapping("/add")
-    public ResponseResult add(CommodityVertityRecord vertityRecord){
+    public ResponseResult add(@RequestBody CommodityVertityRecord vertityRecord){
+
         return service.add(vertityRecord);
     }
 

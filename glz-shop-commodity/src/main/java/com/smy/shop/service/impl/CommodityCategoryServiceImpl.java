@@ -1,5 +1,6 @@
 package com.smy.shop.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.glz.model.ResponseResult;
@@ -22,8 +23,13 @@ public class CommodityCategoryServiceImpl implements CommodityCategoryService {
     public ResponseResult add(CommodityCategory commodityCategory) {
         commodityCategory.setNavStatus(1);
         commodityCategory.setShowStatus(1);
-
         int insert = commodityCategoryMapper.insert(commodityCategory);
+        if (commodityCategory.getParentId()!=0 ||commodityCategory.getParentId() != null) {
+            CommodityCategory parent = commodityCategoryMapper.selectById(commodityCategory.getParentId());
+            parent.setChildren(commodityCategory.getId());
+            commodityCategoryMapper.update(parent, new UpdateWrapper<CommodityCategory>().eq("id", parent.getId()));
+        }
+        System.out.println("commodityCategory = " + commodityCategory);
         if (insert > 0){
             return ResponseResult.success();
         }
@@ -32,8 +38,9 @@ public class CommodityCategoryServiceImpl implements CommodityCategoryService {
 
     @Override
     public ResponseResult update(CommodityCategory commodityCategory) {
-//        CommodityCategory category = commodityCategoryMapper.selectById(commodityCategory.getId());
-        int update = commodityCategoryMapper.update(commodityCategory, new UpdateWrapper<CommodityCategory>().eq("id", commodityCategory.getId()));
+        System.out.println("commodityCategory = " + commodityCategory);
+        CommodityCategory category = commodityCategoryMapper.selectById(commodityCategory.getId());
+        int update = commodityCategoryMapper.update(category, new UpdateWrapper<CommodityCategory>().eq("id", commodityCategory.getId()));
         if (update > 0){
             return ResponseResult.success();
         }
@@ -53,6 +60,11 @@ public class CommodityCategoryServiceImpl implements CommodityCategoryService {
 
     @Override
     public ResponseResult del(Long id) {
+
+        CommodityCategory category = commodityCategoryMapper.selectById(id);
+        if (category.getChildren() != null){
+            commodityCategoryMapper.deleteById(category.getChildren());
+        }
         int delete = commodityCategoryMapper.deleteById(id);
         if (delete > 0){
             return ResponseResult.success();

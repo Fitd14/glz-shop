@@ -7,7 +7,7 @@ import java.util.List;
 public interface AdvertiseService {
     int createAdvertise(Advertise advertise);
     Advertise getAdvertiseId(String aid);
-    List<String> getList();
+    List<Advertise> getList();
     List<Advertise> getAllList(Integer page,Integer rows);
     int delete(String aid);
 }

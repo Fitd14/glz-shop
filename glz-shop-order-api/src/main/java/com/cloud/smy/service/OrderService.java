@@ -1,6 +1,7 @@
 package com.cloud.smy.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.glz.model.OrderDTO;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Cart;
 import com.glz.pojo.Order;
@@ -11,7 +12,7 @@ public interface OrderService {
     /**
      * 添加订单
      */
-    ResponseResult addOrder(String userId, List<Long> cids, String id);
+    ResponseResult addOrder(OrderDTO orderDTO);
 
     /**
      * 根据订单号删除订单
@@ -60,6 +61,6 @@ public interface OrderService {
 
     /**
      * 查看所有订单
-     * */
+     */
     ResponseResult allOrder();
 }

@@ -94,4 +94,9 @@ public class CommdityController {
     public ResponseResult update(@RequestBody Commodity commodity){
         return commodityService.update(commodity);
     }
+
+    @RequestMapping("/category")
+    public ResponseResult queryCategory(Integer category){
+        return commodityService.queryCategory(category);
+    }
 }

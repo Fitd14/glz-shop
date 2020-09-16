@@ -25,6 +25,10 @@ public class OrderBack {
      */
     int status;
     /**
+     * 图片描述
+     * */
+    String img;
+    /**
      * 更新时间
      */
     @TableField(fill = FieldFill.INSERT)

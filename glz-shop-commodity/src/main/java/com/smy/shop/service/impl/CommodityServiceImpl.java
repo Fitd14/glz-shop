@@ -181,4 +181,15 @@ public class CommodityServiceImpl implements CommodityService {
         return ResponseResult.error();
     }
 
+    /**
+     * 根据类别ID查询商品
+     * @param category
+     * @return
+     */
+    @Override
+    public ResponseResult queryCategory(Integer category) {
+        List<Commodity> list = commodityMapper.selectList(new QueryWrapper<Commodity>().eq("category", category));
+        return new ResponseResult("200", "success", list);
+    }
+
 }

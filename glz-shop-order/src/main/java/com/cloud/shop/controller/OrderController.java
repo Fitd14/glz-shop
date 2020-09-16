@@ -1,6 +1,7 @@
 package com.cloud.shop.controller;
 
 import com.cloud.smy.service.OrderService;
+import com.glz.model.OrderDTO;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Cart;
 import com.glz.pojo.Order;
@@ -37,10 +38,8 @@ public class OrderController {
      * 通过一个购物车记录添加一条订单信息
      */
     @PostMapping("/add")
-    public ResponseResult add(String userId, List<Long> cids, @RequestParam("aid") String aid) {
-
-        return orderService.addOrder(userId, cids, aid);
-
+    public ResponseResult add(@RequestBody OrderDTO orderDTO) {
+        return orderService.addOrder(orderDTO);
     }
 
     /**

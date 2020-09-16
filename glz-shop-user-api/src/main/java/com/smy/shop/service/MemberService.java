@@ -1,5 +1,6 @@
 package com.smy.shop.service;
 
+import com.glz.model.MemberDTO;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Member;
 
@@ -16,4 +17,6 @@ public interface MemberService {
     ResponseResult findAll();
 
     ResponseResult findMemberInfoByUsername(String username);
+
+    ResponseResult modifyInfo(MemberDTO memberDTO);
 }

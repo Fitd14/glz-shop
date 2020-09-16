@@ -4,10 +4,7 @@ import com.glz.model.ResponseResult;
 import com.glz.pojo.CommodityCategory;
 import com.smy.shop.service.CommodityCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/commodityCategory")
@@ -54,5 +51,14 @@ public class CommodityCategoryContoller {
         return service.selById(id);
     }
 
+    /**
+     * 通过父类ID查询该父类下的所有子类
+     * @param parentId
+     * @return
+     */
+    @RequestMapping("/subclass")
+    public ResponseResult querySubclass(Long parentId){
+        return service.querySubclass(parentId);
+    }
 
 }

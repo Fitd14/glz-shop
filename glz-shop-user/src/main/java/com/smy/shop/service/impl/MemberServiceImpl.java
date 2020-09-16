@@ -77,7 +77,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public ResponseResult findAll() {
-        List<Member> members = memberMapper.selectList(new QueryWrapper<>());
+        List<MemberDTO> members = memberMapper.findAll();
         return new ResponseResult(ResultEnum.OK.getCode(),ResultEnum.OK.getValue(),members);
     }
 

@@ -11,7 +11,8 @@ public interface CartService {
 
     /**
      * 获取购物车信息
-     * @param userId 用户ID
+     *
+     * @param userId      用户ID
      * @param commodityId 商品ID
      * @return
      */
@@ -19,7 +20,8 @@ public interface CartService {
 
     /**
      * 删除购物车
-     * @param userId 用户ID
+     *
+     * @param userId      用户ID
      * @param commodityId 商品ID
      * @return
      */
@@ -27,6 +29,7 @@ public interface CartService {
 
     /**
      * 获取购物车列表
+     *
      * @param userId
      * @return
      */
@@ -34,6 +37,7 @@ public interface CartService {
 
     /**
      * 清空购物车
+     *
      * @param userId
      * @return
      */
@@ -41,6 +45,7 @@ public interface CartService {
 
     /**
      * 批量删除
+     *
      * @param userId
      * @param commodityIds
      * @return
@@ -49,9 +54,15 @@ public interface CartService {
 
     /**
      * 批量查询
+     *
      * @param userId
      * @param commodityIds
      * @return
      */
     List<Cart> batchCart(String userId, String[] commodityIds);
+
+    /**
+     * 通过ID查找购物车
+     */
+    Cart getCartById(Long id);
 }

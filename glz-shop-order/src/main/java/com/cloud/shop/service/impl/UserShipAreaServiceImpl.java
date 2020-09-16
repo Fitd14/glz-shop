@@ -45,7 +45,7 @@ public class UserShipAreaServiceImpl implements UserShipAreaService {
      * 根据id查找地址
      */
     @Override
-    public ResponseResult getShipAreaById(String id) {
+    public ResponseResult getShipAreaById(Long id) {
         UserShipArea userShipArea = userShipAreaMapper.selectById(id);
         return new ResponseResult("200", "success", userShipArea);
     }
@@ -54,7 +54,7 @@ public class UserShipAreaServiceImpl implements UserShipAreaService {
      * 根据id删除地址
      */
     @Override
-    public ResponseResult delShipAreaById(String id) {
+    public ResponseResult delShipAreaById(Long id) {
         int i = userShipAreaMapper.deleteById(id);
         if (i != 0) {
             return ResponseResult.success();

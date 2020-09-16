@@ -42,3 +42,8 @@ spring:
           predicates:
             - Path=/shop/adver/**,/file/**
 
+        - id: glz-shop-collect
+          uri: lb://glz-shop-collect
+          predicates:
+            - Path=/shop/newProduct/**,/file/**
+

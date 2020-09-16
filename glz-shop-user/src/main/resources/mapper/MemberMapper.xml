@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smy.shop.mapper.MemberMapper">
+
+    <resultMap id="memberMap" type="com.glz.model.MemberDTO">
+        <id column="id" property="userId"></id>
+        <result column="username" property="username"/>
+        <result column="nickname" property="nickname"/>
+        <result column="icon" property="icon"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+    </resultMap>
+
+    <select id="findMemberInfo" resultMap="memberMap">
+        select id,username,nickname,icon,gender,birthday from t_member where username = #{username}
+    </select>
+
+    <select id="findAll" resultMap="memberMap">
+        select id,username,nickname,icon,gender,birthday from t_member
+    </select>
+</mapper>

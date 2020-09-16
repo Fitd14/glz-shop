@@ -35,4 +35,11 @@ public interface CommodityCategoryService {
      */
     ResponseResult selByName(String name);
 
+    /**
+     * 通过父类ID查询出该父类下所有子类
+     * @param parentId
+     * @return
+     */
+    ResponseResult querySubclass(Long parentId);
+
 }

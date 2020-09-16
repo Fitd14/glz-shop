@@ -25,8 +25,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
+
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,6 +53,8 @@ public class CommodityServiceImpl implements CommodityService {
         String now = DateUtil.now();
         return now;
     }
+
+
     @Override
     @Transactional
     public ResponseResult save(Commodity commodity,
@@ -68,6 +70,8 @@ public class CommodityServiceImpl implements CommodityService {
         inventory.setTotalCount(commodity.getInventory());
         String[] split = commodity.getPhoto().split(",");
         for (String path: split) {
+            String[] split1 = path.split("/");
+            System.out.println("split1 = " + split1);
             UploadFile uploadFile = new UploadFile();
             uploadFile.setPath(path);
             uploadFile.setProductId(commodity.getId());
@@ -105,15 +109,8 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     @Transactional
-    public ResponseResult updateStatusById(String id, Long uid,String detail,int status) {
+    public ResponseResult updateStatusById(String id, Long vertifyName,int status) {
         Commodity oldCommodity = commodityMapper.selectById(id);
-        CommodityVertityRecord vertityRecord = new CommodityVertityRecord();
-        vertityRecord.setProductId(id);
-        vertityRecord.setStatus(status);
-        vertityRecord.setDetail(detail);
-        vertityRecord.setVertityMan(uid);
-        vertityRecord.setDetail(detail);
-        commodityVertityRecordService.add(vertityRecord);
         int row = commodityMapper.update(oldCommodity, new UpdateWrapper<Commodity>()
                 .set("update_time",date())
                 .set("status",status)
@@ -182,6 +179,17 @@ public class CommodityServiceImpl implements CommodityService {
             return ResponseResult.success();
         }
         return ResponseResult.error();
+    }
+
+    /**
+     * 根据类别ID查询商品
+     * @param category
+     * @return
+     */
+    @Override
+    public ResponseResult queryCategory(Integer category) {
+        List<Commodity> list = commodityMapper.selectList(new QueryWrapper<Commodity>().eq("category", category));
+        return new ResponseResult("200", "success", list);
     }
 
 }

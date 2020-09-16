@@ -11,7 +11,7 @@ import com.glz.model.ResponseResult;
 import com.glz.pojo.Member;
 import com.smy.shop.mapper.MemberMapper;
 import com.smy.shop.service.MemberService;
-import com.smy.shop.util.BCryptUtils;
+import com.smy.shop.utils.BCryptUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -77,7 +77,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public ResponseResult findAll() {
-        List<Member> members = memberMapper.selectList(new QueryWrapper<>());
+        List<MemberDTO> members = memberMapper.findAll();
         return new ResponseResult(ResultEnum.OK.getCode(),ResultEnum.OK.getValue(),members);
     }
 

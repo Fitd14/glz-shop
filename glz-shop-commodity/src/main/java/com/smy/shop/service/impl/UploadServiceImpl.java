@@ -17,7 +17,7 @@ public class UploadServiceImpl implements UploadService {
     @Override
     public ResponseResult upload(UploadFile uploadFile) {
         uploadFile.setCreateTime(DateUtil.now());
-        uploadFile.setCreateTime(DateUtil.now());
+        uploadFile.setUpdateTime(DateUtil.now());
         int insert = uploadMapper.insert(uploadFile);
         if (insert>0){
             return  ResponseResult.success();

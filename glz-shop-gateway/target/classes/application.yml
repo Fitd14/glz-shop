@@ -13,7 +13,6 @@ spring:
           uri: lb://glz-shop-inventory
           predicates:
             - Path=/inventory/**
-
         - id: glz-shop-sso
           uri: lb://glz-shop-sso
           predicates:
@@ -37,4 +36,9 @@ spring:
           uri: lb://glz-shop-cart-service
           predicates:
             - Path=/cart/**
+
+        - id: glz-shop-advertise
+          uri: lb://glz-shop-advertise
+          predicates:
+            - Path=/shop/adver/**,/file/**
 

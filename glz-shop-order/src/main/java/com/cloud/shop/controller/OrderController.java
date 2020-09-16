@@ -18,6 +18,14 @@ public class OrderController {
     OrderService orderService;
 
     /**
+     * 获得所有订单
+     */
+    @GetMapping("/all")
+    public ResponseResult all() {
+        return orderService.allOrder();
+    }
+
+    /**
      * 跨域测试
      */
     @GetMapping("/aaa")
@@ -95,7 +103,7 @@ public class OrderController {
      *
      * @Param ids 订单ID集合
      */
-    @GetMapping("/order/del/ids")
+    @GetMapping("/del/ids")
     public ResponseResult delBatch(List<String> ids) {
         return orderService.delByIdlist(ids);
     }
@@ -103,7 +111,7 @@ public class OrderController {
     /**
      * 根据收货状态查询
      */
-    @GetMapping("/order/status")
+    @GetMapping("/status")
     public ResponseResult getByStatus(@RequestParam("userId") String userId, @RequestParam("status") int status) {
         return orderService.getByStatus(userId, status);
     }
@@ -111,7 +119,7 @@ public class OrderController {
     /**
      * 根据付款状态查询
      */
-    @GetMapping("/order/pay/status")
+    @GetMapping("/pay/status")
     public ResponseResult getByPaytatus(@RequestParam("userId") String userId, @RequestParam("payStatus") int payStatus) {
         return orderService.getByPayStatus(userId, payStatus);
     }

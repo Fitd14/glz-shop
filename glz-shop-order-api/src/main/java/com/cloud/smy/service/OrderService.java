@@ -57,4 +57,9 @@ public interface OrderService {
      * 根据付款状态查询
      */
     ResponseResult getByPayStatus(String userId, int payStatus);
+
+    /**
+     * 查看所有订单
+     * */
+    ResponseResult allOrder();
 }

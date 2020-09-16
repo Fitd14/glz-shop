@@ -201,4 +201,10 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orders = orderMapper.selectByMap(map);
         return new ResponseResult("200", "success", orders);
     }
+
+    @Override
+    public ResponseResult allOrder() {
+        List<Order> lists = orderMapper.lists();
+        return new ResponseResult("200", "success", lists);
+    }
 }

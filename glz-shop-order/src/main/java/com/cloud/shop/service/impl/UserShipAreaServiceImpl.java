@@ -61,4 +61,13 @@ public class UserShipAreaServiceImpl implements UserShipAreaService {
         }
         return ResponseResult.error();
     }
+
+    @Override
+    public ResponseResult udpShipArea(UserShipArea userShipArea) {
+        int i = userShipAreaMapper.updateById(userShipArea);
+        if (i != 0) {
+            return ResponseResult.success();
+        }
+        return ResponseResult.error();
+    }
 }

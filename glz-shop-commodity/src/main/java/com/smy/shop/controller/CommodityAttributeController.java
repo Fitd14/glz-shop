@@ -5,6 +5,7 @@ import com.glz.pojo.CommodityAttribute;
 import com.smy.shop.service.ComodityAttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,12 +26,12 @@ public class CommodityAttributeController {
     }
 
     @RequestMapping("/del")
-    public  ResponseResult del(Long id){
+    public  ResponseResult del(@RequestParam("id") Long id){
         return comodityAttributeService.del(id);
     }
 
     @RequestMapping("/sel")
-    public  ResponseResult sel(Long id){
+    public  ResponseResult sel(@RequestParam("id") Long id){
         return comodityAttributeService.sel(id);
     }
 }

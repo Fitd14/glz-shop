@@ -23,4 +23,9 @@ public interface UserShipAreaService {
      * 通过ID删除地址
      */
     ResponseResult delShipAreaById(String id);
+
+    /**
+     * 更新收货地址
+     */
+    ResponseResult udpShipArea(UserShipArea userShipArea);
 }

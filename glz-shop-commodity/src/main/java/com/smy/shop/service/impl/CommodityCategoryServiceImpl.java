@@ -96,5 +96,16 @@ public class CommodityCategoryServiceImpl implements CommodityCategoryService {
         return ResponseResult.error();
     }
 
+    /**
+     * 通过父类ID查询该父类下的子类
+     * @param parentId
+     * @return
+     */
+    @Override
+    public ResponseResult querySubclass(Long parentId) {
+        List<CommodityCategory> parentIds = commodityCategoryMapper.selectList(new QueryWrapper<CommodityCategory>().eq("parent_id", parentId));
+        return new ResponseResult("200", "success", parentIds);
+    }
+
 
 }

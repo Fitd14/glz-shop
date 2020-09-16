@@ -35,4 +35,11 @@ public interface CommodityService {
     ResponseResult  selectAll();
 
     ResponseResult update(Commodity commodity);
+
+    /**
+     * 根据类别ID查询商品
+     * @param category
+     * @return
+     */
+    ResponseResult queryCategory(Integer category);
 }

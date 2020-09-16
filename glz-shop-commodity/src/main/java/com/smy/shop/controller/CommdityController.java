@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/commodity")
 public class CommdityController {
     String gloabURL = "";
@@ -96,5 +97,10 @@ public class CommdityController {
     @RequestMapping("/update")
     public ResponseResult update(@RequestBody Commodity commodity){
         return commodityService.update(commodity);
+    }
+
+    @RequestMapping("/category")
+    public ResponseResult queryCategory(Integer category){
+        return commodityService.queryCategory(category);
     }
 }

@@ -54,3 +54,7 @@ mybatis-plus:
 logging:
   level:
     com.cloud.shop: debug
+
+FTP_HOST: 192.168.115.63
+FTP_POST: 21
+

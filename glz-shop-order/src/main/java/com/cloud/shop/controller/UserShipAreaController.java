@@ -38,7 +38,7 @@ public class UserShipAreaController {
      * 根据ID查找地址
      */
     @GetMapping("/area/id/{id}")
-    public ResponseResult getAreaById(@PathVariable("id") String id) {
+    public ResponseResult getAreaById(@PathVariable("id") Long id) {
         return userShipAreaService.getShipAreaById(id);
     }
 
@@ -46,7 +46,7 @@ public class UserShipAreaController {
      * 根据ID删除地址
      */
     @GetMapping("/area/del/{id}")
-    public ResponseResult delAreaById(@PathVariable("id") String id) {
+    public ResponseResult delAreaById(@PathVariable("id") Long id) {
         return userShipAreaService.delShipAreaById(id);
     }
 

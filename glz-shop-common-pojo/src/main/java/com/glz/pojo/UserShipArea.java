@@ -16,7 +16,7 @@ public class UserShipArea {
     /**
      * 用戶ID
      */
-    Long userId;
+    String userId;
     /**
      * 收貨人姓名
      */

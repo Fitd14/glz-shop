@@ -11,6 +11,7 @@ import com.cloud.smy.service.OrderItemService;
 import com.cloud.smy.service.OrderService;
 import com.cloud.smy.service.UserShipAreaService;
 import com.dsj.shop.service.CartService;
+import com.glz.model.OrderDTO;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.*;
 import org.apache.dubbo.config.annotation.Reference;
@@ -61,28 +62,34 @@ public class OrderServiceImpl implements OrderService {
      * 添加订单
      */
     @Override
-    public ResponseResult addOrder(String userId, List<Long> cids, String id) {
-        List<Cart> carts = cartService.listCart(userId);
-        Cart cart = carts.get(0);
+    public ResponseResult addOrder(OrderDTO orderDTO) {
+        List<Cart> carts = new ArrayList<>();
+        BigDecimal totalPrice = new BigDecimal(0);
         Order order = new Order();
-        UserShipArea userShipArea = null;
+        UserShipArea userShipArea = new UserShipArea();
         int i = 0;
-        if (id != null) {
-            ResponseResult shipAreaById = userShipAreaService.getShipAreaById(id);
+        if (orderDTO.getShipId() != null) {
+            ResponseResult shipAreaById = userShipAreaService.getShipAreaById(orderDTO.getShipId());
             userShipArea = (UserShipArea) shipAreaById.getData();
         }
-        if (userShipArea != null && carts != null) {
+        if (orderDTO.getCids().length != 0) {
+            for (Long cid : orderDTO.getCids()) {
+                Cart cart = new Cart();
+                totalPrice.add(cart.getTotalPrice());
+                carts.add(cart);
+            }
+        }
+        if (userShipArea != null && carts.size() != 0) {
             String uuid = UUID.randomUUID().toString().replaceAll("-", "");
             order.setOrderNo(uuid);
-            order.setPayment(cart.getTotalPrice());
-            order.setUserId(cart.getUserId());
+            order.setPayment(totalPrice);
+            order.setUserId(orderDTO.getUserId());
             order.setShipName(userShipArea.getName());
             order.setPhone(userShipArea.getPhone());
             order.setPostCode(userShipArea.getPostCode());
             order.setProvince(userShipArea.getProvince());
             order.setCity(userShipArea.getCity());
             order.setRegion(userShipArea.getRegion());
-            BigDecimal total = new BigDecimal("0");
             for (Cart cart2 : carts) {
                 OrderItem item = new OrderItem();
                 item.setOrderNo(uuid);
@@ -90,12 +97,10 @@ public class OrderServiceImpl implements OrderService {
                 item.setCommodityId(cart2.getCommodityId());
                 item.setNumber(cart2.getCommodityCount());
                 item.setPrice(cart2.getTotalPrice());
-                total = total.add(cart2.getTotalPrice());
                 i = orderItemService.addOrderItem(item);
             }
-            order.setPayment(total);
             orderMapper.insert(order);
-            cartService.deleteCartAll(userId);
+            cartService.deleteCartAll(orderDTO.getUserId());
         }
         if (i > 0) {
             return ResponseResult.success();

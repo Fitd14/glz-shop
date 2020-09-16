@@ -17,12 +17,12 @@ public interface UserShipAreaService {
     /***
      * 通過id查找地址
      * */
-    ResponseResult getShipAreaById(String id);
+    ResponseResult getShipAreaById(Long id);
 
     /**
      * 通过ID删除地址
      */
-    ResponseResult delShipAreaById(String id);
+    ResponseResult delShipAreaById(Long id);
 
     /**
      * 更新收货地址

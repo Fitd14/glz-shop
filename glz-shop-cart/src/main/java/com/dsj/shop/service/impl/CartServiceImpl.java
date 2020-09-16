@@ -15,8 +15,7 @@ import java.util.Map;
  * 对外公共接口实现
  */
 @Service
-public class CartServiceImpl implements CartService
-{
+public class CartServiceImpl implements CartService {
 
     @Autowired
     private CartMapper cartMapper;
@@ -66,5 +65,10 @@ public class CartServiceImpl implements CartService
         map.put("commodityId", commodityIds);
         List<Cart> carts = cartMapper.batchCart(map);
         return carts;
+    }
+
+    @Override
+    public Cart getCartById(Long id) {
+        return cartMapper.selectById(id);
     }
 }

@@ -16,7 +16,7 @@
 
 
     <select id="findMemberInfo" resultMap="memberMap">
-        select id,username,nickname,icon,gender,birthday from t_member where username = #{username}
+        select id,username,nickname,icon,gender,birthday,phone,email from t_member where username = #{username}
     </select>
 
     <select id="findAll" resultMap="memberMap">

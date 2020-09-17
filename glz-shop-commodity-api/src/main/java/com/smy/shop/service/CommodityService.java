@@ -49,4 +49,11 @@ public interface CommodityService {
      * @return
      */
     ResponseResult getByCategory(Integer category ,int count);
+
+    /**
+     * 多个商品id，查询id
+     * @param
+     * @return
+     */
+    ResponseResult selGroupId(String[] id);
 }

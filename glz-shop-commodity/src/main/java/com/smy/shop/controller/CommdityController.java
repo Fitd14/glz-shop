@@ -105,4 +105,10 @@ public class CommdityController {
     public ResponseResult getByCategoryCount(Integer category,int count){
         return commodityService.getByCategory(category, count);
     }
+
+    @GetMapping("/selGroupId")
+    public ResponseResult selGroupId(String[] id){
+        System.out.println(id);
+        return commodityService.selGroupId(id);
+    }
 }

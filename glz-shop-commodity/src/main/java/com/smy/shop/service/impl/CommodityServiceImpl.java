@@ -198,4 +198,14 @@ public class CommodityServiceImpl implements CommodityService {
         return new ResponseResult("200", "success", list);
     }
 
+    public ResponseResult selGroupId(String[] id){
+        List<Commodity> commodities = commodityMapper.selByGroupId(id);
+        if (commodities.size()>0){
+            for (Commodity commodity:commodities){
+                System.out.println("commodity = " + commodity);
+            }
+            return new ResponseResult("200","success",commodities);
+        }
+        return ResponseResult.error();
+    }
 }

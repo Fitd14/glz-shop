@@ -42,4 +42,11 @@ public interface CommodityService {
      * @return
      */
     ResponseResult queryCategory(Integer category);
+
+    /**
+     * 根据类别ID查询商品 指定数量
+     * @param category
+     * @return
+     */
+    ResponseResult getByCategory(Integer category ,int count);
 }

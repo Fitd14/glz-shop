@@ -192,4 +192,10 @@ public class CommodityServiceImpl implements CommodityService {
         return new ResponseResult("200", "success", list);
     }
 
+    @Override
+    public ResponseResult getByCategory(Integer category, int count) {
+        List<Commodity> list = commodityMapper.getByCategoryCount(category, count);
+        return new ResponseResult("200", "success", list);
+    }
+
 }

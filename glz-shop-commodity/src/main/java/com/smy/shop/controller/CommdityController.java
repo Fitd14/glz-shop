@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/commodity")
 public class CommdityController {
 
@@ -98,5 +99,10 @@ public class CommdityController {
     @RequestMapping("/category")
     public ResponseResult queryCategory(Integer category){
         return commodityService.queryCategory(category);
+    }
+
+    @RequestMapping("/categorycount")
+    public ResponseResult getByCategoryCount(Integer category,int count){
+        return commodityService.getByCategory(category, count);
     }
 }

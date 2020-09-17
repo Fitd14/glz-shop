@@ -18,4 +18,6 @@ public interface CommodityMapper extends BaseMapper<Commodity> {
     List<Commodity> selectAll();
 
     List<Commodity> getLimit(@Param("pageNo") Long pageNo,@Param("pageSize")Long pageSize,@Param("putawayStatus")Integer putawayStatus);
+
+    List<Commodity> getByCategoryCount(@Param("category") Integer category,@Param("count") int count);
 }

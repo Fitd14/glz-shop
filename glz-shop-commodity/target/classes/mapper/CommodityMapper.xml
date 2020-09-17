@@ -72,6 +72,18 @@
         <result column="specific_type" property="specificType" />
     </resultMap>
 
+    <select id="getByCategoryCount" resultMap="commodityMap">
+        SELECT
+        t1.*
+        FROM t_commodity t1
+        <where>
+            and t1.category = #{category}
+            <if test="count>0">
+                limit #{count}
+            </if>
+        </where>
+
+    </select>
 
 
     <select id="selectAll" resultMap="commodityMap">

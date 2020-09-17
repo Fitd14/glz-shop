@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/commodity")
 public class CommdityController {
 
@@ -42,7 +43,7 @@ public class CommdityController {
     }
 
     @RequestMapping("/check")
-    public ResponseResult updateStatus(String id,Long uid,int status){
+    public ResponseResult updateStatus(String id,String uid,int status){
         return commodityService.updateStatusById(id, uid,status);
     }
 
@@ -98,5 +99,16 @@ public class CommdityController {
     @RequestMapping("/category")
     public ResponseResult queryCategory(Integer category){
         return commodityService.queryCategory(category);
+    }
+
+    @RequestMapping("/categorycount")
+    public ResponseResult getByCategoryCount(Integer category,int count){
+        return commodityService.getByCategory(category, count);
+    }
+
+    @GetMapping("/selGroupId")
+    public ResponseResult selGroupId(String[] id){
+        System.out.println(id);
+        return commodityService.selGroupId(id);
     }
 }

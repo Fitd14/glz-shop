@@ -19,6 +19,7 @@ dubbo:
     port: -1
   cloud:
     subscribed-services: ""
+
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
 

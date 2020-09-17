@@ -7,11 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("t_commodity")
-public class Commodity {
+public class Commodity implements Serializable {
 
     /**
      * 主键

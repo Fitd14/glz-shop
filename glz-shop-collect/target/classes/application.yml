@@ -19,7 +19,7 @@ dubbo:
     name: dubbo
     port: -1
   cloud:
-    subscribed-services: ""
+    subscribed-services: glz-shop-commodity
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml

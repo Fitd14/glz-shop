@@ -43,7 +43,7 @@ public class CommdityController {
     }
 
     @RequestMapping("/check")
-    public ResponseResult updateStatus(String id,Long uid,int status){
+    public ResponseResult updateStatus(String id,String uid,int status){
         return commodityService.updateStatusById(id, uid,status);
     }
 

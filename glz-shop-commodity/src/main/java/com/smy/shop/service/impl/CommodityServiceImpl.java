@@ -109,7 +109,7 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     @Transactional
-    public ResponseResult updateStatusById(String id, Long vertifyName,int status) {
+    public ResponseResult updateStatusById(String id, String vertifyName,int status) {
         Commodity oldCommodity = commodityMapper.selectById(id);
         int row = commodityMapper.update(oldCommodity, new UpdateWrapper<Commodity>()
                 .set("update_time",date())

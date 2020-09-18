@@ -7,7 +7,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: admin
     password: shop1234
-    url: jdbc:mysql://39.106.162.221:3306/glz-shop
+    url: jdbc:mysql://39.106.162.221:3306/glz-shop?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
 
   application:
     name: glz-shop-cart-service
@@ -19,12 +19,12 @@ spring:
 
 dubbo:
   scan:
-    base-packages: com.dsj.shop.service
+    base-packages: com.dsj.shop.service.impl
   protocol:
     name: dubbo
     port: -1
   cloud:
-    subscribed-services: ''
+    subscribed-services: glz-shop-commodity
   registry:
     address: nacos://39.106.162.221:8848
 

@@ -36,11 +36,14 @@ public class MyCartServiceImpl implements MyCartService {
     @Override
     public ResponseResult saveCart(String userId, String commodityId, Integer commodityCount) {
 
+        System.out.println(userId);
+        System.out.println(commodityCount);
+        System.out.println(commodityId);
 
         ResponseResult<Commodity> responseResult = commodityService.selectOne(commodityId);
         Commodity data = responseResult.getData();
 
-        System.out.println(data.getCommoditySubHead());
+        System.out.println(data);
 
         Cart cart = new Cart();
         cart.setUserId(userId);

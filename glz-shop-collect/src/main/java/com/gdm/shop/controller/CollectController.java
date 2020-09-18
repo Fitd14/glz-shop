@@ -19,7 +19,7 @@ public class CollectController {
     public ResponseResult<Collect> getCollectId(Long cid){
         return new ResponseResult<Collect>("200","success",collectService.getId(cid));
     }
-    @DeleteMapping("/delete/{cid}")
+    @RequestMapping("/delete/{cid}")
     public int deleteId(@PathVariable String cid){
         return collectService.delete(cid);
     }
@@ -35,7 +35,7 @@ public class CollectController {
     public ResponseResult<List<Collect>> getCollectList(String userId,int page){
         return new ResponseResult<List<Collect>>("200","success",collectService.getList(userId,page-1));
     }
-    @DeleteMapping("/deletes")
+    @RequestMapping("/deletes")
     public String deletes(List<Long> ids){
         List<Long> idss = new ArrayList<>();
         collectService.deletes(ids);

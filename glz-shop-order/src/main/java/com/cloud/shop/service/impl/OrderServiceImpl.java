@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
         List<Cart> carts = new ArrayList<>();
         BigDecimal totalPrice = new BigDecimal(0);
         Order order = new Order();
-        UserShipArea userShipArea = new UserShipArea();
+        UserShipArea userShipArea = null;
         int i = 0;
         if (orderDTO.getShipId() != null) {
             ResponseResult shipAreaById = userShipAreaService.getShipAreaById(orderDTO.getShipId());
@@ -76,8 +76,9 @@ public class OrderServiceImpl implements OrderService {
         if (orderDTO.getCids().length != 0) {
             for (Long cid : orderDTO.getCids()) {
                 Cart cart = cartService.getCartById(cid);
-                totalPrice.add(cart.getTotalPrice());
+                totalPrice = totalPrice.add(cart.getTotalPrice());
                 carts.add(cart);
+                System.out.println(totalPrice);
             }
         }
         if (userShipArea != null && carts.size() != 0) {

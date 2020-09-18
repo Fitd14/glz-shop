@@ -21,7 +21,7 @@ public class CartController {
      * @return
      */
     @PostMapping("/add")
-    public ResponseResult addCart(String userId, String commodityId, Integer commodityCount){
+    public ResponseResult addCart(@RequestParam("userId") String userId, @RequestParam("commodityId") String commodityId, @RequestParam("commodityCount") Integer commodityCount){
         return myCartService.saveCart(userId, commodityId, commodityCount);
     }
 

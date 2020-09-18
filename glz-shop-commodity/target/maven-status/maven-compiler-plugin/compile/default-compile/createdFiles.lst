@@ -1,8 +1,5 @@
-com\smy\shop\CommodityApplication.class
 com\smy\shop\mapper\CommodityMapper.class
-com\smy\shop\config\MyBatisPlusConfig.class
 com\smy\shop\controller\CommdityController.class
 com\smy\shop\service\impl\CommodityServiceImpl.class
-com\smy\shop\controller\CommodityTypeController.class
-com\smy\shop\service\impl\CommodityTypeServiceImpl.class
-com\smy\shop\mapper\CommodityTypeMapper.class
+com\smy\shop\CommodityApplication.class
+com\smy\shop\config\MyBatisPlusConfig.class

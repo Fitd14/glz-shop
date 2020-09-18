@@ -34,7 +34,7 @@ public class AdvertiseController {
         return new ResponseResult("200", "success", advertiseService.getAllList(page, rows));
     }
 
-    @DeleteMapping("/delete/{aid}")
+    @RequestMapping("/delete/{aid}")
     public int delete(@PathVariable("aid") String aid) {
         return advertiseService.delete(aid);
     }

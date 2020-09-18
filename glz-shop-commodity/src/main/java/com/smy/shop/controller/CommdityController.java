@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/commodity")
 @Scope("prototype")
 public class CommdityController {

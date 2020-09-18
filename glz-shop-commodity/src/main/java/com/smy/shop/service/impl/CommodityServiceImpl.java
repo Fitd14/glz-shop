@@ -109,7 +109,7 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     @Transactional
-    public ResponseResult updateStatusById(String id, Long vertifyName,int status) {
+    public ResponseResult updateStatusById(String id, String vertifyName,int status) {
         Commodity oldCommodity = commodityMapper.selectById(id);
         int row = commodityMapper.update(oldCommodity, new UpdateWrapper<Commodity>()
                 .set("update_time",date())
@@ -192,4 +192,20 @@ public class CommodityServiceImpl implements CommodityService {
         return new ResponseResult("200", "success", list);
     }
 
+    @Override
+    public ResponseResult getByCategory(Integer category, int count) {
+        List<Commodity> list = commodityMapper.getByCategoryCount(category, count);
+        return new ResponseResult("200", "success", list);
+    }
+
+    public ResponseResult selGroupId(String[] id){
+        List<Commodity> commodities = commodityMapper.selByGroupId(id);
+        if (commodities.size()>0){
+            for (Commodity commodity:commodities){
+                System.out.println("commodity = " + commodity);
+            }
+            return new ResponseResult("200","success",commodities);
+        }
+        return ResponseResult.error();
+    }
 }

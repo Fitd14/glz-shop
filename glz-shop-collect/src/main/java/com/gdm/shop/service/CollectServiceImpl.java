@@ -4,7 +4,11 @@ import cn.hutool.core.date.DateUtil;
 import com.gdm.service.CollectService;
 import com.gdm.shop.mapper.CollectMapper;
 import com.gdm.shop.mapper.CollectTypeMapper;
+import com.glz.model.ResponseResult;
 import com.glz.pojo.Collect;
+import com.glz.pojo.Commodity;
+import com.smy.shop.service.CommodityService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +26,22 @@ public class CollectServiceImpl implements CollectService {
     CollectMapper collectMapper;
     @Autowired
     CollectTypeMapper collectTypeMapper;
+    @Reference
+    CommodityService commodityService;
     @Override
-    public int create(Long typeId,Long userId) {
+    public int create(String cid,String uid) {
         Collect collect = new Collect();
-        collect.setUserId(userId);
-        collect.setComId((long) 1);
-        collect.setCommodityName("meizu手机");
-        collect.setBrand("手机");
-        collect.setNote("备注1");
-        collect.setPhoto("地址2");
-        collect.setTypeId(typeId);
-        collect.setPrice(new BigDecimal(50.0));
+        ResponseResult<Commodity> responseResult = commodityService.selectOne(cid);
+        Commodity commodity =  responseResult.getData();
+        collect.setUserId(uid);
+        collect.setComId(cid);
+        collect.setCommodityName(commodity.getCommodityName());
+        collect.setPhoto(commodity.getPhoto());
+        collect.setBrand(commodity.getBrand());
+        collect.setTypeId("1302779453499269121");
+        collect.setPrice(commodity.getPrice());
         collect.setCreateTime(DateUtil.now());
+        collect.setNote(commodity.getProductDetail());
         return collectMapper.insert(collect);
     }
 
@@ -43,7 +51,7 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
-    public int delete(Long cid) {
+    public int delete(String cid) {
         return collectMapper.deleteById(cid);
     }
 
@@ -58,12 +66,17 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
-    public List<Collect> getList(Long userId,int page) {
+    public List<Collect> getList(String userId,int page) {
         return collectMapper.getList(userId,page);
     }
 
     @Override
     public void deletes(List<Long> ids) {
         collectMapper.deleteBatchIds(ids);
+    }
+
+    @Override
+    public List<Collect> getListUid(String userId) {
+        return collectMapper.getListUid(userId);
     }
 }

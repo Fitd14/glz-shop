@@ -11,6 +11,11 @@
 
     <artifactId>glz-shop-collect</artifactId>
     <dependencies>
+        <dependency>
+            <groupId>com.smy.shop</groupId>
+            <artifactId>glz-shop-commodity</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!--获取公共模块-->
 <!--        <dependency>-->
 <!--            <groupId>com.smy.shop</groupId>-->
@@ -101,6 +106,11 @@
             <artifactId>glz-shop-common</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.smy.shop</groupId>
+            <artifactId>glz-shop-commodity-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

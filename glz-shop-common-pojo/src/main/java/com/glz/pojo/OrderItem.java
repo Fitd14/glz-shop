@@ -27,20 +27,28 @@ public class OrderItem {
 
     /**
      * 商品ID
-     * */
+     */
     String commodityId;
     /**
+     * 商品副标题
+     */
+    private String commoditySubHead;
+    /**
+     * images
+     */
+    String img;
+    /**
      * 数量
-     * */
+     */
     int number;
 
     /**
      * 价钱
-     * */
+     */
     BigDecimal price;
     /**
      * 状态
-     * */
+     */
     int status;
     /**
      * 备注

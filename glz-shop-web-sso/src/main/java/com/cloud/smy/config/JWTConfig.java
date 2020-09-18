@@ -20,7 +20,7 @@ public class JWTConfig {
     /**
      * Token前缀字符
      */
-    public static String tokenPrefix;
+    public static String tokenPrefix = "Bearer ";
     /**
      * 过期时间
      */

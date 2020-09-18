@@ -111,4 +111,10 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem
         return new ResponseResult("200", "success", item);
     }
 
+    @Override
+    public ResponseResult getByOrderItemId(int id) {
+        OrderItem orderItem = orderItemMapper.selectById(id);
+        return new ResponseResult("200", "success", orderItem);
+    }
+
 }

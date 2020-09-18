@@ -44,4 +44,12 @@ public class OrderItemController {
         return orderItemService.getByOrderNoAndCid(orderBo, cid);
     }
 
+    /**
+     * 通过ID查找数据
+     */
+    @GetMapping("/orderItem/sel/{id}")
+    public ResponseResult getByid(@PathVariable("id") int id) {
+        return orderItemService.getByOrderItemId(id);
+    }
+
 }

@@ -43,4 +43,12 @@ public class OrderBackController {
     public ResponseResult delOrderBack(@PathVariable("id") Long id) {
         return orderBackService.delOrderBack(id);
     }
+
+    /**
+     * 查看单条退单详情
+     */
+    @GetMapping("/sel/id")
+    public ResponseResult selOrderBack(@RequestParam("id") Long id) {
+        return orderBackService.selOrderBack(id);
+    }
 }

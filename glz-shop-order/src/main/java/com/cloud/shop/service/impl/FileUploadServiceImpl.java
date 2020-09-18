@@ -33,7 +33,7 @@ public class FileUploadServiceImpl implements FileUploadService {
                     + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
             FtpUtil.uploadFile("192.168.115.63", 21, "anonymous", "", "/", path
                     , newFileName, file.getInputStream());
-            String imgURL = "http://" + this.FTP_HOST + path + newFileName;
+            String imgURL = "http://" + this.FTP_HOST +":63"+ path + newFileName;
             return imgURL;
 
         } catch (IOException e) {

@@ -63,6 +63,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public ResponseResult addOrder(OrderDTO orderDTO) {
+        System.out.println(orderDTO);
         List<Cart> carts = new ArrayList<>();
         BigDecimal totalPrice = new BigDecimal(0);
         Order order = new Order();
@@ -74,7 +75,7 @@ public class OrderServiceImpl implements OrderService {
         }
         if (orderDTO.getCids().length != 0) {
             for (Long cid : orderDTO.getCids()) {
-                Cart cart = new Cart();
+                Cart cart = cartService.getCartById(cid);
                 totalPrice.add(cart.getTotalPrice());
                 carts.add(cart);
             }
@@ -97,10 +98,12 @@ public class OrderServiceImpl implements OrderService {
                 item.setCommodityId(cart2.getCommodityId());
                 item.setNumber(cart2.getCommodityCount());
                 item.setPrice(cart2.getTotalPrice());
+                item.setImg(cart2.getCommodityImg());
+                item.setCommoditySubHead(cart2.getCommodityName());
+                cartService.delCartById(cart2.getCartId());
                 i = orderItemService.addOrderItem(item);
             }
             orderMapper.insert(order);
-            cartService.deleteCartAll(orderDTO.getUserId());
         }
         if (i > 0) {
             return ResponseResult.success();

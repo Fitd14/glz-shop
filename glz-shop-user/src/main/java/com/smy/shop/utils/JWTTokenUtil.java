@@ -1,4 +1,4 @@
-package com.smy.shop.util;
+package com.smy.shop.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -29,7 +29,10 @@ public class JWTTokenUtil {
      * @return
      */
     public static String getUsernameFromToken(String token) {
-        String[] str = token.split("-");
+        String[] str = token.split(" ");
+        for (String strs: str){
+            System.out.println(strs);
+        }
         JWTVerifier verifier = JWT.require(TOKEN_SECRET).withIssuer(TOKEN_ISSURE).build();
         // 解码JWT
         DecodedJWT jwt = verifier.verify(str[1]);

@@ -6,7 +6,7 @@ import com.glz.model.ResponseResult;
 import com.glz.pojo.Member;
 import com.glz.util.MailUtils;
 import com.smy.shop.service.MemberService;
-import com.smy.shop.util.JWTTokenUtil;
+import com.smy.shop.utils.JWTTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

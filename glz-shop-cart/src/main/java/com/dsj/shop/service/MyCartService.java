@@ -7,10 +7,10 @@ public interface MyCartService {
 
     /**
      * 添加购物车
-     * @param cart
+     * @param
      * @return
      */
-    ResponseResult saveCart(Cart cart);
+    ResponseResult saveCart(String userId, String commodityId, Integer commodityCount);
 
     /**
      * 获取用户购物车中所有的商品

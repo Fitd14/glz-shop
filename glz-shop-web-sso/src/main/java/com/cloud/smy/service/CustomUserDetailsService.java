@@ -46,7 +46,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         String userName = null;
         String password = null;
-        String uid = user.getId();
+        String uid = null;
         String roleId = null;
 
         if(ObjectUtils.isEmpty(user)){
@@ -57,6 +57,8 @@ public class CustomUserDetailsService implements UserDetailsService {
             userName = byUsername.getUsername();
             password = byUsername.getPassword();
             uid = byUsername.getId();
+        }else{
+            uid = user.getId();
         }
 
         Set<GrantedAuthority> grantedAuthoritySet = new HashSet<>();

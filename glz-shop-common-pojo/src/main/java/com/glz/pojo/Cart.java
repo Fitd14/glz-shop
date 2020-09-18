@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("t_cart")
-public class Cart {
+public class Cart implements Serializable {
 
     /**
      * 购物车主键ID，自增
@@ -56,4 +57,8 @@ public class Cart {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateTime;
+
+    private String commodityName;
+
+    private String commodityImg;
 }

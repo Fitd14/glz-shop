@@ -26,13 +26,16 @@ public class FileUploadServiceImpl implements FileUploadService {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
             String path = sdf.format(new Date());
+            System.out.println(file.getOriginalFilename());
+
             String newFileName
                     = UUID.randomUUID().toString().replaceAll("-", "")
                     + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-            FtpUtil.uploadFile(this.FTP_HOST, this.FTP_POST, null, null, "/cyp", path
+            FtpUtil.uploadFile("192.168.115.63", 21, "anonymous", "", "/", path
                     , newFileName, file.getInputStream());
             String imgURL = "http://" + this.FTP_HOST + path + newFileName;
             return imgURL;
+
         } catch (IOException e) {
             e.printStackTrace();
         }

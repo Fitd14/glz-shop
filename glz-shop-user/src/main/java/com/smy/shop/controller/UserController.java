@@ -3,8 +3,11 @@ package com.smy.shop.controller;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.User;
 import com.smy.shop.service.UserService;
+import com.smy.shop.utils.JWTTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/user")
@@ -45,6 +48,14 @@ public class UserController {
     @PutMapping("/put")
     public ResponseResult modify(@RequestBody User user){
         return userService.update(user);
+    }
+
+    @GetMapping("/getInfo")
+    public ResponseResult getInfo(HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        String username = JWTTokenUtil.getUsernameFromToken(token);
+        User user = userService.selectByUsername(username);
+        return new ResponseResult("200","成功",user);
     }
 
 }

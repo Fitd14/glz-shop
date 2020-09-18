@@ -20,4 +20,6 @@ public interface OrderBackService {
 
     ResponseResult delOrderBack(Long id);
 
+    ResponseResult selOrderBack(Long id);
+
 }

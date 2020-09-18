@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
@@ -70,7 +71,7 @@ public class Commodity implements Serializable {
     /**
      * 商品价格
      */
-    private double price;
+    private BigDecimal price;
     /**
      * 商品重量
      */

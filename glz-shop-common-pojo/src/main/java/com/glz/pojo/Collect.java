@@ -37,9 +37,9 @@ public class Collect {
      */
     private String userId;
     /**
-     * 商品价格
+     * 收藏时商品价格
      */
-    private double price;
+    private BigDecimal price;
     /**
      * 备注
      */

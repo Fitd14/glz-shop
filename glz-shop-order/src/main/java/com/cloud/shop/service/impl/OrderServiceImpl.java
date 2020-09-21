@@ -104,6 +104,8 @@ public class OrderServiceImpl implements OrderService {
                 cartService.delCartById(cart2.getCartId());
                 i = orderItemService.addOrderItem(item);
             }
+            order.setMemo(orderDTO.getMemo());
+            order.setPaymentStatus(orderDTO.getPaymentStatus());
             orderMapper.insert(order);
         }
         if (i > 0) {

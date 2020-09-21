@@ -20,7 +20,7 @@ public class NewProductController {
     public int add(NewProduct newProduct){
         return newProductService.addProduct(newProduct);
     }
-    @DeleteMapping("/delete/{pid}")
+    @RequestMapping("/delete/{pid}")
     public int delete(@PathVariable String pid){
         return newProductService.delete(pid);
     }

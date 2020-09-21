@@ -24,14 +24,14 @@ public interface UserService {
      * @param uid
      * @return
      */
-    ResponseResult delete(Long uid);
+    ResponseResult delete(String uid);
 
     /**
      * 通过id查询某个用户
      * @param uid
      * @return
      */
-    ResponseResult selectById(Long uid);
+    ResponseResult selectById(String uid);
 
     /**
      * 通过username查询用户

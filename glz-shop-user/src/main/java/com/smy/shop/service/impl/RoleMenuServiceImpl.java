@@ -52,7 +52,8 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     @Transactional
     public ResponseResult update(RoleMenu roleMenu) {
         if (roleMenu.getMenuIds().length == 0) {
-
+            roleMenuMapper.deleteById(roleMenu.getRoleId());
+            return ResponseResult.success();
         }
         for(String menuId:roleMenu.getMenuIds()){
             RoleMenu oldRoleMenu = selectByMenuIdAndByRoleId(menuId,roleMenu.getRoleId());

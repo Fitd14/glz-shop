@@ -26,6 +26,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
             String path = sdf.format(new Date());
+
             String newFileName
                     = UUID.randomUUID().toString().replaceAll("-", "")
                     + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));

@@ -78,10 +78,7 @@
 <!--            </exclusions>-->
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>dubbo-registry-nacos</artifactId>
-        </dependency>
+
 
 
         <!--<dependency>

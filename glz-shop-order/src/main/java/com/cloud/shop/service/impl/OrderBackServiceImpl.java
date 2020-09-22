@@ -76,4 +76,10 @@ public class OrderBackServiceImpl implements OrderBackService {
         }
         return ResponseResult.error();
     }
+
+    @Override
+    public ResponseResult selOrderBack(Long id) {
+        OrderBack orderBack = orderBackMapper.selectById(id);
+        return new ResponseResult("200","success",orderBack);
+    }
 }

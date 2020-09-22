@@ -9,11 +9,14 @@
         <result column="nickname" property="nickname"/>
         <result column="icon" property="icon"/>
         <result column="gender" property="gender"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
         <result column="birthday" property="birthday"/>
     </resultMap>
 
+
     <select id="findMemberInfo" resultMap="memberMap">
-        select id,username,nickname,icon,gender,birthday from t_member where username = #{username}
+        select id,username,nickname,icon,gender,birthday,phone,email from t_member where username = #{username}
     </select>
 
     <select id="findAll" resultMap="memberMap">

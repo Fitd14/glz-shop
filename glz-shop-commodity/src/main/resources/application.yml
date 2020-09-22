@@ -36,10 +36,12 @@ logging:
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
 
+FTP_HOST: 192.168.115.63
+FTP_POST: 21
 
 localtion: D:/Download/
 
-httpPath: http://192.168.115.60:100/
+httpPath: http://192.168.115.1:100/
 
 
 

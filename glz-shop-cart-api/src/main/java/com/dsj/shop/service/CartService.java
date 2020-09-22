@@ -65,4 +65,9 @@ public interface CartService {
      * 通过ID查找购物车
      */
     Cart getCartById(Long id);
+
+    /**
+     * 通过ID删除购物车
+     */
+    int delCartById(Long id);
 }

@@ -7,11 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("t_commodity")
-public class Commodity {
+public class Commodity implements Serializable {
 
     /**
      * 主键
@@ -68,23 +71,19 @@ public class Commodity {
     /**
      * 商品价格
      */
-    private double price;
-
+    private BigDecimal price;
     /**
      * 商品重量
      */
     private double weight;
-
     /**
      * 商品高度
      */
     private double height;
-
     /**
      * 商品长度
      */
     private double length;
-
     /**
      * 商品宽度
      */

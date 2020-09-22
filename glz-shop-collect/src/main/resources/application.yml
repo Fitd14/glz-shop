@@ -10,7 +10,9 @@ spring:
     password: shop1234
   cloud:
     nacos:
-      server-addr: 39.106.162.221:8848
+      discovery:
+        server-addr: 39.106.162.221:8848
+
 
 dubbo:
   scan:
@@ -19,7 +21,7 @@ dubbo:
     name: dubbo
     port: -1
   cloud:
-    subscribed-services: ""
+    subscribed-services: glz-shop-commodity
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml

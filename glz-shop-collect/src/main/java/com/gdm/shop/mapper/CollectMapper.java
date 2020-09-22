@@ -34,7 +34,10 @@ public interface CollectMapper extends BaseMapper<Collect> {
      * @return 商品的集合
      */
     @Select("select * from t_collect where user_id=#{userId} order by create_time desc limit #{page},10;")
-    List<Collect> getList(@Param("userId") Long userId,@Param("page") int page);
+    List<Collect> getList(@Param("userId") String userId,@Param("page") int page);
+
+    @Select("select * from t_collect where user_id=#{userId} order by create_time desc;")
+    List<Collect> getListUid(@Param("userId") String userId);
 
 
 }

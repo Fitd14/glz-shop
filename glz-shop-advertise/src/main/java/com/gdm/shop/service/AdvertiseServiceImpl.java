@@ -30,13 +30,13 @@ public class AdvertiseServiceImpl implements AdvertiseService{
     }
 
     @Override
-    public List<String> getList() {
+    public List<Advertise> getList() {
         List<Advertise> advertises = advertiseMapper.getShowList();
         List<String> pics = new ArrayList<>();
         for (Advertise advertise:advertises) {
             pics.add(advertise.getPic());
         }
-        return pics;
+        return advertises;
     }
 
     @Override

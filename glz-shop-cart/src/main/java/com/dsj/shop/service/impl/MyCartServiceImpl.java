@@ -8,6 +8,9 @@ import com.dsj.shop.mapper.CartMapper;
 import com.dsj.shop.service.MyCartService;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Cart;
+import com.glz.pojo.Commodity;
+import com.smy.shop.service.CommodityService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,13 +25,34 @@ public class MyCartServiceImpl implements MyCartService {
     @Autowired
     private CartMapper cartMapper;
 
+    @Reference
+    private CommodityService commodityService;
+
     /**
      * 添加购物车
-     * @param cart
+     * @param
      * @return
      */
     @Override
-    public ResponseResult saveCart(Cart cart) {
+    public ResponseResult saveCart(String userId, String commodityId, Integer commodityCount) {
+
+        System.out.println(userId);
+        System.out.println(commodityCount);
+        System.out.println(commodityId);
+
+        ResponseResult<Commodity> responseResult = commodityService.selectOne(commodityId);
+        Commodity data = responseResult.getData();
+
+        System.out.println(data);
+
+        Cart cart = new Cart();
+        cart.setUserId(userId);
+        cart.setCommodityId(commodityId);
+        cart.setCommodityCount(commodityCount);
+        cart.setCommodityName(data.getCommoditySubHead());
+        cart.setCommodityImg(data.getPhoto());
+        cart.setPrice(data.getPrice());
+        cart.setTotalPrice(new BigDecimal(commodityCount).multiply(data.getPrice()));
 
         Cart one = cartMapper.selectOne(new QueryWrapper<Cart>().eq("user_id", cart.getUserId())
                 .eq("commodity_id", cart.getCommodityId()));

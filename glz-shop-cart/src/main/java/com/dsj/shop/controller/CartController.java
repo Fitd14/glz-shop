@@ -17,12 +17,12 @@ public class CartController {
 
     /**
      * 添加购物车
-     * @param cart
+     * @param
      * @return
      */
     @PostMapping("/add")
-    public ResponseResult addCart(Cart cart){
-        return myCartService.saveCart(cart);
+    public ResponseResult addCart(@RequestParam("userId") String userId, @RequestParam("commodityId") String commodityId, @RequestParam("commodityCount") Integer commodityCount){
+        return myCartService.saveCart(userId, commodityId, commodityCount);
     }
 
     /**

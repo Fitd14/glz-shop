@@ -1,11 +1,12 @@
 package com.smy.shop.controller;
 
 import cn.hutool.extra.mail.MailUtil;
+import com.glz.model.MemberDTO;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Member;
 import com.glz.util.MailUtils;
 import com.smy.shop.service.MemberService;
-import com.smy.shop.util.JWTTokenUtil;
+import com.smy.shop.utils.JWTTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,6 +53,11 @@ public class MemberController {
         Member member = memberService.findByUsername(username);
         MailUtils.sendForgotPassword(member.getEmail());
         return new ResponseResult("200","邮件已发送，请查收");
+    }
+
+    @PutMapping("/modify/info")
+    public ResponseResult modifyInfo(@RequestBody MemberDTO memberDTO){
+        return memberService.modifyInfo(memberDTO);
     }
 }
 

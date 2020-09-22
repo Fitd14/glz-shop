@@ -19,11 +19,11 @@ public class Collect {
      * 主键
      */
     @TableId
-    private Long id;
+    private String id;
     /**
      * 商品Id
      */
-    private Long comId;
+    private String comId;
     /**
      * 商品名称
      */
@@ -35,9 +35,9 @@ public class Collect {
     /**
      * 用户id
      */
-    private Long userId;
+    private String userId;
     /**
-     * 商品价格
+     * 收藏时商品价格
      */
     private BigDecimal price;
     /**
@@ -51,7 +51,7 @@ public class Collect {
     /**
      * 收藏夹类别Id
      */
-    private Long typeId;
+    private String typeId;
     /**
      * 创建时间
      */

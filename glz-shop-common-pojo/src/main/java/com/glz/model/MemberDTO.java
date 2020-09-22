@@ -24,6 +24,10 @@ public class MemberDTO {
 
     private int gender;
 
+    private String phone;
+
+    private String email;
+
     private String birthday;
 
     private Set<Permission> menus;

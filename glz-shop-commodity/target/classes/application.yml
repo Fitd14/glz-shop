@@ -39,7 +39,7 @@ mybatis-plus:
 
 localtion: D:/Download/
 
-httpPath: http://192.168.115.60:100/
+httpPath: http://192.168.115.1:100/
 
 
 

@@ -71,4 +71,10 @@ public class CartServiceImpl implements CartService {
     public Cart getCartById(Long id) {
         return cartMapper.selectById(id);
     }
+
+    @Override
+    public int delCartById(Long id) {
+        int i = cartMapper.deleteById(id);
+        return i;
+    }
 }

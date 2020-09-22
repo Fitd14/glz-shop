@@ -43,4 +43,9 @@ public interface OrderItemService extends IService<OrderItem> {
      * 根据订单号和商品号查询一条订单明细
      */
     ResponseResult getByOrderNoAndCid(String orderBo, String cid);
+
+    /**
+     * 根据订单号和商品号查询一条订单明细
+     */
+    ResponseResult getByOrderItemId(int id);
 }

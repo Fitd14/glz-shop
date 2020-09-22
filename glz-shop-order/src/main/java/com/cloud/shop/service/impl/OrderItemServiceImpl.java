@@ -101,14 +101,16 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem
      */
     @Override
     public ResponseResult getByOrderNoAndCid(String orderBo, String cid) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("order_no", orderBo);
-        map.put("commodity_id", cid);
-        List<OrderItem> items = orderItemMapper.selectByMap(map);
-        OrderItem item = new OrderItem();
-        item = items.get(0);
+        OrderItem orderItem = orderItemMapper.selectOne(new QueryWrapper<OrderItem>()
+                .eq("order_no", orderBo)
+                .eq("commodity_id", cid));
+        return new ResponseResult("200", "success", orderItem);
+    }
 
-        return new ResponseResult("200", "success", item);
+    @Override
+    public ResponseResult getByOrderItemId(int id) {
+        OrderItem orderItem = orderItemMapper.selectById(id);
+        return new ResponseResult("200", "success", orderItem);
     }
 
 }

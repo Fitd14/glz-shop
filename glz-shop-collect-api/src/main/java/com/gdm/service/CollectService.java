@@ -13,7 +13,7 @@ public interface CollectService {
      * @param userId 用户id
      * @return 1，收藏成功 0，收藏失败
      */
-    int create(Long typeId,Long userId);
+    int create(String cid,String uid);
 
     /**
      * 根据收藏id查询收藏内容
@@ -27,7 +27,7 @@ public interface CollectService {
      * @param cid 收藏id
      * @return 1，删除成功
      */
-    int delete(Long cid);
+    int delete(String cid);
 
     /**
      * 根据用户查询收藏商品集合分页
@@ -50,11 +50,18 @@ public interface CollectService {
      * @param page 当前页
      * @return  收藏商品集合分页
      */
-    List<Collect> getList(Long userId,int page);
+    List<Collect> getList(String userId,int page);
 
     /**
      * 删除多态消息
      * @param ids 删除收藏商品id集合
      */
     void deletes(List<Long> ids);
+
+    /**
+     * 根据用户查询用户收藏
+     * @param userId 用户id
+     * @return
+     */
+    List<Collect> getListUid(String userId);
 }

@@ -17,6 +17,7 @@ spring:
           uri: lb://glz-shop-sso
           predicates:
             - Path=/auth/**,/logout
+
         - id: glz-shop-user
           uri: lb://glz-shop-user
           predicates:
@@ -27,12 +28,12 @@ spring:
           predicates:
             - Path=/commodity/**,/commodityCategory/**,/commodityAttribute/**,/commodityVertityRecord/**
 
-        - id: glz-shop-commodity
+        - id: glz-shop-order
           uri: lb://glz-shop-order
           predicates:
-            - Path=/ship/**,/orderBack/**,/order/**,/orderItem/**
+            - Path=/ship/**,/orderBack/**,/order/**,/orderItem/**,/orderFile/**
 
-        - id: glz-shop-commodity
+        - id: glz-shop-cart-service
           uri: lb://glz-shop-cart-service
           predicates:
             - Path=/cart/**
@@ -42,8 +43,12 @@ spring:
           predicates:
             - Path=/shop/adver/**,/file/**
 
-        - id: glz-shop-collect
-          uri: lb://glz-shop-collect
+        - id: glz-shop-newProduct
+          uri: lb://glz-shop-newProduct
           predicates:
             - Path=/shop/newProduct/**,/file/**
 
+        - id: glz-shop-collect
+          uri: lb://glz-shop-collect
+          predicates:
+            - Path=/shop/**

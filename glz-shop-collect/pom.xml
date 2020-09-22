@@ -11,6 +11,11 @@
 
     <artifactId>glz-shop-collect</artifactId>
     <dependencies>
+        <dependency>
+            <groupId>com.smy.shop</groupId>
+            <artifactId>glz-shop-commodity</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!--获取公共模块-->
 <!--        <dependency>-->
 <!--            <groupId>com.smy.shop</groupId>-->
@@ -23,12 +28,12 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <!--热加载-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-devtools</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
         <!--测试-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -65,13 +70,15 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-dubbo</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-openfeign-core</artifactId>
-                </exclusion>
-            </exclusions>
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.springframework.cloud</groupId>-->
+<!--                    <artifactId>spring-cloud-openfeign-core</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
         </dependency>
+
+
 
 
         <!--<dependency>
@@ -101,6 +108,11 @@
             <artifactId>glz-shop-common</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.smy.shop</groupId>
+            <artifactId>glz-shop-commodity-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

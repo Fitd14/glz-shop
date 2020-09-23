@@ -46,7 +46,7 @@ spring:
         - id: glz-shop-newProduct
           uri: lb://glz-shop-newProduct
           predicates:
-            - Path=/shop/newProduct/**,/file/**
+            - Path=/shop/newProduct/**
 
         - id: glz-shop-collect
           uri: lb://glz-shop-collect

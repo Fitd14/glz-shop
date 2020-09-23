@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/commodity")
 @Scope("prototype")
 public class CommdityController {
@@ -49,8 +50,12 @@ public class CommdityController {
     }
 
     @RequestMapping("/sel")
-    public ResponseResult sel(String commodityName, String commoditySubHead, String brand, String max, String min,String specificType, Long pageNo, Long pageSize, Integer putawayStatus){
-        return   commodityService.getByOther(commodityName, commoditySubHead, brand,max,min,specificType,pageNo,pageSize,putawayStatus);
+    public ResponseResult sel(String commodityName, String commoditySubHead,Integer category, String brand,
+                              String max, String min,String specificType, Long pageNo,
+                              Long pageSize, Integer putawayStatus){
+        System.out.println("category = " + category);
+        return   commodityService.getByOther(commodityName, commoditySubHead,
+             category,  brand,max,min,specificType,pageNo,pageSize,putawayStatus);
     }
 
     @RequestMapping("/limit")
@@ -111,5 +116,10 @@ public class CommdityController {
     public ResponseResult selGroupId(String[] id){
         System.out.println(id);
         return commodityService.selGroupId(id);
+    }
+
+    @GetMapping("/likeName")
+    public ResponseResult selLikeName(String commodityName){
+        return commodityService.selLikeName(commodityName);
     }
 }

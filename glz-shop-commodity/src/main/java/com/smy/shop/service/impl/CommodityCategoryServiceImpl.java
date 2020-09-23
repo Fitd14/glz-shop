@@ -40,7 +40,7 @@ public class CommodityCategoryServiceImpl implements CommodityCategoryService {
     public ResponseResult update(CommodityCategory commodityCategory) {
         System.out.println("commodityCategory = " + commodityCategory);
         CommodityCategory category = commodityCategoryMapper.selectById(commodityCategory.getId());
-        int update = commodityCategoryMapper.update(category, new UpdateWrapper<CommodityCategory>().eq("id", commodityCategory.getId()));
+        int update = commodityCategoryMapper.update(category, new UpdateWrapper<CommodityCategory>().set("keywords",commodityCategory.getKeywords()).eq("id", commodityCategory.getId()));
         if (update > 0){
             return ResponseResult.success();
         }

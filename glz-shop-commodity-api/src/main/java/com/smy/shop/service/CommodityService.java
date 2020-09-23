@@ -21,11 +21,11 @@ public interface CommodityService {
 
     ResponseResult updateStatusById(String id,String vertifyName,int status);
 
-    ResponseResult getByOther(@Param("commodityName") String commodityName,
-                              @Param("commoditySubHead") String commoditySubHead,
-                              @Param("brand") String brand,@Param("specificType") String specificType,
-                    @Param("max") String max, @Param("min") String min ,@Param("pageNo") Long pageNo,@Param("pageSize")Long pageSize
-            ,@Param("putawayStatus")Integer putawayStatus);
+    ResponseResult getByOther(String commodityName,
+                              String commoditySubHead,
+                              Integer category, String brand,String specificType,
+                    String max, String min , Long pageNo,Long pageSize
+            ,Integer putawayStatus);
 
     ResponseResult getLimit(@Param("pageNo") Long pageNo,@Param("pageSize")Long pageSize,
                             @Param("putawayStatus")Integer putawayStatus);
@@ -56,4 +56,6 @@ public interface CommodityService {
      * @return
      */
     ResponseResult selGroupId(String[] id);
+
+    ResponseResult selLikeName(String commodityName);
 }

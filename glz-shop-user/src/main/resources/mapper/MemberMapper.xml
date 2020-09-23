@@ -20,6 +20,6 @@
     </select>
 
     <select id="findAll" resultMap="memberMap">
-        select id,username,nickname,icon,gender,birthday from t_member
+        select id,username,nickname,icon,gender,birthday,phone,email,create_time from t_member
     </select>
 </mapper>

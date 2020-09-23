@@ -1,5 +1,6 @@
 package com.smy.shop.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.glz.model.ResponseResult;
 import com.glz.model.RoleUserDTO;
@@ -23,9 +24,12 @@ public class RoleUserServiceImpl implements RoleUserService {
 
     @Override
     public ResponseResult save(RoleUser roleUser) {
-        int result = roleUserMapper.insert(roleUser);
-        if(result > 0){
-            return ResponseResult.success();
+        RoleUser isRoleUser = selectByUserIdAndRoleId(roleUser);
+        if(ObjectUtil.isEmpty(isRoleUser)){
+            int result = roleUserMapper.insert(roleUser);
+            if(result > 0){
+                return ResponseResult.success();
+            }
         }
         return ResponseResult.error();
     }

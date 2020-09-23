@@ -23,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 
@@ -121,14 +123,11 @@ public class CommodityServiceImpl implements CommodityService {
         return ResponseResult.error();
     }
 
-
-
     @Override
-    public ResponseResult getByOther(String commodityName, String commoditySubHead,
-                                     String specificType , String brand, String max, String min,
-                                    Long pageNo, Long pageSize, Integer putawayStatus) {
-
-        List<Commodity> commoditys = commodityMapper.getByOther(commodityName, commoditySubHead, brand,max,min,specificType,pageNo,pageSize,putawayStatus);
+    public ResponseResult getByOther(String commodityName, String commoditySubHead, Integer category, String brand, String specificType, String max, String min, Long pageNo, Long pageSize, Integer putawayStatus) {
+        System.out.println("category = " + category);
+        List<Commodity> commoditys = commodityMapper.getByOther(commodityName, commoditySubHead,category,
+                brand,max,min,specificType,pageNo*pageSize,pageSize,putawayStatus);
         if (commoditys.size()>0){
             return new ResponseResult("200","success",commoditys);
         }
@@ -208,4 +207,17 @@ public class CommodityServiceImpl implements CommodityService {
         }
         return ResponseResult.error();
     }
+
+    @Override
+    public ResponseResult selLikeName(String commodityName) {
+        List<Commodity> commodities = commodityMapper.selLikeName(commodityName);
+        if (commodities.size()>0){
+            for (Commodity commodity:commodities){
+                System.out.println("commodity = " + commodity);
+            }
+            return new ResponseResult("200","success",commodities);
+        }
+        return ResponseResult.error();
+    }
+
 }

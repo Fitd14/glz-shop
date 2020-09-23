@@ -33,6 +33,9 @@ public class PermissionServiceImpl implements PermissionService {
     public ResponseResult addPermission(Permission permission) {
         permission.setId(IdUtil.simpleUUID());
         permission.setCreateTime(DateUtil.now());
+        if(permission.getPid() == null){
+            permission.setPid("0");
+        }
         int result = permissionMapper.insert(permission);
         if(result > 0){
             return ResponseResult.success();
@@ -84,7 +87,7 @@ public class PermissionServiceImpl implements PermissionService {
     private Set<Permission> subjectMapper(List<Permission> list){
         Set<Permission> permissions = new HashSet<>();
         for (Permission permission: list){
-            if (permission.getPid() == 0){
+            if ("0".equals(permission.getPid())){
                 List<Permission> subjectPermission = selectByPid(permission.getId());
                 HashSet<Permission> permissionHashSet = new HashSet<>(subjectPermission);
                 permission.setPermissions(permissionHashSet);

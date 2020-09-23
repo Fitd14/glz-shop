@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smy.shop.mapper.CommodityMapper">
-
-
+    <select id="selLikeName" resultMap="commodityMap">
+    SELECT
+    t1.*
+    FROM t_commodity t1
+    <where>
+        <if test="commodityName != null ">
+            and t1.commodity_name like CONCAT('%',#{commodityName},'%')
+        </if>
+    </where>
+    </select>
     <select id="getByOther" resultMap="commodityMap">
          SELECT
             t1.*
          FROM t_commodity t1
         <where>
-            <if test="commodityName != null">
+            <if test="commodityName != null ">
                 and t1.commodity_name like CONCAT('%',#{commodityName},'%')
             </if>
-            <if test="commoditySubHead != null ">
-                and t1.commodity_sub_head like CONCAT('%',#{commoditySubHead},'%')
+            <if test="category != null  ">
+                and t1.category =#{category}
             </if>
-            <if test="brand !=null ">
+            <if test="brand !=null  ">
                 and t1.brand like CONCAT('%',#{brand},'%')
             </if>
-            <if test="specificType != null">
-                and t1.specific_type = #{specificType}
-            </if>
-
             <choose>
                 <when test="max!=null and min!=null">
                     and t1.price between #{min} and #{max}
@@ -44,6 +48,7 @@
                 </otherwise>
             </choose>
         </where>
+        ORDER BY create_time DESC
         <choose>
             <when test="pageNo>=0 and pageSize>0">
                 limit #{pageNo},#{pageSize}

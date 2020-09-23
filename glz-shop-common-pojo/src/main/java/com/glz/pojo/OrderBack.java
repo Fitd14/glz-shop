@@ -17,6 +17,15 @@ public class OrderBack {
      */
     String commodityId;
     /**
+     * 商品名
+     */
+    @TableField(exist = false)
+    String commodityName;
+    /**
+     * 商品副标题
+     */
+    private String commoditySubHead;
+    /**
      * 描述
      */
     String memo;
@@ -26,7 +35,7 @@ public class OrderBack {
     int status;
     /**
      * 图片描述
-     * */
+     */
     String img;
     /**
      * 更新时间

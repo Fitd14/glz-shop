@@ -3,17 +3,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloud.shop.mapper.OrderMapper">
     <resultMap id="MyOrder" type="com.glz.pojo.Order">
-        <result property="id" column="id"/>
         <result property="orderNo" column="order_no"/>
         <result property="userId" column="user_id"/>
         <result property="payment" column="payment"/>
+        <result property="paymentStatus" column="payment_status"/>
         <result property="status" column="status"/>
         <result property="paymentTime" column="payment_time"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
+        <result property="shipName" column="ship_name"/>
+        <result property="postCode" column="post_code"/>
+        <result property="detailAddress" column="detail_address"/>
+        <result property="phone" column="phone"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="region" column="region"/>
+        <result property="memo" column="memo"/>
+        <result property="userName" column="user_name"/>
     </resultMap>
 
-    <select id="lists" resultMap="MyOrder" >
+    <select id="lists" resultMap="MyOrder">
         select * from t_order
         <!--  <where>
               <if test="userId != null">
@@ -26,5 +35,25 @@
           </where>-->
     </select>
 
+    <select id="dyList" resultMap="MyOrder">
+        select * from t_order
+        <where>
+            <if test="userName != null and userName != ''">
+                and user_name like concat('%',#{userName},'%')
+            </if>
+            <if test="createTime != null and createTime != ''">
+                and create_time like concat('%',#{createTime},'%')
+            </if>
+            <if test="provinces != null and provinces != ''">
+                and province like concat('%',#{provinces},'%')
+            </if>
+        </where>
+    </select>
+    <select id="timeList" resultMap="MyOrder">
+        select * from t_order where create_time between #{startTime} and #{endTime}
+    </select>
+    <select id="countList" resultType="com.glz.model.TempProvince">
+        SELECT count(*) num, province FROM t_order GROUP BY province ASC
+    </select>
 
 </mapper>

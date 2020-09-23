@@ -1,6 +1,7 @@
 package com.cloud.shop.controller;
 
 import com.cloud.smy.service.OrderService;
+import com.glz.model.DyOrder;
 import com.glz.model.OrderDTO;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Cart;
@@ -123,4 +124,29 @@ public class OrderController {
         return orderService.getByPayStatus(userId, payStatus);
     }
 
+    /**
+     * 根据用户名 或者 创建时间 或者 省份动态查询数据
+     */
+    @PostMapping("/dy")
+    public ResponseResult dySelOrder(@RequestBody DyOrder order) {
+        System.out.println(order.getCreateTime());
+        System.out.println(order.getProvince());
+        return orderService.dySelOrder(order);
+    }
+
+    /**
+     * 查询一段时间内的订单
+     */
+    @GetMapping("/time")
+    public ResponseResult timeSelOrder(@RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime) {
+        return orderService.bwtOrder(startTime, endTime);
+    }
+
+    /**
+     * 统计各省的限量总计
+     */
+    @GetMapping("/count")
+    public ResponseResult countOrder() {
+        return orderService.countOrder();
+    }
 }

@@ -11,6 +11,7 @@ import com.cloud.smy.service.OrderItemService;
 import com.cloud.smy.service.OrderService;
 import com.cloud.smy.service.UserShipAreaService;
 import com.dsj.shop.service.CartService;
+import com.glz.model.DyOrder;
 import com.glz.model.OrderDTO;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.*;
@@ -82,7 +83,7 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         if (userShipArea != null && carts.size() != 0) {
-            String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+            String uuid = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9);
             order.setOrderNo(uuid);
             order.setPayment(totalPrice);
             order.setUserId(orderDTO.getUserId());
@@ -95,6 +96,7 @@ public class OrderServiceImpl implements OrderService {
             for (Cart cart2 : carts) {
                 OrderItem item = new OrderItem();
                 item.setOrderNo(uuid);
+                item.setUserName(orderDTO.getUserName());
                 item.setUserId(cart2.getUserId());
                 item.setCommodityId(cart2.getCommodityId());
                 item.setNumber(cart2.getCommodityCount());
@@ -104,6 +106,7 @@ public class OrderServiceImpl implements OrderService {
                 cartService.delCartById(cart2.getCartId());
                 i = orderItemService.addOrderItem(item);
             }
+            order.setUserName(orderDTO.getUserName());
             order.setMemo(orderDTO.getMemo());
             order.setPaymentStatus(orderDTO.getPaymentStatus());
             orderMapper.insert(order);
@@ -217,5 +220,24 @@ public class OrderServiceImpl implements OrderService {
     public ResponseResult allOrder() {
         List<Order> lists = orderMapper.lists();
         return new ResponseResult("200", "success", lists);
+    }
+
+    @Override
+    public ResponseResult dySelOrder(DyOrder dyOrder) {
+        System.out.println(dyOrder.getProvince());
+        List<Order> orders = orderMapper.dyList(dyOrder.getUserName().trim(), dyOrder.getCreateTime(), dyOrder.getProvince().trim());
+        return new ResponseResult("200", "success", orders);
+    }
+
+    @Override
+    public ResponseResult bwtOrder(String startTime, String endTime) {
+        List<Order> orders = orderMapper.timeList(startTime, endTime);
+        return new ResponseResult("200", "success", orders);
+    }
+
+    @Override
+    public ResponseResult countOrder() {
+        List<Order> orders = orderMapper.countList();
+        return new ResponseResult("200", "success", orders);
     }
 }

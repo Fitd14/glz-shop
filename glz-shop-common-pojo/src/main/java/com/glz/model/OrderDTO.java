@@ -21,10 +21,12 @@ public class OrderDTO {
     Long shipId;
     /**
      * 支付状态
-     * */
+     */
     int paymentStatus;
     /**
      * 描述
-     * */
+     */
     String memo;
+
+    String userName;
 }

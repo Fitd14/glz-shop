@@ -24,11 +24,17 @@ public class OrderItem {
      * 用户ID；
      */
     String userId;
+    String userName;
 
     /**
      * 商品ID
      */
     String commodityId;
+    /**
+     * 商品名
+     */
+    @TableField(exist = false)
+    String commodityName;
     /**
      * 商品副标题
      */

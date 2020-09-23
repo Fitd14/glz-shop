@@ -1,6 +1,7 @@
 package com.cloud.smy.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.glz.model.DyOrder;
 import com.glz.model.OrderDTO;
 import com.glz.model.ResponseResult;
 import com.glz.pojo.Cart;
@@ -63,4 +64,19 @@ public interface OrderService {
      * 查看所有订单
      */
     ResponseResult allOrder();
+
+    /**
+     * 动态查看订单
+     */
+    ResponseResult dySelOrder(DyOrder dyOrder);
+
+    /**
+     * 查看在一段时间区间的订单
+     */
+    ResponseResult bwtOrder(String startTime, String endTime);
+
+    /**
+     * 统计各省的销售概况
+     */
+    ResponseResult countOrder();
 }

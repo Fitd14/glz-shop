@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseResult delete(Long uid) {
+    public ResponseResult delete(String uid) {
         int row = userMapper.deleteById(uid);
         if(row > 0){
             return ResponseResult.success();
@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseResult selectById(Long uid) {
+    public ResponseResult selectById(String uid) {
         User user = userMapper.selectById(uid);
         return new ResponseResult("200","查询成功",user);
     }

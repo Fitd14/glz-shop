@@ -17,7 +17,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/save")
-    public ResponseResult save(@RequestBody User user){
+    public ResponseResult save(User user){
+        System.out.println(user);
         return userService.insert(user);
     }
 
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseResult delete(@PathVariable Long id){
+    public ResponseResult delete(@PathVariable String id){
         return userService.delete(id);
     }
     @GetMapping("/all")
@@ -41,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseResult get(@PathVariable Long id){
+    public ResponseResult get(@PathVariable String id){
         return userService.selectById(id);
     }
 

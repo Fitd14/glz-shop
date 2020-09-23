@@ -5,10 +5,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.glz.enums.ResultEnum;
 import com.glz.model.ResponseResult;
+import com.glz.pojo.Permission;
+import com.glz.pojo.Role;
 import com.glz.pojo.RoleMenu;
 import com.glz.pojo.RoleUser;
 import com.smy.shop.mapper.RoleMenuMapper;
+import com.smy.shop.service.PermissionService;
 import com.smy.shop.service.RoleMenuService;
+import com.smy.shop.service.RoleService;
 import com.smy.shop.service.RoleUserService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,6 +31,11 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     private RoleMenuMapper roleMenuMapper;
     @Autowired
     private RoleUserService roleUserService;
+    @Autowired
+    private PermissionService permissionService;
+
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public ResponseResult addRoleMenu(RoleMenu roleMenu) {
@@ -52,12 +62,11 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     @Transactional
     public ResponseResult update(RoleMenu roleMenu) {
         if (roleMenu.getMenuIds().length == 0) {
-
+            roleMenuMapper.deleteById(roleMenu.getRoleId());
+            return ResponseResult.success();
         }
         for(String menuId:roleMenu.getMenuIds()){
             RoleMenu oldRoleMenu = selectByMenuIdAndByRoleId(menuId,roleMenu.getRoleId());
-            System.out.println(oldRoleMenu);
-            System.out.println(ObjectUtil.isEmpty(oldRoleMenu));
             if (ObjectUtil.isEmpty(oldRoleMenu)){
                 addRoleMenu(new RoleMenu(roleMenu.getRoleId(), menuId));
             }else {
@@ -74,7 +83,16 @@ public class RoleMenuServiceImpl implements RoleMenuService {
 
     @Override
     public RoleMenu selectByRoleId(String roleId) {
-        return roleMenuMapper.findByRoleId(roleId);
+        Role role = roleService.selectById(roleId);
+        RoleMenu menu = new RoleMenu();
+        if("root".equals(role.getCode())){
+            Set<Permission> permissions = permissionService.selectAll();
+            menu.setMenuAll(permissions);
+            menu.setRoleId(role.getId());
+        }else {
+            menu = roleMenuMapper.findByRoleId(roleId);
+        }
+        return menu;
     }
 
     @Override
@@ -91,6 +109,4 @@ public class RoleMenuServiceImpl implements RoleMenuService {
                 .eq("menu_id", menuId));
         return roleMenu;
     }
-
-
 }

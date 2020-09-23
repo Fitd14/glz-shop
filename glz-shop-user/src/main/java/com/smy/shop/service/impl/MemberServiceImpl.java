@@ -92,7 +92,7 @@ public class MemberServiceImpl implements MemberService {
         Member member = memberMapper.selectOne(new QueryWrapper<Member>().eq("username", memberDTO.getUsername()));
         memberMapper.update(member,new UpdateWrapper<Member>()
                 .set("nickname",memberDTO.getNickname())
-                .set("phone",memberDTO.getGender())
+                .set("phone",memberDTO.getPhone())
                 .set("email",memberDTO.getEmail())
                 .set("gender",memberDTO.getGender())
                 .set("update_time",DateUtil.now())

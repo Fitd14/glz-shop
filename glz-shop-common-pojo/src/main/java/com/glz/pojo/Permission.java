@@ -15,7 +15,6 @@ import java.util.Set;
  * 后台菜单表
  */
 @Data
-@NoArgsConstructor
 @TableName("t_permission")
 public class Permission implements Serializable {
 
@@ -23,7 +22,7 @@ public class Permission implements Serializable {
     private String id;
 
     //父节点id
-    private long pid;
+    private String pid;
 
     //名称
     private String name;
@@ -35,19 +34,19 @@ public class Permission implements Serializable {
     private String icon;
 
     //类型 0为目录 1为菜单 2为按钮
-    private String type;
+    private int type;
 
     //前端资源路径
     private String uri;
 
     //状态 0为禁用 1为启用
-    private String status;
+    private int status;
 
     //创建时间
     private String createTime;
 
     //排序
-    private String sort;
+    private int sort;
 
     @TableField(exist = false)
     private Set<Permission> permissions;

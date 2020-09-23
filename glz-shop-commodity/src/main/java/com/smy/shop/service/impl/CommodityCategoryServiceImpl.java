@@ -24,7 +24,7 @@ public class CommodityCategoryServiceImpl implements CommodityCategoryService {
         commodityCategory.setNavStatus(1);
         commodityCategory.setShowStatus(1);
         int insert = commodityCategoryMapper.insert(commodityCategory);
-        if (commodityCategory.getParentId()!=0 ||commodityCategory.getParentId() != null) {
+        if (commodityCategory.getParentId()!=0) {
             CommodityCategory parent = commodityCategoryMapper.selectById(commodityCategory.getParentId());
             parent.setChildren(commodityCategory.getId());
             commodityCategoryMapper.update(parent, new UpdateWrapper<CommodityCategory>().eq("id", parent.getId()));

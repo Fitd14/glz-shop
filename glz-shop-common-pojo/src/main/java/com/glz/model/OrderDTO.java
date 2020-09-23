@@ -19,5 +19,12 @@ public class OrderDTO {
      * 收货地址ID
      */
     Long shipId;
-
+    /**
+     * 支付状态
+     * */
+    int paymentStatus;
+    /**
+     * 描述
+     * */
+    String memo;
 }

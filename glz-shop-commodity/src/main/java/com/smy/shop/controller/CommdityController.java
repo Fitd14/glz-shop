@@ -4,6 +4,7 @@ import com.glz.model.ResponseResult;
 import com.glz.pojo.Commodity;
 import com.glz.pojo.Inventory;
 import com.smy.shop.service.CommodityService;
+import com.smy.shop.utils.FtpUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 @RestController
@@ -20,7 +23,10 @@ import java.util.UUID;
 @RequestMapping("/commodity")
 @Scope("prototype")
 public class CommdityController {
-
+    @Value("${FTP_HOST}")
+    private String FTP_HOST;
+    @Value("${FTP_POST}")
+    private int FTP_POST;
     @Autowired
     CommodityService commodityService;
     @Value("${localtion}")
@@ -74,29 +80,26 @@ public class CommdityController {
     }
 
     @RequestMapping("/upload")
-    public String upload(@RequestParam("file") MultipartFile[] files) throws IOException {
-        String  savePath = localtion;
-        String gloabURL = "";
-        File file1 = new File( savePath);
-        if(localtion.isEmpty()){
-            file1.mkdir();
-        }
-        for (MultipartFile file: files) {
-            String id = UUID.randomUUID().toString().replace("-", "");
-            String originalFilename = file.getOriginalFilename();
-            String suffex = originalFilename.substring(originalFilename.lastIndexOf("."));
-            String path= id+suffex;
-            if ("".equals(gloabURL)){
-                gloabURL = httpPath+path;
-            }else {
-                gloabURL = gloabURL +"," + httpPath+path;
-            }
-            FileUtils.copyInputStreamToFile(file.getInputStream(),new File(localtion + File.separator +path) );
-        }
-        System.out.println("gloabURL = " + gloabURL);
-        return gloabURL;
+    public String upload(MultipartFile file) throws IOException {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
+            String path = sdf.format(new Date());
+            System.out.println(file.getOriginalFilename());
 
+            String newFileName
+                    = UUID.randomUUID().toString().replaceAll("-", "")
+                    + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+            FtpUtil.uploadFile("192.168.115.63", 21, "anonymous", "", "/", path
+                    , newFileName, file.getInputStream());
+            String imgURL = "http://" + this.FTP_HOST +":63"+ path + newFileName;
+            return imgURL;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
+
     @RequestMapping("/update")
     public ResponseResult update(@RequestBody Commodity commodity){
         return commodityService.update(commodity);

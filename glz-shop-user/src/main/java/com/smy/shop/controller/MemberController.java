@@ -48,6 +48,11 @@ public class MemberController {
         return memberService.findMemberInfoByUsername(username);
     }
 
+    @GetMapping("/info/{username}")
+    public ResponseResult getUserInfoByUsername(@PathVariable String username){
+        return memberService.findMemberInfoByUsername(username);
+    }
+
     @GetMapping("/forget/pw")
     public ResponseResult forgetPassword(@RequestBody String username){
         Member member = memberService.findByUsername(username);

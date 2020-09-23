@@ -75,4 +75,9 @@ public class Order {
      * 收货地区
      * */
     String region;
+
+    /**
+     * 描述
+     * */
+    String memo;
 }

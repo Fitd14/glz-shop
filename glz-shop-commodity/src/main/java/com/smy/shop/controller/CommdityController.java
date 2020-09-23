@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/commodity")
 @Scope("prototype")
 public class CommdityController {

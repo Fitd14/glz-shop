@@ -15,4 +15,6 @@ public interface AdvertiseMapper extends BaseMapper<Advertise> {
     List<Advertise> getShowList();
     @Select("select * from t_home_advertise LIMIT #{page},#{rows};")
     List<Advertise> getAllList(@Param("page") Integer page,@Param("rows") Integer rows);
+    @Select("select * from t_home_advertise order by start_time")
+    List<Advertise> selectList();
 }

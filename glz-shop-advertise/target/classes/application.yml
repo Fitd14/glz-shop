@@ -1,0 +1,25 @@
+server:
+  port: 5011
+spring:
+  application:
+    name: glz-shop-advertise
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource  #当前数据源操作类型
+    url: jdbc:mysql://39.106.162.221:3306/glz-shop?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: admin
+    password: shop1234
+  cloud:
+    nacos:
+      server-addr: 39.106.162.221:8848
+dubbo:
+  scan:
+    base-packages: com.gdm.shop.service
+  protocol:
+    name: dubbo
+    port: -1
+  cloud:
+    subscribed-services: ""
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+

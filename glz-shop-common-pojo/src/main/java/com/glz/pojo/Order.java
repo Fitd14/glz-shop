@@ -18,6 +18,7 @@ public class Order {
      * 用户ID
      */
     String UserId;
+    String userName;
     /**
      * 总价
      */
@@ -47,37 +48,37 @@ public class Order {
     String updateTime;
     /**
      * 收货人姓名
-     * */
+     */
     String shipName;
 
 
     /**
      * 邮政编码
-     * */
+     */
     String postCode;
     /**
      * 地址详情
-     * */
+     */
     String detailAddress;
     /**
      * 手机号
-     * */
+     */
     String phone;
     /**
      * 收货省份
-     * */
+     */
     String province;
     /**
      * 收货城市
-     * */
+     */
     String city;
     /**
      * 收货地区
-     * */
+     */
     String region;
 
     /**
      * 描述
-     * */
+     */
     String memo;
 }

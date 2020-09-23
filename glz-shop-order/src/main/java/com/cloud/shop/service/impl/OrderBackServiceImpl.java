@@ -7,8 +7,11 @@ import com.cloud.shop.mapper.OrderMapper;
 import com.cloud.smy.service.OrderBackService;
 import com.cloud.smy.service.OrderItemService;
 import com.glz.model.ResponseResult;
+import com.glz.pojo.Commodity;
 import com.glz.pojo.OrderBack;
 import com.glz.pojo.OrderItem;
+import com.smy.shop.service.CommodityService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +27,10 @@ public class OrderBackServiceImpl implements OrderBackService {
     OrderBackMapper orderBackMapper;
     @Autowired
     OrderItemMapper orderItemMapper;
+
+    @Reference
+    CommodityService commodityService;
+
 
     /**
      * 审核退货
@@ -64,6 +71,13 @@ public class OrderBackServiceImpl implements OrderBackService {
     @Override
     public ResponseResult allBack() {
         List<OrderBack> orderBacks = orderBackMapper.selectList(new QueryWrapper<>());
+        if (orderBacks.size() > 0) {
+            for (OrderBack ob : orderBacks) {
+                ResponseResult<Commodity> responseResult = commodityService.selectOne(ob.getCommodityId());
+                Commodity commodity = responseResult.getData();
+                ob.setCommodityName(commodity.getCommoditySubHead());
+            }
+        }
         return new ResponseResult("200", "success", orderBacks);
     }
 
@@ -80,6 +94,6 @@ public class OrderBackServiceImpl implements OrderBackService {
     @Override
     public ResponseResult selOrderBack(Long id) {
         OrderBack orderBack = orderBackMapper.selectById(id);
-        return new ResponseResult("200","success",orderBack);
+        return new ResponseResult("200", "success", orderBack);
     }
 }

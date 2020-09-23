@@ -41,7 +41,11 @@ public class AdvertiseServiceImpl implements AdvertiseService{
 
     @Override
     public List<Advertise> getAllList(Integer page,Integer rows) {
+        if(rows!=-1){
         return advertiseMapper.getAllList(page, rows);
+        }else {
+            return advertiseMapper.selectList();
+        }
     }
 
     @Override
